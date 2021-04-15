@@ -1,0 +1,36 @@
+//Mobil  tasarim
+
+@media (max-width: 800px) {
+  .header-bar-container {
+    width: 100%;
+    height: 8vh;
+    background-color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.1));
+    .header-logo {
+      width: 40px;
+      height: 40px;
+      background-image: url("../../assets/icons/shoes-logo.png");
+      transition-duration: 0.2s;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .header-greeting {
+      font-size: 4vw;
+      .header-greeting-name {
+        color: #4f5485;
+      }
+    }
+    .header-menu-button {
+      width: 40px;
+      height: 40px;
+      background-image: url("../../assets/icons/secenekler-menu.png");
+    }
+  }
+}
