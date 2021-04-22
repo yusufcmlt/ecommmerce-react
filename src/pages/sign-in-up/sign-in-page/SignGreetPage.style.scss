@@ -1,0 +1,19 @@
+.sign-page-buttons-container {
+  width: 100%;
+  display: grid;
+  row-gap: 40px;
+  text-align: center;
+  .google-hesap-secenek {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+
+    .google-hesap-icon {
+      width: 25px;
+      height: 25px;
+      margin-right: 15px;
+    }
+  }
+}

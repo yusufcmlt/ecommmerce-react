@@ -1,0 +1,15 @@
+.app-custom-button {
+  width: 285px;
+  height: 50px;
+  border: none;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 18px;
+
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    filter: contrast(130%);
+  }
+}
