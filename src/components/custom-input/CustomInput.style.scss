@@ -1,0 +1,44 @@
+.input-container {
+  width: 100%;
+  position: relative;
+  .input-icon {
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+    filter: invert(70%) sepia(76%) saturate(531%) hue-rotate(342deg)
+      brightness(99%) contrast(98%);
+    position: absolute;
+    top: 15px;
+    bottom: 15px;
+    left: 10px;
+    z-index: 999;
+  }
+  .input-icon-account {
+    background-image: url("../../assets/icons/account.svg");
+  }
+  .input-icon-password {
+    background-image: url("../../assets/icons/password.svg");
+  }
+  .input-icon-email {
+    background-image: url("../../assets/icons/email.svg");
+  }
+
+  .custom-input {
+    width: 285px;
+    height: 50px;
+    background-color: #373747;
+    color: #fbb224;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    box-sizing: border-box;
+    text-indent: 45px;
+    &::placeholder {
+      color: #fbb224;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}

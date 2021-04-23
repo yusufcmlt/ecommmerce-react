@@ -1,4 +1,5 @@
 import firebase from "./firebase/firebase";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import "./App.scss";
 import HeaderBar from "./components/header-bar/HeaderBar";
@@ -9,8 +10,12 @@ import { SignInUp } from "./pages/sign-in-up/SignInUp";
 function App() {
   return (
     <div className="App">
-      {/* <HeaderBar userName="Yusuf" /> */}
-      <SignInUp />
+      <Switch>
+        <Route path="/giris">
+          <SignInUp />
+        </Route>
+        <Route path="/"></Route>
+      </Switch>
     </div>
   );
 }

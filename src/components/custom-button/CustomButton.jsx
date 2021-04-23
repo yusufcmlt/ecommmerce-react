@@ -11,6 +11,7 @@ export default function CustomButton({
       className="app-custom-button border-radius-10"
       style={{ color: textColor, backgroundColor: buttonColor }}
       type="button"
+      onClick={funcOnPress}
     >
       {buttonText}
     </button>

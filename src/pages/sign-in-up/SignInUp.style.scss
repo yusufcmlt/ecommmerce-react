@@ -12,19 +12,20 @@
   .sign-page-form-container {
     background-color: #262631;
     width: 411px;
-    height: 50vh;
+    height: 55vh;
     display: grid;
-    justify-content: space-around;
+    grid-template-rows: 1fr 6fr;
+    justify-content: center;
     align-items: center;
     .sign-page-greet {
-      margin: 20px 0 0 0;
+      margin: 40px 0;
       font-weight: 500;
       color: #fbb224;
       text-align: center;
     }
     .sign-page-hr {
-      width: 70%;
-      border-color: #fbb224;
+      width: 75%;
+      border-color: #7877b1;
     }
   }
 
@@ -33,7 +34,7 @@
 
     .sign-page-form-container {
       width: 100vw;
-      height: 60vh;
+      height: 65vh;
     }
   }
 }
