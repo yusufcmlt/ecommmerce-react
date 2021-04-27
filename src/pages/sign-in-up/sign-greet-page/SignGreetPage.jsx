@@ -4,6 +4,8 @@ import CustomButton from "../../../components/custom-button/CustomButton";
 import { ReactComponent as GoogleIcon } from "../../../assets/icons/google.svg";
 import "./SignGreetPage.style.scss";
 
+import { signInWithGoogle } from "../../../firebase/firebase";
+
 export const SignGreetPage = ({ signIn, signUp }) => {
   return (
     <div className="greet-container">
@@ -21,10 +23,13 @@ export const SignGreetPage = ({ signIn, signUp }) => {
           funcOnPress={signIn}
         />
         <p style={{ color: "#FBB224" }}>veya</p>
-        <a className="google-hesap-secenek" href="google.com">
-          <GoogleIcon className="google-hesap-icon" />
+        <button className="google-hesap-secenek">
+          <GoogleIcon
+            className="google-hesap-icon"
+            onClick={signInWithGoogle}
+          />
           <p style={{ color: "#FBB224" }}>hesabızla giriş yapın</p>
-        </a>
+        </button>
       </div>
     </div>
   );

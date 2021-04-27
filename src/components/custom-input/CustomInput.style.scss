@@ -16,6 +16,9 @@
   .input-icon-account {
     background-image: url("../../assets/icons/account.svg");
   }
+  .input-icon-email {
+    background-image: url("../../assets/icons/email.svg");
+  }
   .input-icon-password {
     background-image: url("../../assets/icons/password.svg");
   }
@@ -24,18 +27,18 @@
   }
 
   .custom-input {
-    width: 285px;
+    width: 335px;
     height: 50px;
     background-color: #373747;
     color: #fbb224;
-    font-family: inherit;
+    font-family: "Montserrat", sans-serif;
+    //font-family: inherit;
     font-weight: 500;
     font-size: 13px;
-    letter-spacing: 0.5px;
     box-sizing: border-box;
     text-indent: 45px;
     &::placeholder {
-      color: #fbb224;
+      color: #fbb3245e;
     }
     &:focus {
       outline: none;

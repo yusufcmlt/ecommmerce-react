@@ -3,6 +3,7 @@ import React from "react";
 import "./CustomInput.style.scss";
 
 export const CustomInput = ({
+  inputChange,
   inputType,
   inputPlaceholder,
   inputName,
@@ -18,6 +19,7 @@ export const CustomInput = ({
         type={inputType}
         name={inputName}
         placeholder={inputPlaceholder}
+        onChange={inputChange}
         required
       />
     </div>

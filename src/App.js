@@ -1,23 +1,26 @@
-import firebase from "./firebase/firebase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import "./App.scss";
-import HeaderBar from "./components/header-bar/HeaderBar";
-import Button from "./components/custom-button/CustomButton";
-import CustomButton from "./components/custom-button/CustomButton";
 import { SignInUp } from "./pages/sign-in-up/SignInUp";
+import { AuthProvider, useAuth } from "./contexts/auth-context/AuthContext";
 
-function App() {
+export default function App() {
+  const { currentUser } = useAuth();
+
   return (
     <div className="App">
       <Switch>
         <Route path="/giris">
           <SignInUp />
         </Route>
-        <Route path="/"></Route>
+        <Route path="/">
+          {currentUser ? (
+            `Merhaba ${currentUser.email} hosgeldin`
+          ) : (
+            <Link to="/giris">Giris yap</Link>
+          )}
+        </Route>
       </Switch>
     </div>
   );
 }
-
-export default App;
