@@ -1,18 +1,43 @@
-.logo-login-container {
-  width: 100vw;
-  background-color: rgba(255, 255, 255, 0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.logo-login-link {
+  .logo-login-container {
+    width: 100vw;
+    height: 75px;
+    background-color: rgba(143, 143, 143, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 
-  .logo-login-icon {
-    width: 60px;
-    height: 60px;
-    margin-right: 15px;
+    .logo-login-icon {
+      width: 60px;
+      height: 60px;
+      margin-right: 15px;
+    }
+    .logo-login-text {
+      margin: 0;
+      color: white;
+      word-break: break-all;
+      width: 2em;
+      font-size: 18px;
+      transition-duration: 0.2s;
+
+      .logo-text-first {
+        color: white;
+      }
+      .logo-text-second {
+        color: #fbb224;
+      }
+    }
+    &:hover {
+      .logo-login-text {
+        width: 3em;
+        transform: scale(1.2);
+      }
+    }
   }
-  .logo-login-text {
-    color: white;
-    word-break: break-all;
-    width: 2em;
+}
+@media (max-width: 800px) {
+  .logo-login-link {
+    margin: auto 0;
   }
 }

@@ -10,10 +10,14 @@ export const LogoLogin = () => {
       onClick={() => window.location.reload()}
       to="/giris"
       style={{ textDecoration: "none" }}
+      className="logo-login-link"
     >
       <div className="logo-login-container">
         <LoginLogo className="logo-login-icon" />
-        <h2 className="logo-login-text">SHOE</h2>
+        <h2 className="logo-login-text">
+          <span className="logo-text-first">SHOE</span>
+          <span className="logo-text-second">SHOE</span>
+        </h2>
       </div>
     </Link>
   );
