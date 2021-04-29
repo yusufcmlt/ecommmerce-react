@@ -13,7 +13,7 @@ const app = firebase.initializeApp({
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 });
 
-export async function createUserProfileDocument(displayName, email, userID) {
+export async function createUserProfileDocument(email, userID) {
   //if (!userID) return;
 
   //New or existing user reference
@@ -24,10 +24,10 @@ export async function createUserProfileDocument(displayName, email, userID) {
   //Creating a new user object on database
   if (!snapShot.exists) {
     await userRef.set({
-      displayName,
       email,
       cart: [],
       addresses: [],
+      orders: [],
       isAdmin: false,
       createdAt: new Date(),
     });

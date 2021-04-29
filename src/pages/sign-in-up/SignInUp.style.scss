@@ -1,3 +1,9 @@
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .sign-page-container {
   min-height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.171), black),
@@ -7,34 +13,60 @@
   background-position: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: space-around;
   .sign-page-form-container {
     background-color: #262631;
     width: 411px;
     height: 55vh;
     display: grid;
-    grid-template-rows: 1fr 6fr;
+    grid-template-rows: 0.5fr 6fr;
     justify-content: center;
     align-items: center;
-    .sign-page-greet {
-      margin: 40px 0;
-      font-weight: 500;
-      color: #fbb224;
-      text-align: center;
-    }
-    .sign-page-hr {
-      width: 75%;
-      border-color: #7877b1;
+
+    .sign-page-header {
+      display: flex;
+      flex-direction: column;
+      transition-duration: 1s;
+      height: 130px;
+
+      .sign-page-greet {
+        margin-top: 35px;
+        font-weight: 500;
+        color: #fbb224;
+        text-align: center;
+      }
+      .sign-page-hr {
+        width: 75%;
+        border-color: #7877b1;
+      }
+      .sign-up-error {
+        font-size: 14px;
+        width: 335px;
+        margin-top: 5px;
+        text-align: center;
+        color: #d7654c;
+        font-weight: 600;
+      }
+      .loading-icon {
+        width: 30px;
+        height: 30px;
+        background-image: url("../../assets/icons/loading.svg");
+        background-size: cover;
+        margin: 0 auto;
+        animation: spin 0.5s linear infinite;
+        filter: invert(79%) sepia(46%) saturate(2247%) hue-rotate(340deg)
+          brightness(103%) contrast(97%);
+      }
     }
   }
 
   @media (max-width: 800px) {
-    align-items: flex-end;
-
     .sign-page-form-container {
+      margin-top: auto;
       width: 100vw;
       height: 65vh;
+      border-radius: 30px 30px 0 0;
     }
   }
 }

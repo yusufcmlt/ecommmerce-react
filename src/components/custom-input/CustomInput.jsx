@@ -2,7 +2,7 @@ import React from "react";
 
 import "./CustomInput.style.scss";
 
-export const CustomInput = ({
+const CustomInput = ({
   inputChange,
   inputType,
   inputPlaceholder,
@@ -25,3 +25,5 @@ export const CustomInput = ({
     </div>
   );
 };
+
+export default CustomInput;

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 
 import { LogoLogin } from "../../components/logos/logo-login/LogoLogin";
 import { useAuth } from "../../contexts/auth-context/AuthContext";
+import { auth, createUserProfileDocument } from "../../firebase/firebase";
 import { SignGreetPage } from "./sign-greet-page/SignGreetPage";
 import SignInPage from "./sign-in-page/SignInPage";
 import SignUpPage from "./sign-up-page/SignUpPage";
@@ -14,20 +15,35 @@ export const SignInUp = () => {
     signPage: "GREET",
     signMessage: "Hoşgeldiniz",
   });
+  const [signError, setSignError] = useState("");
+  const [signLoading, setSignLoading] = useState(false);
 
   const { currentUser } = useAuth();
   const history = useHistory();
+
   useEffect(() => {
     if (currentUser) {
-      history.push({ pathname: "/" });
+      createUserProfileDocument(currentUser.email, currentUser.uid)
+        .then(() => {
+          history.push({ pathname: "/" });
+        })
+        .catch((error) => {
+          setSignError("Girişte bir hata oldu.");
+        });
     }
-  }, [currentUser]);
+  }, [currentUser, signLoading]);
 
   const handleSignIn = () => {
     setSignPage({ signPage: "SIGN_IN", signMessage: "Giriş Yapın" });
   };
   const handleSignUp = () => {
     setSignPage({ signPage: "SIGN_UP", signMessage: "Bir Hesap Oluşturun." });
+  };
+  const handleError = (errorMessage) => {
+    setSignError(errorMessage);
+  };
+  const handleSignLoading = (loadingState) => {
+    setSignLoading(loadingState);
   };
 
   return (
@@ -37,14 +53,27 @@ export const SignInUp = () => {
         <div className="sign-page-header">
           <h3 className="sign-page-greet">{signPageState.signMessage}</h3>
           <hr className="sign-page-hr" />
+          {signLoading ? (
+            <div className="loading-icon" />
+          ) : signError ? (
+            <div className="sign-up-error">{signError}</div>
+          ) : null}
         </div>
         <div className="sign-page-content">
           {signPageState.signPage === "GREET" ? (
             <SignGreetPage signIn={handleSignIn} signUp={handleSignUp} />
           ) : signPageState.signPage === "SIGN_IN" ? (
-            <SignInPage />
+            <SignInPage
+              handleError={handleError}
+              handleSignLoading={handleSignLoading}
+              signLoading={signLoading}
+            />
           ) : (
-            <SignUpPage />
+            <SignUpPage
+              handleError={handleError}
+              handleSignLoading={handleSignLoading}
+              signLoading={signLoading}
+            />
           )}
         </div>
       </div>

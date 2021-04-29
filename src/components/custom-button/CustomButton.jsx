@@ -7,6 +7,7 @@ export default function CustomButton({
   textColor,
   funcOnPress,
   buttonState,
+  buttonIcon,
 }) {
   return (
     <button
@@ -14,11 +15,14 @@ export default function CustomButton({
       style={{
         color: textColor,
         backgroundColor: buttonState ? "gray" : buttonColor,
+        fontSize: buttonIcon ? "14px" : "18px",
+        fontWeight: buttonIcon ? "600" : "500",
       }}
       type={buttonType}
       onClick={funcOnPress}
       disabled={buttonState}
     >
+      <span className={`button-icon button-icon-${buttonIcon}`} />
       {buttonText}
     </button>
   );

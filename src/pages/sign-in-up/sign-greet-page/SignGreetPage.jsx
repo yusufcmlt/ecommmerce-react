@@ -1,10 +1,9 @@
 import React from "react";
+import { signInWithGoogle } from "../../../firebase/firebase";
 
 import CustomButton from "../../../components/custom-button/CustomButton";
-import { ReactComponent as GoogleIcon } from "../../../assets/icons/google.svg";
-import "./SignGreetPage.style.scss";
 
-import { signInWithGoogle } from "../../../firebase/firebase";
+import "./SignGreetPage.style.scss";
 
 export const SignGreetPage = ({ signIn, signUp }) => {
   return (
@@ -23,13 +22,13 @@ export const SignGreetPage = ({ signIn, signUp }) => {
           funcOnPress={signIn}
         />
         <p style={{ color: "#FBB224" }}>veya</p>
-        <button className="google-hesap-secenek">
-          <GoogleIcon
-            className="google-hesap-icon"
-            onClick={signInWithGoogle}
-          />
-          <p style={{ color: "#FBB224" }}>hesabızla giriş yapın</p>
-        </button>
+        <CustomButton
+          className="google-hesap-secenek"
+          buttonText="hesabınızla bağlanın"
+          funcOnPress={signInWithGoogle}
+          textColor="#4F5495"
+          buttonIcon="google"
+        ></CustomButton>
       </div>
     </div>
   );

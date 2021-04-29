@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-//import { useAuth } from "../../../contexts/auth-context/AuthContext";
-import CustomButton from "../../../components/custom-button/CustomButton";
-import { CustomInput } from "../../../components/custom-input/CustomInput";
-
-import "./SignUpPage.style.scss";
 import { auth, createUserProfileDocument } from "../../../firebase/firebase";
-import { Redirect } from "react-router";
-import { useAuth } from "../../../contexts/auth-context/AuthContext";
-//import { createUserProfileDocument } from "../../../firebase/firebase";
 
-export default function SignUpPage({ redirectFunc }) {
+//Components
+import CustomButton from "../../../components/custom-button/CustomButton";
+import CustomInput from "../../../components/custom-input/CustomInput";
+
+//Style
+import "./SignUpPage.style.scss";
+import { useHistory } from "react-router";
+import { useEffect } from "react/cjs/react.development";
+
+export default function SignUpPage({
+  handleError,
+  signLoading,
+  handleSignLoading,
+}) {
   const [userCredentials, setCredentials] = useState({
     displayName: "",
     email: "",
@@ -17,43 +22,48 @@ export default function SignUpPage({ redirectFunc }) {
     confirmPassword: "",
   });
 
-  const [signError, setError] = useState("");
-  const [signLoading, setSignLoading] = useState(false);
-
-  async function handleSubmit(event) {
+  function handleRegisterSubmit(event) {
     event.preventDefault();
-    if (userCredentials.password !== userCredentials.confirmPassword) {
-      return setError("Şifreler Eşleşmiyor.");
-    }
-    if (userCredentials.password.length < 6) {
-      return setError("Şifre uzunluğu 6 karakterden az olamaz");
-    }
-    try {
-      setError("");
-      setSignLoading(true);
-      const { user } = await auth.createUserWithEmailAndPassword(
+    credentialsCheck();
+    handleError("");
+    handleSignLoading(true);
+    auth
+      .createUserWithEmailAndPassword(
         userCredentials.email,
         userCredentials.password
-      );
-      await createUserProfileDocument(
-        userCredentials.displayName,
-        userCredentials.email,
-        user.uid
-      );
-    } catch (error) {
-      console.log(error);
-      setError("Kayıt durumuyla ilgili bir sorun var.");
-    }
-    setSignLoading(false);
+      )
+      .then(({ user }) => {
+        user
+          .updateProfile({ displayName: userCredentials.displayName })
+          .then(() => {
+            auth.currentUser.reload();
+          });
+      })
+      .catch((error) => {
+        handleError(
+          "Kayıt durumuyla ilgili bir sorun var. Bu email kullanılıyor olabilir."
+        );
+      })
+      .finally(() => {
+        handleSignLoading(false);
+      });
   }
+
   function handleChange(event) {
     const { name, value } = event.target;
     setCredentials({ ...userCredentials, [name]: value });
   }
 
+  function credentialsCheck() {
+    if (userCredentials.password !== userCredentials.confirmPassword) {
+      return handleError("Şifreler Eşleşmiyor.");
+    } else if (userCredentials.password.length < 6) {
+      return handleError("Şifre uzunluğu 6 karakterden az olamaz");
+    }
+  }
+
   return (
-    <form className="sign-up-container" onSubmit={handleSubmit}>
-      {signError}
+    <form className="sign-up-container" onSubmit={handleRegisterSubmit}>
       <CustomInput
         inputType="text"
         inputPlaceholder="Adınız"

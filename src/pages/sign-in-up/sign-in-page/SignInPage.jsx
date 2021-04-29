@@ -1,32 +1,41 @@
 import React from "react";
-import { Redirect } from "react-router";
+
 import { useState } from "react/cjs/react.development";
-import CustomButton from "../../../components/custom-button/CustomButton";
-import { CustomInput } from "../../../components/custom-input/CustomInput";
-import { useAuth } from "../../../contexts/auth-context/AuthContext";
 import { auth } from "../../../firebase/firebase";
+
+import CustomButton from "../../../components/custom-button/CustomButton";
+import CustomInput from "../../../components/custom-input/CustomInput";
 
 import "./SignInPage.style.scss";
 
-export default function SignInPage({ redirectFunc }) {
+export default function SignInPage({
+  handleError,
+  handleSignLoading,
+  signLoading,
+}) {
   const [loginCredentials, setLoginCredentials] = useState({
     email: "",
     password: "",
   });
 
-  const [signError, setError] = useState("");
-
-  async function handleSubmit(event) {
+  function handleLoginSubmit(event) {
+    handleSignLoading(true);
     event.preventDefault();
-
-    try {
-      await auth.signInWithEmailAndPassword(
+    handleError("");
+    auth
+      .signInWithEmailAndPassword(
         loginCredentials.email,
         loginCredentials.password
-      );
-    } catch (error) {
-      console.log(error);
-    }
+      )
+      .catch((error) => {
+        console.log(error);
+        handleError(
+          "Giriş bilgilerinde bir hata var. Lütfen doğru girdiğinden emin ol. "
+        );
+      })
+      .finally(() => {
+        handleSignLoading(false);
+      });
   }
   function handleChange(event) {
     const { value, name } = event.target;
@@ -34,7 +43,7 @@ export default function SignInPage({ redirectFunc }) {
   }
 
   return (
-    <form className="sign-in-container" onSubmit={handleSubmit}>
+    <form className="sign-in-container" onSubmit={handleLoginSubmit}>
       <CustomInput
         inputType="email"
         inputPlaceholder="E-posta adresiniz."
@@ -56,6 +65,7 @@ export default function SignInPage({ redirectFunc }) {
         buttonColor="#4F5485"
         textColor="#FBB224"
         buttonType="submit"
+        buttonState={signLoading}
       />
     </form>
   );
