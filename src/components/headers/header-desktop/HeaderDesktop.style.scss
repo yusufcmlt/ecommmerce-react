@@ -1,0 +1,23 @@
+.header-desktop-container {
+  width: 100vw;
+  height: 70px;
+  background-color: #262631;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  align-items: center;
+  .header-desktop-greet {
+    color: white;
+    font-weight: 500;
+    margin: 0 auto;
+    .header-desktop-greet-username {
+      color: #fbb224;
+      font-weight: 600;
+    }
+  }
+  .header-desktop-buttons {
+    margin: 0 20px 0 auto;
+    display: flex;
+  }
+}

@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react/cjs/react.development";
 import { auth } from "../../../firebase/firebase";
 
-import CustomButton from "../../../components/custom-button/CustomButton";
+import CustomButton from "../../../components/buttons/custom-button/CustomButton";
 import CustomInput from "../../../components/custom-input/CustomInput";
 
 import "./SignInPage.style.scss";

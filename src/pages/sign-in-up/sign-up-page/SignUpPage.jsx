@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { auth, createUserProfileDocument } from "../../../firebase/firebase";
 
 //Components
-import CustomButton from "../../../components/custom-button/CustomButton";
+import CustomButton from "../../../components/buttons/custom-button/CustomButton";
 import CustomInput from "../../../components/custom-input/CustomInput";
 
 //Style
 import "./SignUpPage.style.scss";
-import { useHistory } from "react-router";
-import { useEffect } from "react/cjs/react.development";
 
 export default function SignUpPage({
   handleError,

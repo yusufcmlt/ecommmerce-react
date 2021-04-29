@@ -1,19 +1,20 @@
-.logo-login-link {
-  .logo-login-container {
-    width: 100vw;
+.logo-desktop-link {
+  margin-right: auto;
+  .logo-desktop-container {
+    min-width: 15vw;
+    max-width: 20%;
     height: 75px;
-    background-color: rgba(143, 143, 143, 0.5);
+    background-color: rgba(143, 143, 143, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
 
-    .logo-login-icon {
-      width: 60px;
-      height: 60px;
+    .logo-desktop-icon {
+      width: 50px;
+      height: 50px;
       margin-right: 15px;
     }
-    .logo-login-text {
+    .logo-desktop-text {
       margin: 0;
       color: white;
       word-break: break-all;
@@ -22,15 +23,10 @@
       transition-duration: 0.2s;
     }
     &:hover {
-      .logo-login-text {
+      .logo-desktop-text {
         width: 3em;
         transform: scale(1.2);
       }
     }
-  }
-}
-@media (max-width: 800px) {
-  .logo-login-link {
-    margin: auto 0;
   }
 }

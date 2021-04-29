@@ -1,11 +1,11 @@
 import React from "react";
 import { signInWithGoogle } from "../../../firebase/firebase";
 
-import CustomButton from "../../../components/custom-button/CustomButton";
+import CustomButton from "../../../components/buttons/custom-button/CustomButton";
 
 import "./SignGreetPage.style.scss";
 
-export const SignGreetPage = ({ signIn, signUp }) => {
+const SignGreetPage = ({ signIn, signUp }) => {
   return (
     <div className="greet-container">
       <div className="sign-page-buttons-container">
@@ -33,3 +33,5 @@ export const SignGreetPage = ({ signIn, signUp }) => {
     </div>
   );
 };
+
+export default SignGreetPage;

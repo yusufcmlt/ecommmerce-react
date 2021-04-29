@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-
-import { LogoLogin } from "../../components/logos/logo-login/LogoLogin";
 import { useAuth } from "../../contexts/auth-context/AuthContext";
-import { auth, createUserProfileDocument } from "../../firebase/firebase";
-import { SignGreetPage } from "./sign-greet-page/SignGreetPage";
+
+import LogoLogin from "../../components/logos/logo-login/LogoLogin";
+import { createUserProfileDocument } from "../../firebase/firebase";
+import SignGreetPage from "./sign-greet-page/SignGreetPage";
 import SignInPage from "./sign-in-page/SignInPage";
 import SignUpPage from "./sign-up-page/SignUpPage";
 

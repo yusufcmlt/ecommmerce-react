@@ -4,7 +4,7 @@ import "./LogoLogin.style.scss";
 import { ReactComponent as LoginLogo } from "../../../assets/icons/shoes-logo.svg";
 import { Link } from "react-router-dom";
 
-export const LogoLogin = () => {
+const LogoLogin = () => {
   return (
     <Link
       onClick={() => window.location.reload()}
@@ -14,11 +14,10 @@ export const LogoLogin = () => {
     >
       <div className="logo-login-container">
         <LoginLogo className="logo-login-icon" />
-        <h2 className="logo-login-text">
-          <span className="logo-text-first">SHOE</span>
-          <span className="logo-text-second">SHOE</span>
-        </h2>
+        <h2 className="logo-login-text">SHOE SHOE</h2>
       </div>
     </Link>
   );
 };
+
+export default LogoLogin;

@@ -4,6 +4,7 @@ export default function CustomButton({
   buttonType,
   buttonColor,
   buttonText,
+  buttonSize,
   textColor,
   funcOnPress,
   buttonState,
@@ -11,12 +12,13 @@ export default function CustomButton({
 }) {
   return (
     <button
-      className="app-custom-button border-radius-10"
+      className={`size-${buttonSize} app-custom-button border-radius-5`}
       style={{
         color: textColor,
         backgroundColor: buttonState ? "gray" : buttonColor,
         fontSize: buttonIcon ? "14px" : "18px",
-        fontWeight: buttonIcon ? "600" : "500",
+        fontWeight: "500",
+        textIndent: buttonIcon ? "15px" : "0",
       }}
       type={buttonType}
       onClick={funcOnPress}
