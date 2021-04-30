@@ -1,0 +1,25 @@
+.header-mobile-container {
+  width: 100vw;
+  min-height: 70px;
+  background-color: #262631;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  border-radius: 0 0 10px 10px;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  .header-mobile-main-row {
+    width: 100vw;
+    height: 70px;
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    justify-items: center;
+    align-items: center;
+    padding: 0 10px;
+  }
+  .header-mobile-optional-row {
+    margin: auto;
+  }
+}

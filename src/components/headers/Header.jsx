@@ -6,7 +6,7 @@ import HeaderDesktop from "./header-desktop/HeaderDesktop";
 import HeaderMobile from "./header-mobile/HeaderMobile";
 
 export default function Header() {
-  const isMobile = useMediaQuery({ query: "(max-width:1000px)" });
+  const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
   const { currentUser } = useAuth();
 
   return (

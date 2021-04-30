@@ -1,0 +1,37 @@
+.search-bar-container {
+  display: flex;
+  overflow: hidden;
+  height: 50px;
+
+  .search-bar-input {
+    background-color: #373747;
+    width: 100%;
+    border: none;
+    color: #fbb224;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 13px;
+    box-sizing: border-box;
+    text-indent: 30px;
+    letter-spacing: 0.05em;
+    &::placeholder {
+      color: #fbb224;
+    }
+    &:focus {
+      outline: none;
+      background-color: #fbb224;
+      color: #373747;
+      &::placeholder {
+        color: #373747;
+      }
+    }
+  }
+}
+
+.search-bar-mobile {
+  width: 90vw;
+  margin: 15px 0;
+}
+.search-bar-desktop {
+  width: 550px;
+}

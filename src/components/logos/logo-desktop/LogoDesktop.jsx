@@ -7,7 +7,9 @@ import "./LogoDesktop.style.scss";
 export const LogoDesktop = () => {
   return (
     <Link
-      onClick={() => window.location.reload()}
+      onClick={() => {
+        setTimeout(() => window.location.reload(), 200);
+      }}
       to="/"
       style={{ textDecoration: "none" }}
       className="logo-desktop-link"

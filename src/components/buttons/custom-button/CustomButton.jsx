@@ -16,7 +16,6 @@ export default function CustomButton({
       style={{
         color: textColor,
         backgroundColor: buttonState ? "gray" : buttonColor,
-        fontSize: buttonIcon ? "14px" : "18px",
         fontWeight: "500",
         textIndent: buttonIcon ? "15px" : "0",
       }}

@@ -100,6 +100,7 @@ export default function SignUpPage({
         buttonType="submit"
         textColor="#4F5485"
         buttonState={signLoading}
+        buttonSize="login"
       />
     </form>
   );

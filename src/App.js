@@ -5,6 +5,7 @@ import { SignInUp } from "./pages/sign-in-up/SignInUp";
 
 import React from "react";
 import MainPage from "./pages/main-page/MainPage";
+import { MenuProvider } from "./contexts/mobile-menu-context/MobileMenuContext";
 
 export default function App() {
   return (
@@ -14,7 +15,9 @@ export default function App() {
           <SignInUp />
         </Route>
         <Route path="/">
-          <MainPage />
+          <MenuProvider>
+            <MainPage />
+          </MenuProvider>
         </Route>
       </Switch>
     </div>

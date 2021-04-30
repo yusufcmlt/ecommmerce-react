@@ -31,6 +31,9 @@
   .button-icon-google {
     background-image: url("../../../assets/icons/google.svg");
   }
+  .button-icon-search {
+    background-image: url("../../../assets/icons/search.svg");
+  }
   .button-icon-cart {
     background-image: url("../../../assets/icons/shopping-cart.svg");
   }
@@ -46,7 +49,25 @@
   .button-icon-login {
     background-image: url("../../../assets/icons/account.svg");
   }
+  .button-icon-nav {
+    background-image: url("../../../assets/icons/nav.svg");
+  }
+  .button-icon-back {
+    background-image: url("../../../assets/icons/back.svg");
+  }
+  .button-icon-setting {
+    background-image: url("../../../assets/icons/setting.svg");
+  }
 }
+
+.size-login {
+  font-size: 18px;
+  font-weight: 600;
+}
+.size-google {
+  font-size: 14px;
+}
+
 .size-header-menu {
   width: 155px;
   height: 40px;
@@ -54,10 +75,62 @@
   .button-icon {
     width: 22px;
     height: 22px;
-    filter: invert(77%) sepia(62%) saturate(1862%) hue-rotate(341deg)
-      brightness(104%) contrast(97%);
     top: 9px;
     bottom: 9px;
-    left: 10px;
+    left: 15px;
+  }
+}
+.size-nav {
+  width: 35px;
+  height: 35px;
+  background-color: transparent;
+  .button-icon {
+    width: 35px;
+    height: 35px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+.size-back {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  .button-icon {
+    width: 30px;
+    height: 30px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+.size-mobile-menu {
+  width: 300px;
+  height: 65px;
+  margin: 5px 5px;
+  font-size: 18px;
+  .button-icon {
+    width: 30px;
+    height: 30px;
+    top: 17.5px;
+    left: 25px;
+  }
+}
+
+.size-search {
+  width: 50px;
+  height: 50px;
+  border-radius: 0 !important;
+  display: flex;
+  .button-icon {
+    width: 25px;
+    height: 25px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
 }

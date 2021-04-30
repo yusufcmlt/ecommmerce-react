@@ -14,12 +14,14 @@ const SignGreetPage = ({ signIn, signUp }) => {
           buttonColor="#FBB224"
           textColor="#4F5485"
           funcOnPress={signUp}
+          buttonSize="login"
         />
         <CustomButton
           buttonText="Giriş Yapın"
           buttonColor="#4F5485"
           textColor="#FBB224"
           funcOnPress={signIn}
+          buttonSize="login"
         />
         <p style={{ color: "#FBB224" }}>veya</p>
         <CustomButton
@@ -28,6 +30,7 @@ const SignGreetPage = ({ signIn, signUp }) => {
           funcOnPress={signInWithGoogle}
           textColor="#4F5495"
           buttonIcon="google"
+          buttonSize="google"
         ></CustomButton>
       </div>
     </div>

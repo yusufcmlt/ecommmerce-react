@@ -7,15 +7,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
   align-items: center;
-  .header-desktop-greet {
-    color: white;
-    font-weight: 500;
-    margin: 0 auto;
-    .header-desktop-greet-username {
-      color: #fbb224;
-      font-weight: 600;
-    }
-  }
+
   .header-desktop-buttons {
     margin: 0 20px 0 auto;
     display: flex;

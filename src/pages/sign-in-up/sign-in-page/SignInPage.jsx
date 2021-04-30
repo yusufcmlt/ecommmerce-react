@@ -66,6 +66,7 @@ export default function SignInPage({
         textColor="#FBB224"
         buttonType="submit"
         buttonState={signLoading}
+        buttonSize="login"
       />
     </form>
   );
