@@ -1,5 +1,5 @@
 import React from "react";
-import { useMobileMenu } from "../../../contexts/mobile-menu-context/MobileMenuContext";
+import { useNavMenu } from "../../../contexts/nav-menu-context/NavMenuContext";
 import CustomButton from "../../buttons/custom-button/CustomButton";
 import LogoMobile from "../../logos/logo-mobile/LogoMobile";
 import SearchBar from "../../search-bar/SearchBar";
@@ -8,7 +8,7 @@ import UserGreet from "../../user-greet-message/UserGreet";
 import "./HeaderMobile.style.scss";
 
 export default function HeaderMobile() {
-  const { isMenuOpened, handleMenuOpened } = useMobileMenu();
+  const { isMenuOpened, handleMenuOpened } = useNavMenu();
 
   return (
     <div className="header-mobile-container">

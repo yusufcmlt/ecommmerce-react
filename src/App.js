@@ -5,7 +5,7 @@ import { SignInUp } from "./pages/sign-in-up/SignInUp";
 
 import React from "react";
 import MainPage from "./pages/main-page/MainPage";
-import { MenuProvider } from "./contexts/mobile-menu-context/MobileMenuContext";
+import { MenuProvider } from "./contexts/nav-menu-context/NavMenuContext";
 
 export default function App() {
   return (
