@@ -9,10 +9,13 @@ export default function CustomButton({
   funcOnPress,
   buttonState,
   buttonIcon,
+  selectedMenuButton,
 }) {
   return (
     <button
-      className={`size-${buttonSize} app-custom-button border-radius-5`}
+      className={`${
+        selectedMenuButton && "selected"
+      } size-${buttonSize} app-custom-button border-radius-5`}
       style={{
         color: textColor,
         backgroundColor: buttonState ? "gray" : buttonColor,

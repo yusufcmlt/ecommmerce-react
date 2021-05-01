@@ -79,6 +79,17 @@
     bottom: 9px;
     left: 15px;
   }
+  @media (max-width: 1300px) {
+    width: 130px;
+    height: 30px;
+    font-size: 12px;
+    .button-icon {
+      width: 18px;
+      height: 18px;
+      top: 6px;
+      left: 10px;
+    }
+  }
 }
 .size-nav {
   width: 35px;
@@ -132,5 +143,14 @@
     left: 0;
     right: 0;
     margin: auto;
+  }
+}
+
+.selected {
+  background-color: #fbb224 !important;
+  color: #4f5485 !important;
+  .button-icon {
+    filter: invert(37%) sepia(13%) saturate(1522%) hue-rotate(197deg)
+      brightness(57%) contrast(40%) !important;
   }
 }
