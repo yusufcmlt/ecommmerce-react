@@ -1,13 +1,19 @@
 .logo-desktop-link {
   margin-right: auto;
+
   .logo-desktop-container {
     min-width: 15vw;
     max-width: 20%;
     height: 75px;
-
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 1300px) {
+      min-width: 10vw;
+      .logo-desktop-text {
+        display: none;
+      }
+    }
 
     .logo-desktop-icon {
       width: 50px;
