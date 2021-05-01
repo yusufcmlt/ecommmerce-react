@@ -1,7 +1,13 @@
 .header-greet {
   color: white;
   font-weight: 500;
-  margin: auto;
+
+  @media (max-width: 1366px) {
+    font-size: 1.3vw;
+  }
+  @media (max-width: 1000px) {
+    font-size: 14px;
+  }
   .header-greet-username {
     color: #fbb224;
     font-weight: 600;
