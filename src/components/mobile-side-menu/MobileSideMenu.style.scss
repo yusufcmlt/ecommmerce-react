@@ -1,14 +1,8 @@
-.mobile-side-menu-container {
+.mobile-side-menu-nav {
   width: 100vw;
-  min-height: 100vh;
-  background-color: #262631;
-
-  .mobile-side-menu-nav {
-    margin-top: 100px;
-    height: 75vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  background: linear-gradient(60deg, #2d264e, #26294e);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

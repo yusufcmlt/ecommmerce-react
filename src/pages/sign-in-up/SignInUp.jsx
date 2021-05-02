@@ -9,6 +9,8 @@ import SignInPage from "./sign-in-page/SignInPage";
 import SignUpPage from "./sign-up-page/SignUpPage";
 
 import "./SignInUp.style.scss";
+import { useMediaQuery } from "react-responsive";
+import { useSize } from "../../contexts/mobile-sizes-context/MobileSizesContext";
 
 export const SignInUp = () => {
   const [signPageState, setSignPage] = useState({
@@ -20,6 +22,8 @@ export const SignInUp = () => {
 
   const { currentUser } = useAuth();
   const history = useHistory();
+  const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
+  const { pageMobileHeight } = useSize();
 
   useEffect(() => {
     if (currentUser) {
@@ -31,6 +35,7 @@ export const SignInUp = () => {
           setSignError("Girişte bir hata oldu.");
         });
     }
+    // eslint-disable-next-line
   }, [currentUser, signLoading]);
 
   const handleSignIn = () => {
@@ -47,7 +52,10 @@ export const SignInUp = () => {
   };
 
   return (
-    <div className="sign-page-container">
+    <div
+      style={{ minHeight: isMobile ? `${pageMobileHeight}px` : "100vh" }}
+      className="sign-page-container"
+    >
       <LogoLogin />
       <div className="sign-page-form-container border-radius-20 box-shadow-rule">
         <div className="sign-page-header">
