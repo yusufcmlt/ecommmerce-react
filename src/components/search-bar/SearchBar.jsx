@@ -13,11 +13,7 @@ export default function SearchBar({ searchBarSize }) {
         type="search"
         placeholder="Aklından geçen ürünü ara..."
       ></input>
-      <CustomButton
-        buttonColor="#4F5485"
-        buttonSize="search"
-        buttonIcon="search"
-      />
+      <CustomButton buttonSize="search" buttonIcon="search" />
     </form>
   );
 }

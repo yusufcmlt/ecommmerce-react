@@ -1,10 +1,12 @@
 import React from "react";
-import { useMediaQuery } from "react-responsive";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import { useAuth } from "../../contexts/auth-context/AuthContext";
 import { useNavMenu } from "../../contexts/nav-menu-context/NavMenuContext";
-import app from "../../firebase/firebase";
+import { useMediaQuery } from "react-responsive";
+
 import { signedMenuItems } from "../../utils/constants";
+
 import CustomButton from "../buttons/custom-button/CustomButton";
 
 import "./MenuNav.style.scss";
@@ -25,7 +27,7 @@ export default function MenuNav({ navType }) {
           buttonText="Yönetim"
           buttonSize={navType}
           textColor="#D7654C"
-          buttonColor="#4F5485"
+          buttonColor="transparent"
           buttonIcon="setting"
           selectedMenuButton={isButtonSelected("yonetim")}
           funcOnPress={() => {
@@ -40,7 +42,7 @@ export default function MenuNav({ navType }) {
             buttonText={button.text}
             buttonSize={navType}
             textColor="#fbb224"
-            buttonColor="#4f5485"
+            buttonColor="transparent"
             buttonIcon={button.icon}
             selectedMenuButton={isButtonSelected(button.path)}
             funcOnPress={
@@ -60,7 +62,7 @@ export default function MenuNav({ navType }) {
         buttonText="Giriş yap"
         buttonSize={navType}
         textColor="#FBB224"
-        buttonColor="#4F5485"
+        buttonColor="transparent"
         buttonIcon="login"
       />
     </Link>
