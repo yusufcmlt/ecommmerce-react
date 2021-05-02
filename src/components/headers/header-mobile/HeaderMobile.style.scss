@@ -1,12 +1,12 @@
 .header-mobile-container {
   width: 100vw;
   min-height: 70px;
-  background-color: #262631;
+  background: linear-gradient(60deg, #2d264e, #26294e);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   box-sizing: border-box;
-  border-radius: 0 0 10px 10px;
+
   position: fixed;
   top: 0;
   z-index: 9999;

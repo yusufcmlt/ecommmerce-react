@@ -16,15 +16,12 @@
     .logo-login-text {
       margin: 0;
       color: #fbb224;
-      word-break: break-all;
-      width: 2em;
       font-size: 18px;
       transition-duration: 0.2s;
     }
     &:hover {
       .logo-login-text {
-        width: 3em;
-        transform: scale(1.2);
+        transform: scale(1.05);
       }
     }
   }

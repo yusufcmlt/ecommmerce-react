@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { auth, createUserProfileDocument } from "../../../firebase/firebase";
-
+import { auth } from "../../../firebase/firebase";
 //Components
 import CustomButton from "../../../components/buttons/custom-button/CustomButton";
 import CustomInput from "../../../components/custom-input/CustomInput";
@@ -96,11 +95,9 @@ export default function SignUpPage({
       />
       <CustomButton
         buttonText="Kayıt Ol"
-        buttonColor="#FBB224"
         buttonType="submit"
-        textColor="#4F5485"
         buttonState={signLoading}
-        buttonSize="login"
+        buttonSize="signup"
       />
     </form>
   );

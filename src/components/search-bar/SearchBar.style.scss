@@ -4,7 +4,7 @@
   height: 50px;
 
   .search-bar-input {
-    background-color: #373747;
+    background-color: #4f548575;
     width: 100%;
     border: none;
     color: #fbb224;
@@ -20,9 +20,9 @@
     &:focus {
       outline: none;
       background-color: #fbb224;
-      color: #373747;
+      color: #4f5485;
       &::placeholder {
-        color: #373747;
+        color: #4f5485;
       }
     }
   }

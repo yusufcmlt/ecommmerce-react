@@ -11,7 +11,7 @@ export default function HeaderMobile() {
   const { isMenuOpened, handleMenuOpened } = useNavMenu();
 
   return (
-    <div className="header-mobile-container">
+    <header className="header-mobile-container">
       {!isMenuOpened ? (
         <React.Fragment>
           <div className="header-mobile-main-row">
@@ -37,6 +37,6 @@ export default function HeaderMobile() {
           <UserGreet />
         </div>
       )}
-    </div>
+    </header>
   );
 }

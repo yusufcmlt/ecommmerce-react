@@ -14,7 +14,7 @@ const LogoLogin = () => {
     >
       <div className="logo-login-container">
         <LoginLogo className="logo-login-icon" />
-        <h2 className="logo-login-text">SHOE SHOE</h2>
+        <h2 className="logo-login-text">SHOESHOE</h2>
       </div>
     </Link>
   );
