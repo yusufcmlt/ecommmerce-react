@@ -6,11 +6,8 @@
     width: 25px;
     height: 25px;
     background-size: cover;
-    filter: invert(70%) sepia(76%) saturate(531%) hue-rotate(342deg)
-      brightness(99%) contrast(98%);
     position: absolute;
-    top: 15px;
-    bottom: 15px;
+    top: 12.5px;
     left: 10px;
     z-index: 999;
   }
@@ -30,7 +27,7 @@
   .custom-input {
     width: 335px;
     height: 50px;
-    background-color: #373747;
+    background-color: #4f548575;
     color: #fbb224;
     font-family: inherit;
     font-weight: 500;
@@ -38,10 +35,19 @@
     box-sizing: border-box;
     text-indent: 45px;
     &::placeholder {
-      color: #fbb3245e;
+      color: #fbb224;
     }
     &:focus {
       outline: none;
+      &::placeholder {
+        color: #4f5485;
+      }
+      background-color: #fbb224;
+      color: #4f5485;
+      @at-root .input-icon {
+        filter: invert(190%) sepia(150%) saturate(500%) hue-rotate(20deg)
+          brightness(101%) contrast(97%);
+      }
     }
   }
 }

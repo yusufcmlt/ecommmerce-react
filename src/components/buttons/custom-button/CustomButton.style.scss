@@ -4,17 +4,18 @@
   border: none;
   font-family: inherit;
   position: relative;
-  transition-duration: 0.1s;
+  transition-duration: 0.2s;
+  background-color: transparent;
   cursor: pointer;
+  color: #fbb224;
 
   &:focus {
     outline: none;
   }
   &:hover {
-    filter: contrast(130%);
+    background-color: #272142d7;
   }
   &:active {
-    filter: contrast(140%);
     transform: translateY(2px);
   }
 
@@ -60,11 +61,20 @@
   }
 }
 
-.size-login {
+.size-signup {
   font-size: 18px;
   font-weight: 600;
+  border: 2px solid #fbb224;
+}
+.size-signin {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  border: 2px solid #4f5485;
 }
 .size-google {
+  border: 2px solid #ffffff;
+  color: white;
   font-size: 14px;
 }
 
@@ -72,6 +82,8 @@
   width: 155px;
   height: 40px;
   margin: 0 5px;
+  border: 2px solid #4f5485;
+  color: #fbb224;
   .button-icon {
     width: 22px;
     height: 22px;
@@ -122,6 +134,9 @@
   height: 65px;
   margin: 5px 5px;
   font-size: 18px;
+  border: 2px solid #4f5485;
+  color: #fbb224;
+
   .button-icon {
     width: 30px;
     height: 30px;
@@ -134,7 +149,9 @@
   width: 50px;
   height: 50px;
   border-radius: 0 !important;
+  background-color: #4f5485;
   display: flex;
+
   .button-icon {
     width: 25px;
     height: 25px;
@@ -144,13 +161,12 @@
     right: 0;
     margin: auto;
   }
+  &:active {
+    transform: translateY(0.5px);
+  }
 }
 
 .selected {
-  background-color: #fbb224 !important;
-  color: #4f5485 !important;
-  .button-icon {
-    filter: invert(37%) sepia(13%) saturate(1522%) hue-rotate(197deg)
-      brightness(57%) contrast(40%) !important;
-  }
+  border: 2px solid #fbb224;
+  background-color: #fbb32415;
 }

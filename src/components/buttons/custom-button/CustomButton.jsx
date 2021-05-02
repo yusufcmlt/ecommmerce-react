@@ -2,10 +2,8 @@ import React from "react";
 import "./CustomButton.style.scss";
 export default function CustomButton({
   buttonType,
-  buttonColor,
   buttonText,
   buttonSize,
-  textColor,
   funcOnPress,
   buttonState,
   buttonIcon,
@@ -14,11 +12,9 @@ export default function CustomButton({
   return (
     <button
       className={`${
-        selectedMenuButton && "selected"
+        selectedMenuButton ? "selected" : ""
       } size-${buttonSize} app-custom-button border-radius-5`}
       style={{
-        color: textColor,
-        backgroundColor: buttonState ? "gray" : buttonColor,
         fontWeight: "500",
         textIndent: buttonIcon ? "15px" : "0",
       }}
