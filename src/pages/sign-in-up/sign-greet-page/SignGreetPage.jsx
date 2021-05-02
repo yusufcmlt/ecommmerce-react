@@ -11,24 +11,19 @@ const SignGreetPage = ({ signIn, signUp }) => {
       <div className="sign-page-buttons-container">
         <CustomButton
           buttonText="Bir Hesap Oluşturun"
-          buttonColor="#FBB224"
-          textColor="#4F5485"
           funcOnPress={signUp}
-          buttonSize="login"
+          buttonSize="signup"
         />
         <CustomButton
           buttonText="Giriş Yapın"
-          buttonColor="#4F5485"
-          textColor="#FBB224"
           funcOnPress={signIn}
-          buttonSize="login"
+          buttonSize="signin"
         />
-        <p style={{ color: "#FBB224" }}>veya</p>
+        <p style={{ color: "#FBB224", fontWeight: "500" }}>veya</p>
         <CustomButton
           className="google-hesap-secenek"
           buttonText="hesabınızla bağlanın"
           funcOnPress={signInWithGoogle}
-          textColor="#4F5495"
           buttonIcon="google"
           buttonSize="google"
         ></CustomButton>

@@ -62,11 +62,9 @@ export default function SignInPage({
       />
       <CustomButton
         buttonText="Giriş Yap"
-        buttonColor="#4F5485"
-        textColor="#FBB224"
         buttonType="submit"
         buttonState={signLoading}
-        buttonSize="login"
+        buttonSize="signup"
       />
     </form>
   );
