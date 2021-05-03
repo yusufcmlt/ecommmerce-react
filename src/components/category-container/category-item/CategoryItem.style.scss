@@ -1,0 +1,29 @@
+.category-item-container {
+  width: 90px;
+  height: 130px;
+  background-size: cover;
+  background-position: center;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  display: flex;
+
+  .category-title {
+    color: #fbb224;
+    font-size: 18px;
+    margin: auto auto 5px auto;
+    text-align: center;
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+@media (max-width: 1024px) {
+  .category-item-container {
+    height: 25vh;
+    flex: 0 0 30vw;
+    margin: 0 5px;
+    &:hover {
+      transform: scale(1);
+    }
+  }
+}
