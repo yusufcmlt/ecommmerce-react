@@ -1,5 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
+import Footer from "../../components/footer/Footer";
 import Header from "../../components/headers/Header";
 
 import HeroDesktop from "../../components/main-page-hero/HeroDesktop";
@@ -27,7 +28,7 @@ export default function MainPage() {
         ) : (
           <React.Fragment>
             {isMobile ? <HeroMobile /> : <HeroDesktop />}
-            <div style={{ marginTop: "auto" }}>SOME FOOTER</div>
+            <Footer></Footer>
           </React.Fragment>
         )}
       </React.Fragment>
