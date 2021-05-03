@@ -3,9 +3,8 @@ import { useMediaQuery } from "react-responsive";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/headers/Header";
 
-import HeroDesktop from "../../components/main-page-hero/HeroDesktop";
-import HeroMobile from "../../components/main-page-hero/HeroMobile";
 import MobileSideMenu from "../../components/mobile-side-menu/MobileSideMenu";
+import PageContent from "../../components/page-content/PageContent";
 import { useSize } from "../../contexts/mobile-sizes-context/MobileSizesContext";
 import { useNavMenu } from "../../contexts/nav-menu-context/NavMenuContext";
 
@@ -27,7 +26,7 @@ export default function MainPage() {
           <MobileSideMenu />
         ) : (
           <React.Fragment>
-            {isMobile ? <HeroMobile /> : <HeroDesktop />}
+            <PageContent />
             <Footer></Footer>
           </React.Fragment>
         )}
