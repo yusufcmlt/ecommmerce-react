@@ -9,7 +9,14 @@ export default function UserGreet() {
     <div className="header-greet">
       Merhaba ,
       <span className="header-greet-username">
-        {currentUser ? currentUser.displayName : "Misafir"}
+        {currentUser ? currentUser.displayName : "Misafir"}!
+      </span>
+      <span
+        role="img"
+        aria-label="hand-greet"
+        style={{ marginLeft: "5px", fontSize: "22px" }}
+      >
+        👋
       </span>
     </div>
   );
