@@ -12,6 +12,7 @@ export default function MobileSideMenu() {
       style={{ minHeight: `${pageMobileHeight}px` }}
       className="mobile-side-menu-nav"
     >
+      <h2 className="mobile-side-menu-title">Seçenekler</h2>
       <MenuNav navType="mobile-menu" />
     </div>
   );

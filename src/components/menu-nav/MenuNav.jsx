@@ -25,9 +25,9 @@ export default function MenuNav({ navType }) {
       <Link to="/yonetim" key="adminButton">
         <CustomButton
           buttonText="Yönetim"
-          buttonSize={navType}
-          textColor="#D7654C"
-          buttonColor="transparent"
+          buttonSize={
+            isMobile ? "mobile-menu size-admin" : "header-menu size-admin"
+          }
           buttonIcon="setting"
           selectedMenuButton={isButtonSelected("yonetim")}
           funcOnPress={() => {
@@ -41,8 +41,6 @@ export default function MenuNav({ navType }) {
           <CustomButton
             buttonText={button.text}
             buttonSize={navType}
-            textColor="#fbb224"
-            buttonColor="transparent"
             buttonIcon={button.icon}
             selectedMenuButton={isButtonSelected(button.path)}
             funcOnPress={
@@ -61,8 +59,6 @@ export default function MenuNav({ navType }) {
       <CustomButton
         buttonText="Giriş yap"
         buttonSize={navType}
-        textColor="#FBB224"
-        buttonColor="transparent"
         buttonIcon="login"
       />
     </Link>
