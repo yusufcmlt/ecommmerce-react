@@ -11,7 +11,7 @@ export default function HeaderMobile() {
   const { isMenuOpened, handleMenuOpened } = useNavMenu();
 
   return (
-    <header className="header-mobile-container">
+    <header id="header-mobile-container" className="header-mobile-container">
       {!isMenuOpened ? (
         <React.Fragment>
           <div className="header-mobile-main-row">
