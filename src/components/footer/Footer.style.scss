@@ -1,0 +1,25 @@
+.footer-container {
+  background: linear-gradient(60deg, #2d264e, #26294e);
+  width: 100%;
+  min-height: 70px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: 2px 1px 5px 1px rgba(0, 0, 0, 0.212);
+  list-style: none;
+
+  li {
+    font-weight: 500;
+    color: #fbb324b4;
+    padding: 0 15px;
+  }
+  @media (max-width: 1024px) {
+    min-height: 15vh;
+    flex-direction: column;
+    justify-content: center;
+    li {
+      padding: 10px 0;
+      font-size: 14px;
+    }
+  }
+}
