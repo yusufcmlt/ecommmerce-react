@@ -12,7 +12,18 @@
   .box-shadow-rule {
     box-shadow: 1px 0 5px 3px rgba(0, 0, 0, 0.25);
   }
+  .box-shadow-rule-card {
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  }
   .input-stroke {
     border: 1px solid rgba(251, 179, 36, 0.2);
+  }
+  .app-section-h3-title {
+    color: #4f5485;
+    font-weight: 600;
+
+    @media (max-width: 1024px) {
+      text-align: left;
+    }
   }
 }
