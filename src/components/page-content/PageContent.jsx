@@ -17,7 +17,7 @@ export default function PageContent() {
       ).offsetHeight;
       setHeaderHeight(headerHeightSelector);
     }
-  }, []);
+  }, [isMobile]);
 
   return (
     <div

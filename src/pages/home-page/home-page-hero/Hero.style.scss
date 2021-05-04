@@ -1,28 +1,31 @@
 .hero {
-  margin: auto;
+  margin-top: 50px;
   min-height: 50vh;
   background-image: linear-gradient(
       rgba(255, 255, 255, 0.65),
       rgba(255, 255, 255, 0.55)
     ),
-    url("../../assets/images/hero-arkaplan.webp");
+    url("../../../assets/images/hero-arkaplan.webp");
   background-size: cover;
   background-position: center;
-  border-radius: 0 0 20px 20px;
+  border-radius: 20px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 10px;
 
   .hero-title {
     font-size: 25px;
-    margin: 0;
+    text-align: center;
     color: #4f5485;
+    font-weight: 600;
     width: 500px;
     margin: auto 0 50px 0;
   }
   .hero-second {
-    width: 35vw;
+    width: 40vw;
+    height: 100%;
+    margin: 20px 0;
   }
 }
 @media (max-width: 1024px) {
@@ -35,7 +38,7 @@
       .hero-title {
         font-size: 20px;
         width: inherit;
-        margin: 0;
+        margin: 20px 0 0 0;
       }
     }
 

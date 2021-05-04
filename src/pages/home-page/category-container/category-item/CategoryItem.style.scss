@@ -1,6 +1,7 @@
 .category-item-container {
-  width: 90px;
-  height: 130px;
+  height: 250px;
+  flex: 0 0 150px;
+  margin: 0 5px;
   background-size: cover;
   background-position: center;
   transition-duration: 0.2s;
@@ -19,8 +20,8 @@
 }
 @media (max-width: 1024px) {
   .category-item-container {
-    height: 25vh;
-    flex: 0 0 30vw;
+    height: 30vh;
+    flex: 0 0 40vw;
     margin: 0 5px;
     &:hover {
       transform: scale(1);

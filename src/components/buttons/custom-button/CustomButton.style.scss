@@ -82,7 +82,7 @@
   width: 155px;
   height: 40px;
   margin: 0 5px;
-  border: 2px solid #4f5485;
+
   color: #fbb224;
   .button-icon {
     width: 22px;
@@ -134,7 +134,7 @@
   height: 65px;
   margin: 5px 5px;
   font-size: 18px;
-  border: 2px solid #4f5485;
+
   color: #fbb224;
 
   .button-icon {
@@ -146,7 +146,6 @@
 }
 .size-admin {
   color: #d7654c;
-  border: 2px solid #d7654c;
 }
 .size-search {
   width: 50px;
@@ -166,6 +165,21 @@
   }
   &:active {
     transform: translateY(0.5px);
+  }
+}
+.size-category-nav {
+  width: 40px;
+  height: 50px;
+  font-weight: 700;
+  font-size: 32px;
+  color: #3e4268;
+  background-color: #4f54855b;
+  &:hover {
+    color: #fbb224;
+    background-color: #4f5485;
+  }
+  &:active {
+    transform: translateY(0);
   }
 }
 

@@ -17,6 +17,7 @@ export function SizeProvider({ children }) {
     if (isMobile) {
       const mobileHeight = window.innerHeight;
       setPageMobileHeight(mobileHeight);
+      console.log(mobileHeight);
     }
   }, [isMobile]);
 

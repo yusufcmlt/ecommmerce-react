@@ -8,6 +8,8 @@ export default function CustomButton({
   buttonState,
   buttonIcon,
   selectedMenuButton,
+  buttonMouseOver,
+  buttonOut,
 }) {
   return (
     <button
@@ -21,6 +23,8 @@ export default function CustomButton({
       type={buttonType}
       onClick={funcOnPress}
       disabled={buttonState}
+      onMouseOver={buttonMouseOver}
+      onMouseOut={buttonOut}
     >
       <span className={`button-icon button-icon-${buttonIcon}`} />
       {buttonText}

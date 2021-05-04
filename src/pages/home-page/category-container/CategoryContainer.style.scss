@@ -1,0 +1,32 @@
+.categories-all {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .categories-container {
+    height: 300px;
+    width: 85%;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .categories-all {
+    display: unset;
+    .categories-container {
+      width: unset;
+      height: unset;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+}

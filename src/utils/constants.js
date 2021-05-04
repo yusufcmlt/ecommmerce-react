@@ -73,4 +73,97 @@ const categories = [
   },
 ];
 
-export { signedMenuItems, categories };
+const itemsPlaceholder = [
+  {
+    name: "Air Force 1 High 07",
+    price: 550,
+    id: "air-force-1-high-07-123123",
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx3%2C.jpg?alt=media&token=c884c0ec-9a13-4cae-8959-dc6195d33d49",
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx.jpg?alt=media&token=9dd6e197-57e0-46b4-a241-527b5394e1a0",
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx2%2C.jpg?alt=media&token=c68c8996-f2ed-4fb0-8bf7-a38c8879e208",
+    ],
+    size: {
+      41: 2,
+      44: 3,
+    },
+    category: ["erkek", "gunluk"],
+    brand: "nike",
+    gender: "erkek",
+    description: "Erkek Yarış Ayakkabısı",
+  },
+  {
+    name: "Air Force 1 High 07",
+    price: 550,
+    id: "air-force-1-high-07-123123",
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx3%2C.jpg?alt=media&token=c884c0ec-9a13-4cae-8959-dc6195d33d49",
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx.jpg?alt=media&token=9dd6e197-57e0-46b4-a241-527b5394e1a0",
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx2%2C.jpg?alt=media&token=c68c8996-f2ed-4fb0-8bf7-a38c8879e208",
+    ],
+    size: {
+      41: 2,
+      44: 3,
+    },
+    category: ["erkek", "gunluk"],
+    brand: "nike",
+    gender: "erkek",
+    description: "Erkek Yarış Ayakkabısı",
+  },
+  {
+    name: "Air Force 1 High 07",
+    price: 550,
+    id: "air-force-1-high-07-123123",
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx3%2C.jpg?alt=media&token=c884c0ec-9a13-4cae-8959-dc6195d33d49",
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx.jpg?alt=media&token=9dd6e197-57e0-46b4-a241-527b5394e1a0",
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx2%2C.jpg?alt=media&token=c68c8996-f2ed-4fb0-8bf7-a38c8879e208",
+    ],
+    size: {
+      41: 2,
+      44: 3,
+    },
+    category: ["erkek", "gunluk"],
+    brand: "nike",
+    gender: "erkek",
+    description: "Erkek Yarış Ayakkabısı",
+  },
+  {
+    name: "Air Force 1 High 07",
+    price: 550,
+    id: "air-force-1-high-07-123123",
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx3%2C.jpg?alt=media&token=c884c0ec-9a13-4cae-8959-dc6195d33d49",
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx.jpg?alt=media&token=9dd6e197-57e0-46b4-a241-527b5394e1a0",
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx2%2C.jpg?alt=media&token=c68c8996-f2ed-4fb0-8bf7-a38c8879e208",
+    ],
+    size: {
+      41: 2,
+      44: 3,
+    },
+    category: ["erkek", "gunluk"],
+    brand: "nike",
+    gender: "erkek",
+    description: "Erkek Yarış Ayakkabısı",
+  },
+  {
+    name: "Air Force 1 High 07",
+    price: 550,
+    id: "air-force-1-high-07-123123",
+    images: [
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx3%2C.jpg?alt=media&token=c884c0ec-9a13-4cae-8959-dc6195d33d49",
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx.jpg?alt=media&token=9dd6e197-57e0-46b4-a241-527b5394e1a0",
+      "https://firebasestorage.googleapis.com/v0/b/react-ecommerce-isyeri.appspot.com/o/item-images%2Fair-force-1-high-07-ayakkab%C4%B1s%C4%B1-tg72Lx2%2C.jpg?alt=media&token=c68c8996-f2ed-4fb0-8bf7-a38c8879e208",
+    ],
+    size: {
+      41: 2,
+      44: 3,
+    },
+    category: ["erkek", "gunluk"],
+    brand: "nike",
+    gender: "erkek",
+    description: "Erkek Yarış Ayakkabısı",
+  },
+];
+
+export { signedMenuItems, categories, itemsPlaceholder };

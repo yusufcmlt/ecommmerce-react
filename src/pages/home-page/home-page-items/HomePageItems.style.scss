@@ -1,0 +1,15 @@
+#new-items-section {
+  margin: 0;
+  padding: 0 10px;
+  min-height: 350px;
+  //padding: 0 10px;
+  .items-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 1024px) {
+  #new-items-section {
+  }
+}

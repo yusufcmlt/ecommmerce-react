@@ -1,7 +1,7 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import CategoryContainer from "../category-container/CategoryContainer";
-import SearchBar from "../search-bar/SearchBar";
+import SearchBar from "../../../components/search-bar/SearchBar";
 
 import "./Hero.style.scss";
 
@@ -12,7 +12,7 @@ export default function Hero() {
     <div className="hero">
       <div className="hero-first">
         <h1 className="hero-title">
-          TÜM AYAKKABI ÇEŞİTLERİNDE ALIŞVERİŞİN ADRESİ
+          TÜM AYAKKABI ÇEŞİTLERİNDE ALIŞVERİŞİN ADRESİ!
         </h1>
         {!isMobile && <SearchBar searchBarSize="desktop" />}
       </div>

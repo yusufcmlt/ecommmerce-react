@@ -27,7 +27,7 @@ export default function MainPage() {
         ) : (
           <React.Fragment>
             <PageContent />
-            <Footer></Footer>
+            <Footer />
           </React.Fragment>
         )}
       </React.Fragment>
