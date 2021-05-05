@@ -1,15 +1,24 @@
 #new-items-section {
-  margin: 0;
-  padding: 0 10px;
-  min-height: 350px;
-  //padding: 0 10px;
+  margin: 50px 0;
+  //min-height: 350px;
+  width: 100%;
   .items-container {
     display: flex;
-    justify-content: flex-start;
     flex-wrap: wrap;
   }
 }
-@media (max-width: 1024px) {
-  #new-items-section {
+@media (min-width: 40em) {
+  .items-container {
+    display: flex;
+    //justify-content: space-around;
+    flex-wrap: wrap;
+  }
+}
+@media (min-width: 60em) {
+  .items-container {
+  }
+}
+@media (min-width: 52em) {
+  .items-container {
   }
 }

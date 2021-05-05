@@ -12,6 +12,7 @@ export default function HomePageItems() {
       <div className="items-container">
         {itemsPlaceholder.map((item) => (
           <Item
+            key={item.name + item.price}
             image={item.images[0]}
             name={item.name}
             price={item.price}
