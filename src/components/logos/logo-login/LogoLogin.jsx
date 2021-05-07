@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./LogoLogin.style.scss";
-import { ReactComponent as LoginLogo } from "../../../assets/icons/shoes-logo.svg";
+import { ReactComponent as LoginLogo } from "../../../assets/icons/logo.svg";
 import { Link } from "react-router-dom";
 
 const LogoLogin = () => {
@@ -14,7 +14,10 @@ const LogoLogin = () => {
     >
       <div className="logo-login-container">
         <LoginLogo className="logo-login-icon" />
-        <h2 className="logo-login-text">SHOESHOE</h2>
+        <h2 className="logo-login-text">
+          <span>FINDIK</span>
+          <span>FISTIK</span>
+        </h2>
       </div>
     </Link>
   );

@@ -12,7 +12,7 @@ export default function Hero() {
     <div className="hero">
       <div className="hero-first">
         <h1 className="hero-title">
-          TÜM AYAKKABI ÇEŞİTLERİNDE ALIŞVERİŞİN ADRESİ!
+          TÜM KURUYEMİŞ ÇEŞİTLERİNDE ALIŞVERİŞİN ADRESİ!
         </h1>
         {!isMobile && <SearchBar searchBarSize="desktop" />}
       </div>

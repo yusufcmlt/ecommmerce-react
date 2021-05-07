@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 
 import PageTitleHeader from "../../components/page-title-header/PageTitleHeader";
+
+import AdminProductList from "./admin-items/AdminProductList";
 import { getItemCategoryCount } from "../../firebase/firebase";
 import AdminNavButtons from "./admin-nav-buttons/AdminNavButtons";
 
@@ -15,14 +17,13 @@ export default function AdminPage() {
 
   const location = useLocation();
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
+    setLoading(true);
     getItemCategoryCount().then((newItemCounts) => {
       setAdminCounts(newItemCounts);
     });
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
     switch (location.pathname) {
       case "/yonetim/urunler":
         console.log("hey");
@@ -34,6 +35,7 @@ export default function AdminPage() {
       default:
         setPageHeaderInfo({ title: "Yönetim", icon: "admin" });
     }
+    setLoading(false);
   }, [location.pathname]);
 
   return (
@@ -53,7 +55,7 @@ export default function AdminPage() {
             />
           </Route>
           <Route path="/yonetim/urunler">
-            <p>Urunler</p>
+            <AdminProductList />
           </Route>
           <Route path="/yonetim/kategoriler">
             <p>kategoriler</p>

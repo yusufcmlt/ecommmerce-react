@@ -1,7 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import { createPortal } from "react-dom";
 
 // Initialize Firebase
 const app = firebase.initializeApp({
@@ -57,6 +56,22 @@ export function getItemCategoryCount() {
           countObj = { ...countObj, [countData.id]: countData.data().count };
         });
         resolve(countObj);
+      });
+  });
+}
+
+export function getAdminItems() {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("items")
+      .get()
+      .then((itemSnapshot) => {
+        resolve(
+          itemSnapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+        );
+      })
+      .catch((error) => {
+        reject(error);
       });
   });
 }

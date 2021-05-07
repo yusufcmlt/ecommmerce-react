@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { ReactComponent as DesktopLogo } from "../../../assets/icons/shoes-logo.svg";
+import { ReactComponent as DesktopLogo } from "../../../assets/icons/logo.svg";
 import "./LogoDesktop.style.scss";
 
 export const LogoDesktop = () => {
@@ -16,7 +16,10 @@ export const LogoDesktop = () => {
     >
       <div className="logo-desktop-container">
         <DesktopLogo className="logo-desktop-icon" />
-        <h2 className="logo-desktop-text">SHOESHOE</h2>
+        <h2 className="logo-desktop-text">
+          <span>FINDIK</span>
+          <span>FISTIK</span>
+        </h2>
       </div>
     </Link>
   );

@@ -8,7 +8,7 @@ import "./HomePageItems.style.scss";
 export default function HomePageItems() {
   return (
     <section id="new-items-section">
-      <h3 className="app-section-h3-title">Yeni Gelenler</h3>
+      <h3 className="app-section-h3-title">Yeni Ürünler</h3>
       <div className="items-container">
         {itemsPlaceholder.map((item) => (
           <Item
