@@ -29,17 +29,19 @@
       .admin-product-info {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         margin-left: 10px;
         .admin-product-title {
+          flex: 0 1 40%;
           margin: 0;
           text-transform: uppercase;
           color: #4f5485;
         }
         .admin-product-desc {
+          flex-direction: 0 1 35%;
           color: rgb(100, 100, 100);
           font-size: 12px;
-          font-weight: 400;
+          font-weight: 500;
         }
       }
       .admin-product-image {
