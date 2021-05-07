@@ -57,12 +57,18 @@
     background-image: url("../../../assets/icons/back.svg");
   }
   .button-icon-setting {
+    filter: invert(48%) sepia(10%) saturate(5122%) hue-rotate(329deg)
+      brightness(96%) contrast(74%);
     background-image: url("../../../assets/icons/setting.svg");
   }
   .button-icon-product {
+    filter: invert(32%) sepia(12%) saturate(1786%) hue-rotate(197deg)
+      brightness(97%) contrast(87%);
     background-image: url("../../../assets/icons/products.svg");
   }
   .button-icon-category {
+    filter: invert(32%) sepia(12%) saturate(1786%) hue-rotate(197deg)
+      brightness(97%) contrast(87%);
     background-image: url("../../../assets/icons/categories.svg");
   }
 }
@@ -155,12 +161,15 @@
 }
 
 .size-admin-nav {
-  color: #d7654c;
+  color: #4f5485;
   width: 50vw;
   height: 250px;
-  background: linear-gradient(60deg, #2d264e, #26294e);
+  background: linear-gradient(80deg, #fbb224, #c98704);
   margin: 10px 0;
   font-size: 48px;
+  transition-duration: 0.2s;
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.15);
+
   > .button-icon {
     position: absolute;
     top: 80%;
@@ -179,7 +188,7 @@
     height: 200px;
   }
   &:hover {
-    background: linear-gradient(60deg, #2a2347, #232547);
+    background: linear-gradient(70deg, #e6a421, #b47903);
   }
 }
 

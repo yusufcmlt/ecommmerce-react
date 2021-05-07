@@ -8,6 +8,7 @@ export default function AdminNavButtons({
   productCount,
   categoryCount,
   navPosition,
+  handlePageTitle,
 }) {
   return (
     <nav className={`admin-nav-buttons admin-nav-${navPosition}`}>
@@ -19,7 +20,7 @@ export default function AdminNavButtons({
           buttonInfo="Ürünler"
         />
       </Link>
-      <Link to="/yonetim/urunler">
+      <Link to="/yonetim/kategoriler">
         <CustomButton
           buttonText={categoryCount}
           buttonSize="admin-nav"

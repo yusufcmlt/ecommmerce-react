@@ -1,6 +1,5 @@
 .page-title-header {
   background: linear-gradient(60deg, #2d264e, #26294e);
-
   min-width: 65%;
   max-width: 75%;
   height: 70px;
@@ -19,6 +18,18 @@
 
   .pt-icon-admin {
     background-image: url("../../assets/icons/admin.svg");
+    filter: invert(48%) sepia(10%) saturate(5122%) hue-rotate(329deg)
+      brightness(96%) contrast(74%);
+  }
+  .pt-icon-product {
+    background-image: url("../../assets/icons/products.svg");
+    filter: invert(48%) sepia(10%) saturate(5122%) hue-rotate(329deg)
+      brightness(96%) contrast(74%);
+  }
+  .pt-icon-category {
+    background-image: url("../../assets/icons/categories.svg");
+    filter: invert(48%) sepia(10%) saturate(5122%) hue-rotate(329deg)
+      brightness(96%) contrast(74%);
   }
 
   .page-title-text {
@@ -34,6 +45,7 @@
 }
 @media (max-width: 1024px) {
   .page-title-header {
+    height: 60px;
     max-width: unset;
     width: 95%;
     margin: 20px auto;
