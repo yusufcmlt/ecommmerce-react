@@ -11,9 +11,9 @@ export default function HeaderDesktop() {
     <header className="header-desktop-container box-shadow-rule">
       <LogoDesktop />
       <UserGreet />
-      <div className="header-desktop-buttons">
+      <nav className="header-desktop-buttons">
         <MenuNav navType="header-menu" />
-      </div>
+      </nav>
     </header>
   );
 }

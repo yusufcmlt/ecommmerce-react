@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import { createPortal } from "react-dom";
 
 // Initialize Firebase
 const app = firebase.initializeApp({
@@ -32,6 +33,32 @@ export async function createUserProfileDocument(email, userID) {
       createdAt: new Date(),
     });
   }
+}
+export function getUserIsAdmin(userID) {
+  const userRef = firestore.doc(`users/${userID}`);
+
+  return new Promise((resolve) => {
+    userRef.get().then((userDoc) => {
+      if (userDoc.exists) {
+        resolve(userDoc.data().isAdmin);
+      } else resolve(false);
+    });
+  });
+}
+
+export function getItemCategoryCount() {
+  let countObj = {};
+  return new Promise((resolve) => {
+    firestore
+      .collection(`itemCounts`)
+      .get()
+      .then((countSnapshot) => {
+        countSnapshot.forEach((countData) => {
+          countObj = { ...countObj, [countData.id]: countData.data().count };
+        });
+        resolve(countObj);
+      });
+  });
 }
 
 export const auth = app.auth();

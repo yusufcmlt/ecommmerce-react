@@ -20,7 +20,7 @@
     text-transform: uppercase;
     color: #4f5485;
     display: flex;
-    padding: 2px;
+    padding: 5px;
     flex-direction: column;
     height: 15%;
     justify-content: space-around;
@@ -37,6 +37,7 @@
     .item-price {
       font-size: 16px;
       font-weight: 600;
+      padding-bottom: 10px;
     }
   }
 }

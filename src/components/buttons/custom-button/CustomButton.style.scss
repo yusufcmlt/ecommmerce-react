@@ -59,6 +59,12 @@
   .button-icon-setting {
     background-image: url("../../../assets/icons/setting.svg");
   }
+  .button-icon-product {
+    background-image: url("../../../assets/icons/products.svg");
+  }
+  .button-icon-category {
+    background-image: url("../../../assets/icons/categories.svg");
+  }
 }
 
 .size-signup {
@@ -146,6 +152,46 @@
 }
 .size-admin {
   color: #d7654c;
+}
+
+.size-admin-nav {
+  color: #d7654c;
+  width: 50vw;
+  height: 250px;
+  background: linear-gradient(60deg, #2d264e, #26294e);
+  margin: 10px 0;
+  font-size: 48px;
+  > .button-icon {
+    position: absolute;
+    top: 80%;
+    left: 90%;
+    width: 40px;
+    height: 40px;
+    @media (max-width: 1024px) {
+      left: 85%;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  @media (max-width: 1024px) {
+    font-size: 44px;
+    width: 65vw;
+    height: 200px;
+  }
+  &:hover {
+    background: linear-gradient(60deg, #2a2347, #232547);
+  }
+}
+
+.button-info-admin {
+  font-size: 18px;
+  position: absolute;
+  top: 15px;
+  left: 10px;
+
+  @media (max-width: 1024px) {
+    font-size: 14px;
+  }
 }
 .size-search {
   width: 50px;

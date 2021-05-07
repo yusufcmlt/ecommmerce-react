@@ -8,12 +8,12 @@ import "./MobileSideMenu.style.scss";
 export default function MobileSideMenu() {
   const { pageMobileHeight } = useSize();
   return (
-    <div
+    <nav
       style={{ minHeight: `${pageMobileHeight}px` }}
       className="mobile-side-menu-nav"
     >
       <h2 className="mobile-side-menu-title">Seçenekler</h2>
       <MenuNav navType="mobile-menu" />
-    </div>
+    </nav>
   );
 }

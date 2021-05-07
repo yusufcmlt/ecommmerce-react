@@ -29,7 +29,7 @@ export const SignInUp = () => {
     if (currentUser) {
       createUserProfileDocument(currentUser.email, currentUser.uid)
         .then(() => {
-          history.push({ pathname: "/" });
+          history.replace({ pathname: "/" });
         })
         .catch((error) => {
           setSignError("Girişte bir hata oldu.");

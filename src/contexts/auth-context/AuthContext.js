@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../../firebase/firebase";
+import { auth, getUserIsAdmin } from "../../firebase/firebase";
 
 const AuthContext = React.createContext();
 
@@ -9,12 +9,16 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
+  const [userIsAdmin, setUserIsAdmin] = useState(false);
   const [userLoading, setUserLoading] = useState(true);
 
   useEffect(() => {
     const unSubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      setUserLoading(false);
+      getUserIsAdmin(user && user.uid).then((userState) => {
+        setUserIsAdmin(userState);
+        setUserLoading(false);
+      });
     });
 
     return unSubscribe;
@@ -22,6 +26,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    userIsAdmin,
   };
   return (
     <AuthContext.Provider value={value}>

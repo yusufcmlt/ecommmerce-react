@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../../contexts/auth-context/AuthContext";
@@ -12,7 +12,7 @@ import CustomButton from "../buttons/custom-button/CustomButton";
 import "./MenuNav.style.scss";
 
 export default function MenuNav({ navType }) {
-  const { currentUser } = useAuth();
+  const { currentUser, userIsAdmin } = useAuth();
   const { appPageState, handleMenuOpened, handlePageState } = useNavMenu();
   const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
 
@@ -23,18 +23,20 @@ export default function MenuNav({ navType }) {
   return currentUser ? (
     <React.Fragment>
       <Link to="/yonetim" key="adminButton">
-        <CustomButton
-          buttonText="Yönetim"
-          buttonSize={
-            isMobile ? "mobile-menu size-admin" : "header-menu size-admin"
-          }
-          buttonIcon="setting"
-          selectedMenuButton={isButtonSelected("yonetim")}
-          funcOnPress={() => {
-            handleMenuOpened();
-            handlePageState("yonetim");
-          }}
-        />
+        {userIsAdmin ? (
+          <CustomButton
+            buttonText="Yönetim"
+            buttonSize={
+              isMobile ? "mobile-menu size-admin" : "header-menu size-admin"
+            }
+            buttonIcon="setting"
+            selectedMenuButton={isButtonSelected("yonetim")}
+            funcOnPress={() => {
+              handleMenuOpened();
+              handlePageState("yonetim");
+            }}
+          />
+        ) : null}
       </Link>
       {signedMenuItems.map((button) => (
         <Link to={`/${button.path}`} key={button.id}>

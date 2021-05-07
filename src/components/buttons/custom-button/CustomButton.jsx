@@ -10,6 +10,7 @@ export default function CustomButton({
   selectedMenuButton,
   buttonMouseOver,
   buttonOut,
+  buttonInfo,
 }) {
   return (
     <button
@@ -26,6 +27,7 @@ export default function CustomButton({
       onMouseOver={buttonMouseOver}
       onMouseOut={buttonOut}
     >
+      <span className="button-info-admin">{buttonInfo}</span>
       <span className={`button-icon button-icon-${buttonIcon}`} />
       {buttonText}
     </button>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory, useLocation } from "react-router";
 import { useNavMenu } from "../../../contexts/nav-menu-context/NavMenuContext";
 import CustomButton from "../../buttons/custom-button/CustomButton";
 import LogoMobile from "../../logos/logo-mobile/LogoMobile";
@@ -10,12 +11,26 @@ import "./HeaderMobile.style.scss";
 export default function HeaderMobile() {
   const { isMenuOpened, handleMenuOpened } = useNavMenu();
 
+  const location = useLocation();
+  const history = useHistory();
+
   return (
     <header id="header-mobile-container" className="header-mobile-container">
       {!isMenuOpened ? (
         <React.Fragment>
           <div className="header-mobile-main-row">
-            <LogoMobile />
+            {location.pathname === "/" ? (
+              <LogoMobile />
+            ) : (
+              <CustomButton
+                buttonSize="back"
+                buttonIcon="back"
+                funcOnPress={() => {
+                  history.goBack();
+                }}
+              />
+            )}
+
             <UserGreet />
             <CustomButton
               buttonSize="nav"
@@ -24,7 +39,9 @@ export default function HeaderMobile() {
             />
           </div>
           <div className="header-mobile-optional-row">
-            <SearchBar searchBarSize="mobile" />
+            {location.pathname === "/" ? (
+              <SearchBar searchBarSize="mobile" />
+            ) : null}
           </div>
         </React.Fragment>
       ) : (
