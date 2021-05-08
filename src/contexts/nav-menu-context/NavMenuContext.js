@@ -21,7 +21,8 @@ export function MenuProvider({ children }) {
     setMenuOpened((isMenuOpened) => !isMenuOpened);
   }
   function handlePageState(pageState) {
-    setPageState((appPageState) => pageState);
+    console.log(pageState);
+    setPageState(pageState);
   }
 
   const value = {

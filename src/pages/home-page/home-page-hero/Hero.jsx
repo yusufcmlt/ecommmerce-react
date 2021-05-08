@@ -4,6 +4,7 @@ import CategoryContainer from "../category-container/CategoryContainer";
 import SearchBar from "../../../components/search-bar/SearchBar";
 
 import "./Hero.style.scss";
+import { ItemCategoryProvider } from "../../../contexts/item-category-context/ItemCategoryContext";
 
 export default function Hero() {
   const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
@@ -18,6 +19,7 @@ export default function Hero() {
       </div>
       <div className="hero-second">
         <h3 className="app-section-h3-title">Kategoriler</h3>
+
         <CategoryContainer />
       </div>
     </div>

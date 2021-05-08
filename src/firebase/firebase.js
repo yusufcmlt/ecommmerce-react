@@ -76,6 +76,26 @@ export function getAdminItems() {
   });
 }
 
+export function getCategories() {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("categories")
+      .get()
+      .then((categorySnapshot) => {
+        resolve(
+          categorySnapshot.docs.map((category) => {
+            return {
+              id: category.id,
+              ...category.data(),
+            };
+          })
+        );
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
 export const auth = app.auth();
 export const firestore = app.firestore();
 

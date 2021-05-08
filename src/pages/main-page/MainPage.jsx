@@ -5,6 +5,7 @@ import Header from "../../components/headers/Header";
 
 import MobileSideMenu from "../../components/mobile-side-menu/MobileSideMenu";
 import PageContent from "../../components/page-content/PageContent";
+import { ItemCategoryProvider } from "../../contexts/item-category-context/ItemCategoryContext";
 import { useSize } from "../../contexts/mobile-sizes-context/MobileSizesContext";
 import { useNavMenu } from "../../contexts/nav-menu-context/NavMenuContext";
 
@@ -20,17 +21,19 @@ export default function MainPage() {
       style={{ minHeight: isMobile ? `${pageMobileHeight}px` : "100vh" }}
       className="main-page-container"
     >
-      <React.Fragment>
-        <Header />
-        {isMobile && isMenuOpened ? (
-          <MobileSideMenu />
-        ) : (
-          <React.Fragment>
-            <PageContent />
-            <Footer />
-          </React.Fragment>
-        )}
-      </React.Fragment>
+      <ItemCategoryProvider>
+        <React.Fragment>
+          <Header />
+          {isMobile && isMenuOpened ? (
+            <MobileSideMenu />
+          ) : (
+            <React.Fragment>
+              <PageContent />
+              <Footer />
+            </React.Fragment>
+          )}
+        </React.Fragment>
+      </ItemCategoryProvider>
     </div>
   );
 }

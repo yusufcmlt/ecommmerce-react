@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import CustomButton from "../../../components/buttons/custom-button/CustomButton";
 
-import { categories } from "../../../utils/constants";
+import CustomButton from "../../../components/buttons/custom-button/CustomButton";
+import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";
+
 import CategoryItem from "./category-item/CategoryItem";
 
 import "./CategoryContainer.style.scss";
 export default function CategoryContainer() {
   const [mouseOverInterval, setMouseOver] = useState();
+
+  const { categories } = useItems();
+
+  // useEffect(() => {
+  //   console.log(categories.length);
+  //   if (!categories.length) {
+  //     handleCategoryLoading();
+  //   }
+  // }, []);
 
   function handleCategoryScroll(direction) {
     const categoryContainer = document.getElementById("category-container");
@@ -15,7 +25,6 @@ export default function CategoryContainer() {
       categoryContainer.scrollBy({ left: direction, behavior: "smooth" });
     }, 100);
     setMouseOver(slideInterval);
-    console.log(slideInterval);
   }
 
   const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
@@ -34,13 +43,14 @@ export default function CategoryContainer() {
         />
       )}
       <div id="category-container" className="categories-container">
-        {categories.map((category) => (
-          <CategoryItem
-            key={category.name}
-            name={category.name}
-            imageUrl={category.imageUrl}
-          />
-        ))}
+        {categories &&
+          categories.data.map((category) => (
+            <CategoryItem
+              key={category.id}
+              name={category.name}
+              imageUrl={category.imageUrl}
+            />
+          ))}
       </div>
       {!isMobile && (
         <CustomButton
