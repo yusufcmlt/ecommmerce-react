@@ -11,6 +11,7 @@ import SignUpPage from "./sign-up-page/SignUpPage";
 import "./SignInUp.style.scss";
 import { useMediaQuery } from "react-responsive";
 import { useSize } from "../../contexts/mobile-sizes-context/MobileSizesContext";
+import Loading from "../../components/loading/Loading";
 
 export const SignInUp = () => {
   const [signPageState, setSignPage] = useState({
@@ -62,7 +63,7 @@ export const SignInUp = () => {
           <h3 className="sign-page-greet">{signPageState.signMessage}</h3>
           <hr className="sign-page-hr" />
           {signLoading ? (
-            <div className="loading-icon" />
+            <Loading size="sign" />
           ) : signError ? (
             <div className="sign-up-error">{signError}</div>
           ) : null}
