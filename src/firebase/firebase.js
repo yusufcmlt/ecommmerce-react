@@ -46,16 +46,16 @@ export function getUserIsAdmin(userID) {
 }
 
 export function getItemCategoryCount() {
-  let countObj = {};
   return new Promise((resolve) => {
     firestore
       .collection(`itemCounts`)
       .get()
       .then((countSnapshot) => {
-        countSnapshot.forEach((countData) => {
-          countObj = { ...countObj, [countData.id]: countData.data().count };
-        });
-        resolve(countObj);
+        resolve(
+          countSnapshot.docs.reduce((acc, countDoc) => {
+            return { ...acc, [countDoc.id]: countDoc.data()["count"] };
+          }, {})
+        );
       });
   });
 }
@@ -70,6 +70,24 @@ export function getAdminItems() {
           itemSnapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
         );
       })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function getNewFiveItem() {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("items")
+      .orderBy("dateAdded", "asc")
+      .limit(5)
+      .get()
+      .then((itemSnapshot) =>
+        resolve(
+          itemSnapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+        )
+      )
       .catch((error) => {
         reject(error);
       });

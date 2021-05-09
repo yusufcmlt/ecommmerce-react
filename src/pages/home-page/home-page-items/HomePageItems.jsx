@@ -1,24 +1,37 @@
 import React from "react";
+import { useEffect } from "react/cjs/react.development";
 import Item from "../../../components/item/Item";
-
-import { itemsPlaceholder } from "../../../utils/constants";
+import Loading from "../../../components/loading/Loading";
+import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";
 
 import "./HomePageItems.style.scss";
 
 export default function HomePageItems() {
+  const { newItems, handleNewItemsLoading } = useItems();
+
+  useEffect(() => {
+    if (!newItems.loaded) {
+      handleNewItemsLoading();
+    }
+  }, []);
+
   return (
     <section id="new-items-section">
       <h3 className="app-section-h3-title">Yeni Ürünler</h3>
       <div className="items-container">
-        {itemsPlaceholder.map((item) => (
-          <Item
-            key={item.name + item.price}
-            image={item.images[0]}
-            name={item.name}
-            price={item.price}
-            desc={item.description}
-          />
-        ))}
+        {newItems.loaded ? (
+          newItems.data.map((item) => (
+            <Item
+              key={item.name + item.price}
+              image={item.image}
+              name={item.name}
+              price={item.price}
+              desc={item.description}
+            />
+          ))
+        ) : (
+          <Loading size="page" />
+        )}
       </div>
     </section>
   );

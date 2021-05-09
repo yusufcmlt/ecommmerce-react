@@ -1,31 +1,26 @@
 import React from "react";
 import { useEffect, useState } from "react/cjs/react.development";
-import { getAdminItems } from "../../../firebase/firebase";
+import Loading from "../../../components/loading/Loading";
+import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";
+
 import AdminProduct from "./AdminProduct";
 
 export default function AdminProductList() {
-  const [isLoading, setLoading] = useState(true);
-  const [adminItems, setAdminItems] = useState([]);
+  const { items, handleItemLoading } = useItems();
 
   useEffect(() => {
-    getAdminItems().then((itemData) => {
-      setAdminItems(itemData);
-      setLoading(false);
-    });
+    if (!items.loaded) {
+      handleItemLoading();
+    }
   }, []);
+
   return (
     <div className="admin-product-list-container">
-      {!isLoading
-        ? adminItems.map((item) => (
-            <AdminProduct
-              key={item.id}
-              name={item.name}
-              price={item.price}
-              image={item.image}
-              number={item.number}
-            />
-          ))
-        : null}
+      {items.loaded ? (
+        items.data.map((item) => <AdminProduct data={item} />)
+      ) : (
+        <Loading size="page" />
+      )}
     </div>
   );
 }

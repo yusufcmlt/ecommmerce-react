@@ -1,41 +1,43 @@
 import React, { useState, useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 import { Route, Switch, useLocation } from "react-router-dom";
+import PageSideMenu from "../../components/page-side-menu/PageSideMenu";
 
+//Components
 import PageTitleHeader from "../../components/page-title-header/PageTitleHeader";
-
+import AdminCategoryList from "./admin-items/AdminCategoryList";
 import AdminProductList from "./admin-items/AdminProductList";
-import { getItemCategoryCount } from "../../firebase/firebase";
 import AdminNavButtons from "./admin-nav-buttons/AdminNavButtons";
 
 export default function AdminPage() {
   const [pageHeaderInfo, setPageHeaderInfo] = useState({
     title: "Yönetim",
     icon: "admin",
+    sideMenu: false,
   });
-  const [isLoading, setLoading] = useState(true);
-  const [adminCounts, setAdminCounts] = useState(0);
 
   const location = useLocation();
-
-  useEffect(() => {}, []);
+  const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
 
   useEffect(() => {
-    setLoading(true);
-    getItemCategoryCount().then((newItemCounts) => {
-      setAdminCounts(newItemCounts);
-    });
     switch (location.pathname) {
       case "/yonetim/urunler":
-        console.log("hey");
-        setPageHeaderInfo({ title: "Ürünler", icon: "product" });
+        setPageHeaderInfo({
+          title: "Ürünler",
+          icon: "product",
+          sideMenu: true,
+        });
         break;
       case "/yonetim/kategoriler":
-        setPageHeaderInfo({ title: "Kategoriler", icon: "category" });
+        setPageHeaderInfo({
+          title: "Kategoriler",
+          icon: "category",
+          sideMenu: true,
+        });
         break;
       default:
-        setPageHeaderInfo({ title: "Yönetim", icon: "admin" });
+        setPageHeaderInfo({ title: "Yönetim", icon: "admin", sideMenu: false });
     }
-    setLoading(false);
   }, [location.pathname]);
 
   return (
@@ -45,23 +47,21 @@ export default function AdminPage() {
         pageIcon={pageHeaderInfo.icon}
         pageType="admin"
       />
-      {!isLoading && (
+
+      <div className="admin-page-content">
         <Switch>
           <Route exact path="/yonetim">
-            <AdminNavButtons
-              navPosition="center"
-              productCount={adminCounts.items}
-              categoryCount={adminCounts.categories}
-            />
+            <AdminNavButtons navPosition="center" />
           </Route>
           <Route path="/yonetim/urunler">
             <AdminProductList />
           </Route>
           <Route path="/yonetim/kategoriler">
-            <p>kategoriler</p>
+            <AdminCategoryList />
           </Route>
         </Switch>
-      )}
+      </div>
+      {pageHeaderInfo.sideMenu ? <PageSideMenu /> : null}
     </section>
   );
 }

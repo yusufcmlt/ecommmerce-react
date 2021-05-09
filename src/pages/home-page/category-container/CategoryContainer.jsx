@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-
-import CustomButton from "../../../components/buttons/custom-button/CustomButton";
 import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";
 
+//Components
+import CustomButton from "../../../components/buttons/custom-button/CustomButton";
+import Loading from "../../../components/loading/Loading";
 import CategoryItem from "./category-item/CategoryItem";
 
+//Styles
 import "./CategoryContainer.style.scss";
+
 export default function CategoryContainer() {
   const [mouseOverInterval, setMouseOver] = useState();
+  const { categories, handleCategoryLoading } = useItems();
 
-  const { categories } = useItems();
-
-  // useEffect(() => {
-  //   console.log(categories.length);
-  //   if (!categories.length) {
-  //     handleCategoryLoading();
-  //   }
-  // }, []);
-
+  //Scroll horizontally on mouse over
   function handleCategoryScroll(direction) {
     const categoryContainer = document.getElementById("category-container");
     const slideInterval = setInterval(() => {
@@ -26,6 +22,13 @@ export default function CategoryContainer() {
     }, 100);
     setMouseOver(slideInterval);
   }
+
+  //Load categories on mount if not loaded
+  useEffect(() => {
+    if (!categories.loaded) {
+      handleCategoryLoading();
+    }
+  }, []);
 
   const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
   return (
@@ -43,14 +46,18 @@ export default function CategoryContainer() {
         />
       )}
       <div id="category-container" className="categories-container">
-        {categories &&
+        {categories.loaded ? (
+          categories &&
           categories.data.map((category) => (
             <CategoryItem
               key={category.id}
               name={category.name}
               imageUrl={category.imageUrl}
             />
-          ))}
+          ))
+        ) : (
+          <Loading size="page" />
+        )}
       </div>
       {!isMobile && (
         <CustomButton
