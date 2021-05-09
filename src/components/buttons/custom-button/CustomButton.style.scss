@@ -74,23 +74,35 @@
       brightness(97%) contrast(87%);
     background-image: url("../../../assets/icons/categories.svg");
   }
+  .button-icon-plus {
+    filter: invert(32%) sepia(12%) saturate(1786%) hue-rotate(197deg)
+      brightness(97%) contrast(87%);
+    background-image: url("../../../assets/icons/plus.svg");
+  }
+  .button-icon-minus {
+    filter: invert(32%) sepia(12%) saturate(1786%) hue-rotate(197deg)
+      brightness(97%) contrast(87%);
+    background-image: url("../../../assets/icons/minus.svg");
+  }
 }
 
 .size-signup {
   font-size: 18px;
   font-weight: 600;
-  border: 2px solid #fbb224;
+  background-color: #fbb224;
+  color: #4f5485;
 }
 .size-signin {
   font-size: 18px;
   font-weight: 600;
   color: #fff;
-  border: 2px solid #4f5485;
+  background-color: #4f5485;
+  color: #fbb224;
 }
 .size-google {
-  border: 2px solid #ffffff;
-  color: white;
+  color: black;
   font-size: 14px;
+  background-color: white;
 }
 
 .size-header-menu {
@@ -230,8 +242,8 @@
   height: 50px;
   font-weight: 700;
   font-size: 32px;
-  color: #3e4268;
-  background-color: #4f54855b;
+  color: #4f5485;
+  background-color: #fbb224;
   &:hover {
     color: #fbb224;
     background-color: #4f5485;
@@ -253,7 +265,16 @@
     background-color: unset;
   }
 }
-
+.size-admin-menu {
+  background-color: #fbb224;
+  color: #4f5485;
+  font-size: 14px;
+  width: 270px;
+  margin: 15px 0;
+  @media (max-width: 1024px) {
+    width: 90vw;
+  }
+}
 .selected {
   border: 2px solid #fbb224;
   background-color: #fbb32415;

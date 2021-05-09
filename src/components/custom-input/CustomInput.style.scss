@@ -1,5 +1,4 @@
 .input-container {
-  width: 100%;
   position: relative;
 
   .input-icon {
@@ -23,10 +22,11 @@
   .input-icon-email {
     background-image: url("../../assets/icons/email.svg");
   }
+  .input-icon-search {
+    background-image: url("../../assets/icons/search.svg");
+  }
 
   .custom-input {
-    width: 335px;
-    height: 50px;
     background-color: #4f548575;
     color: #fbb224;
     font-family: inherit;
@@ -48,6 +48,19 @@
         filter: invert(190%) sepia(150%) saturate(500%) hue-rotate(20deg)
           brightness(101%) contrast(97%);
       }
+    }
+  }
+
+  .custom-input-normal {
+    width: 335px;
+    height: 50px;
+  }
+  .custom-input-admin {
+    width: 270px;
+    height: 50px;
+    margin: 15px 0;
+    @media (max-width: 1024px) {
+      width: 90vw;
     }
   }
 }

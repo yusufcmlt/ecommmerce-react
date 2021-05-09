@@ -8,14 +8,15 @@ const CustomInput = ({
   inputPlaceholder,
   inputName,
   inputIcon,
+  inputSize = "normal",
 }) => {
   return (
-    <div className="input-container">
+    <div className={`input-container`}>
       {inputIcon ? (
         <div className={`input-icon input-icon-${inputIcon}`} />
       ) : null}
       <input
-        className="custom-input border-radius-10 input-stroke"
+        className={`custom-input custom-input-${inputSize} border-radius-10 input-stroke`}
         type={inputType}
         name={inputName}
         placeholder={inputPlaceholder}
