@@ -1,11 +1,13 @@
 .mobile-side-menu-nav {
-  width: 100vw;
-
   background: linear-gradient(60deg, #2d264e, #26294e);
-  display: flex;
+  z-index: 9999;
+  position: fixed;
   flex-direction: column;
+  width: 100vw;
+  display: flex;
   justify-content: center;
   align-items: center;
+
   .mobile-side-menu-title {
     color: #fbb224;
   }
