@@ -45,12 +45,12 @@
 }
 @media (max-width: 1024px) {
   .page-title-header {
-    min-height: 60px;
+    height: 50px;
     max-width: unset;
     flex-basis: 95%;
-    margin: 20px auto;
+    margin: 10px auto;
     .page-title-text {
-      font-size: 20px;
+      font-size: 16px;
       margin: 0;
       margin-left: 20px;
     }
