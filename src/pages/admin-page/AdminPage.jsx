@@ -48,7 +48,10 @@ export default function AdminPage() {
         pageType="admin"
       />
 
-      <div className="admin-page-content">
+      <div
+        className="admin-page-content"
+        style={!pageHeaderInfo.sideMenu ? { margin: "auto" } : {}}
+      >
         <Switch>
           <Route exact path="/yonetim">
             <AdminNavButtons navPosition="center" />
