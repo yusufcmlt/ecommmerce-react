@@ -59,8 +59,10 @@
     width: 270px;
     height: 50px;
     margin: 15px 0;
+    text-indent: 15px;
+    border-radius: 5px;
     @media (max-width: 1024px) {
-      width: 90vw;
+      width: 70vw;
     }
   }
 }
