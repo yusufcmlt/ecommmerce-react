@@ -4,24 +4,34 @@ import { useItems } from "../../../contexts/item-category-context/ItemCategoryCo
 import CategoryItem from "../../home-page/category-container/category-item/CategoryItem";
 
 export default function AdminCategoryList() {
-  const { categories, handleCategoryLoading } = useItems();
+  const {
+    categories,
+    handleCategoryLoading,
+    filterChar,
+    clearFiltering,
+  } = useItems();
 
   useEffect(() => {
+    clearFiltering();
     if (!categories.loaded) {
       handleCategoryLoading();
     }
-  });
+  }, []);
 
   return (
     <div className="admin-category-list-container">
       {categories &&
-        categories.data.map((category) => (
-          <CategoryItem
-            key={category.id}
-            name={category.name}
-            imageUrl={category.imageUrl}
-          />
-        ))}
+        categories.data
+          .filter((category) =>
+            category.name.toLowerCase().includes(filterChar.categories)
+          )
+          .map((category) => (
+            <CategoryItem
+              key={category.id}
+              name={category.name}
+              imageUrl={category.imageUrl}
+            />
+          ))}
     </div>
   );
 }

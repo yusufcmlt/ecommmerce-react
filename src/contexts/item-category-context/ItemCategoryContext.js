@@ -23,6 +23,15 @@ export function ItemCategoryProvider({ children }) {
     items: 0,
     categories: 0,
   });
+  const [filterChar, setFilterChar] = useState({ items: "", categories: "" });
+  const [sortFunc, setSortFunc] = useState({
+    items: {
+      func: (a, b) => a["name"] - b["name"],
+    },
+    categories: {
+      func: (a, b) => b["name"] - a["name"],
+    },
+  });
 
   function handleCategoryLoading() {
     console.log("Categories Loading");
@@ -67,6 +76,42 @@ export function ItemCategoryProvider({ children }) {
       .catch((error) => console.log("Failed to load new items", error));
   }
 
+  function clearFiltering() {
+    setFilterChar({ items: "", categories: "" });
+  }
+  function handleFiltering(event) {
+    const { name, value } = event.target;
+    setFilterChar({ ...filterChar, [name]: value.toLowerCase() });
+  }
+
+  function clearSorting() {
+    setSortFunc({
+      items: {
+        func: (a, b) => a["name"] - b["name"],
+      },
+      categories: {
+        func: (a, b) => b["name"] - a["name"],
+      },
+    });
+  }
+  function handleSorting(event) {
+    //Getting sort directions as ['list to sort','property to sort','sort order']
+    const { value } = event.target;
+    const valueSplit = value.split("-");
+
+    const sortFunction = () => {
+      if (valueSplit[0] === "asc") {
+        return;
+      }
+    };
+
+    console.log(valueSplit);
+    setSortFunc({
+      ...sortFunc,
+      [valueSplit[0]]: { func: sortFunction },
+    });
+  }
+
   const value = {
     categories,
     handleCategoryLoading,
@@ -76,7 +121,13 @@ export function ItemCategoryProvider({ children }) {
     items,
     handleNewItemsLoading,
     newItems,
+    handleFiltering,
+    filterChar,
+    clearFiltering,
+    handleSorting,
+    clearSorting,
   };
+
   return (
     <ItemCategoryContext.Provider value={value}>
       {children}

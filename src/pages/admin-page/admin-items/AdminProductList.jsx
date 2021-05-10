@@ -6,9 +6,18 @@ import { useItems } from "../../../contexts/item-category-context/ItemCategoryCo
 import AdminProduct from "./AdminProduct";
 
 export default function AdminProductList() {
-  const { items, handleItemLoading } = useItems();
+  const {
+    items,
+    handleItemLoading,
+    filterChar,
+    clearFiltering,
+    sortFunc,
+    clearSorting,
+  } = useItems();
 
   useEffect(() => {
+    clearFiltering();
+    clearSorting();
     if (!items.loaded) {
       handleItemLoading();
     }
@@ -17,7 +26,10 @@ export default function AdminProductList() {
   return (
     <div className="admin-product-list-container">
       {items.loaded ? (
-        items.data.map((item) => <AdminProduct data={item} />)
+        items.data
+          .filter((item) => item.name.toLowerCase().includes(filterChar.items))
+          .sort((a, b) => b.name.toLowerCase() - a.name.toLowerCase())
+          .map((item) => <AdminProduct key={item.id} data={item} />)
       ) : (
         <Loading size="page" />
       )}
