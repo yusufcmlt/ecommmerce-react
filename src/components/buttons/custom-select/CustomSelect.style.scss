@@ -1,0 +1,27 @@
+.custom-select-container {
+  border-radius: 5px;
+  background-color: #4f548575;
+  text-indent: 10px;
+  color: #fbb324a1;
+  font-weight: 500;
+  font-family: inherit;
+}
+.select-size-admin {
+  width: 270px;
+  height: 50px;
+  border: none;
+  & option {
+    background-color: #4f548575;
+    color: #4f5485;
+  }
+  &:focus {
+    background-color: #fbb224;
+    color: #4f5485;
+  }
+}
+
+@media (max-width: 1024px) {
+  .select-size-admin {
+    width: 70vw;
+  }
+}
