@@ -9,7 +9,6 @@ import "./PageSideMenu.style.scss";
 export default function PageSideMenu({ children }) {
   return (
     <div className="page-side-menu-container">
-      <h3 className="page-side-menu-title">Seçenekler</h3>
       <Switch>
         <Route path="/yonetim/urunler">
           <AdminFilterMenu
