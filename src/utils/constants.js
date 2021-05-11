@@ -61,4 +61,15 @@ const adminMenuFilters = {
   },
 };
 
-export { signedMenuItems, adminMenuFilters };
+const sortFunctions = {
+  name: {
+    asc: (a, b) => a.name > b.name,
+    desc: (a, b) => b.name > a.name,
+  },
+  price: {
+    asc: (a, b) => a.price - b.price,
+    desc: (a, b) => b.price - a.price,
+  },
+};
+
+export { signedMenuItems, adminMenuFilters, sortFunctions };

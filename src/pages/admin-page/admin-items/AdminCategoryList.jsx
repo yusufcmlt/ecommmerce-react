@@ -1,5 +1,6 @@
-import React from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useEffect, useState } from "react";
+import PageNumberButtons from "../../../components/buttons/page-number-buttons/PageNumberButtons";
+
 import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";
 import CategoryItem from "../../home-page/category-container/category-item/CategoryItem";
 
@@ -8,30 +9,50 @@ export default function AdminCategoryList() {
     categories,
     handleCategoryLoading,
     filterChar,
-    clearFiltering,
+    sortFunc,
+    page,
+    handlePaging,
+    clearAllFilters,
   } = useItems();
 
+  const [activeCategoryCount, setActiveCategoryCount] = useState(
+    categories.data.length
+  );
+  const [filteredCategories, setFilteredCategories] = useState(categories.data);
+
   useEffect(() => {
-    clearFiltering();
     if (!categories.loaded) {
       handleCategoryLoading();
     }
+    clearAllFilters();
   }, []);
+
+  useEffect(() => {
+    setFilteredCategories(
+      categories.data
+        .filter((item) =>
+          item.name.toLowerCase().includes(filterChar.categories)
+        )
+        .sort(sortFunc.categories.func)
+        .slice(...page),
+      setActiveCategoryCount(filteredCategories.length)
+    );
+  }, [filterChar, sortFunc, filteredCategories.length, categories.data, page]);
 
   return (
     <div className="admin-category-list-container">
       {categories &&
-        categories.data
-          .filter((category) =>
-            category.name.toLowerCase().includes(filterChar.categories)
-          )
-          .map((category) => (
-            <CategoryItem
-              key={category.id}
-              name={category.name}
-              imageUrl={category.imageUrl}
-            />
-          ))}
+        filteredCategories.map((category) => (
+          <CategoryItem
+            key={category.id}
+            name={category.name}
+            imageUrl={category.imageUrl}
+          />
+        ))}
+      <PageNumberButtons
+        itemCount={activeCategoryCount}
+        handlePaging={handlePaging}
+      />
     </div>
   );
 }

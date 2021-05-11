@@ -21,14 +21,14 @@ export default function MainPage() {
       style={{ minHeight: isMobile ? `${pageMobileHeight}px` : "100vh" }}
       className="main-page-container"
     >
-      <React.Fragment>
+      <>
         <Header />
         {isMobile && isMenuOpened ? <MobileSideMenu /> : null}
         <ItemCategoryProvider>
           <PageContent />
         </ItemCategoryProvider>
         <Footer />
-      </React.Fragment>
+      </>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react/cjs/react.development";
+import PageNumberButtons from "../../../components/buttons/page-number-buttons/PageNumberButtons";
 import Loading from "../../../components/loading/Loading";
 import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";
 
@@ -10,29 +11,44 @@ export default function AdminProductList() {
     items,
     handleItemLoading,
     filterChar,
-    clearFiltering,
     sortFunc,
-    clearSorting,
+    page,
+    handlePaging,
+    clearAllFilters,
   } = useItems();
 
+  const [activeItemCount, setActiveItemCount] = useState(items.data.length);
+  const [filteredItems, setFilteredItems] = useState(items.data);
+
+  //Load Items on Page Load
   useEffect(() => {
-    clearFiltering();
-    clearSorting();
     if (!items.loaded) {
       handleItemLoading();
     }
+    clearAllFilters();
   }, []);
+
+  useEffect(() => {
+    setFilteredItems(
+      items.data
+        .filter((item) => item.name.toLowerCase().includes(filterChar.items))
+        .sort(sortFunc.items.func)
+        .slice(...page),
+      setActiveItemCount(filteredItems.length)
+    );
+  }, [filterChar, sortFunc, filteredItems.length, items.data, page]);
 
   return (
     <div className="admin-product-list-container">
       {items.loaded ? (
-        items.data
-          .filter((item) => item.name.toLowerCase().includes(filterChar.items))
-          .sort((a, b) => b.name.toLowerCase() - a.name.toLowerCase())
-          .map((item) => <AdminProduct key={item.id} data={item} />)
+        filteredItems.map((item) => <AdminProduct key={item.id} data={item} />)
       ) : (
         <Loading size="page" />
       )}
+      <PageNumberButtons
+        itemCount={activeItemCount}
+        handlePaging={handlePaging}
+      />
     </div>
   );
 }

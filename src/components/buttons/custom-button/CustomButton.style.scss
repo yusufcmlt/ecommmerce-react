@@ -278,6 +278,21 @@
     background-color: #da9408;
   }
 }
+
+.size-page-number {
+  width: 50px;
+  height: 50px;
+  background-color: #fbb224;
+  color: #4f5485;
+  margin: 5px 5px;
+  &:hover {
+    color: #fbb224;
+  }
+  @media (max-width: 1024px) {
+    width: 40px;
+    height: 40px;
+  }
+}
 .selected {
   border: 2px solid #fbb224;
   background-color: #fbb32415;

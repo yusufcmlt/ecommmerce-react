@@ -11,6 +11,7 @@ export default function CustomButton({
   buttonMouseOver,
   buttonOut,
   buttonInfo,
+  buttonValue,
 }) {
   return (
     <button
@@ -26,9 +27,12 @@ export default function CustomButton({
       disabled={buttonState}
       onMouseOver={buttonMouseOver}
       onMouseOut={buttonOut}
+      value={buttonValue}
     >
-      <span className="button-info-admin">{buttonInfo}</span>
-      <span className={`button-icon button-icon-${buttonIcon}`} />
+      {buttonInfo && <span className="button-info-admin">{buttonInfo}</span>}
+      {buttonIcon && (
+        <span className={`button-icon button-icon-${buttonIcon}`} />
+      )}
       {buttonText}
     </button>
   );

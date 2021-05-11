@@ -71,9 +71,22 @@
       }
     }
     .admin-category-list-container {
-      width: 50%;
+      width: 100%;
       margin: auto;
       display: flex;
+      flex-wrap: wrap;
+      @at-root .admin-page-content {
+        width: 65%;
+      }
+      & .category-item-container {
+        flex-basis: calc(20% - 1em);
+      }
+      @media (max-width: 1024px) {
+        & .category-item-container {
+          flex-basis: 25%;
+          height: 20vh;
+        }
+      }
     }
   }
 }

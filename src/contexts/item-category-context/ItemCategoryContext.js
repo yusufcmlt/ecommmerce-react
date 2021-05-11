@@ -6,6 +6,7 @@ import {
   getItemCategoryCount,
   getNewFiveItem,
 } from "../../firebase/firebase";
+import { sortFunctions } from "../../utils/constants";
 
 const ItemCategoryContext = React.createContext();
 
@@ -26,25 +27,21 @@ export function ItemCategoryProvider({ children }) {
   const [filterChar, setFilterChar] = useState({ items: "", categories: "" });
   const [sortFunc, setSortFunc] = useState({
     items: {
-      func: (a, b) => a["name"] - b["name"],
+      func: (a, b) => a["name"] > b["name"],
     },
     categories: {
-      func: (a, b) => b["name"] - a["name"],
+      func: (a, b) => b["name"] > a["name"],
     },
   });
+  const [page, setPage] = useState([0, 10]);
 
-  function handleCategoryLoading() {
-    console.log("Categories Loading");
-    getCategories()
-      .then((categoryData) => {
-        setCategories({ loaded: true, data: [...categoryData] });
-        console.log("Categories Loaded");
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log("Categories Failed to Load");
-      });
-  }
+  useEffect(() => {
+    console.log("Item Provider Mounted");
+    return () => {
+      console.log("Item Provider UnMounted");
+      clearAllFilters();
+    };
+  }, []);
 
   function handleCountLoading() {
     console.log("Item and Category Numbers are Loading");
@@ -53,6 +50,10 @@ export function ItemCategoryProvider({ children }) {
       console.log("Numbers Loaded");
     });
   }
+
+  /**
+   * ITEM LOAD
+   */
 
   function handleItemLoading() {
     console.log("Items Loading");
@@ -75,42 +76,75 @@ export function ItemCategoryProvider({ children }) {
       })
       .catch((error) => console.log("Failed to load new items", error));
   }
-
-  function clearFiltering() {
-    setFilterChar({ items: "", categories: "" });
+  function handleCategoryLoading() {
+    console.log("Categories Loading");
+    getCategories()
+      .then((categoryData) => {
+        setCategories({ loaded: true, data: [...categoryData] });
+        console.log("Categories Loaded");
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log("Categories Failed to Load");
+      });
   }
+
   function handleFiltering(event) {
     const { name, value } = event.target;
     setFilterChar({ ...filterChar, [name]: value.toLowerCase() });
   }
 
-  function clearSorting() {
-    setSortFunc({
-      items: {
-        func: (a, b) => a["name"] - b["name"],
-      },
-      categories: {
-        func: (a, b) => b["name"] - a["name"],
-      },
-    });
-  }
+  /**
+   * SORTING
+   */
+
   function handleSorting(event) {
     //Getting sort directions as ['list to sort','property to sort','sort order']
     const { value } = event.target;
     const valueSplit = value.split("-");
 
-    const sortFunction = () => {
-      if (valueSplit[0] === "asc") {
-        return;
-      }
-    };
-
     console.log(valueSplit);
     setSortFunc({
       ...sortFunc,
-      [valueSplit[0]]: { func: sortFunction },
+      [valueSplit[0]]: { func: sortFunctions[valueSplit[1]][valueSplit[2]] },
     });
   }
+
+  /**
+   * PAGING
+   */
+
+  function handlePaging(event) {
+    let { value } = event.target;
+    value = Number(value);
+    const startPage = (value - 1) * 10;
+    const endPage = value * 10;
+
+    setPage([startPage, endPage]);
+  }
+
+  /**
+   * Clearing Filters
+   */
+  function clearAllFilters() {
+    //Clear Filter Search Input
+    setFilterChar({ items: "", categories: "" });
+    //Clear Sorting
+    setSortFunc({
+      items: {
+        func: (a, b) => a["name"] > b["name"],
+      },
+      categories: {
+        func: (a, b) => b["name"] > a["name"],
+      },
+    });
+    //Clear Paging
+    setPage([0, 10]);
+  }
+
+  /**
+   * EXPORT
+   */
 
   const value = {
     categories,
@@ -123,9 +157,11 @@ export function ItemCategoryProvider({ children }) {
     newItems,
     handleFiltering,
     filterChar,
-    clearFiltering,
     handleSorting,
-    clearSorting,
+    sortFunc,
+    page,
+    handlePaging,
+    clearAllFilters,
   };
 
   return (
