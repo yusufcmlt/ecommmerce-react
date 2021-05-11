@@ -63,8 +63,8 @@ const adminMenuFilters = {
 
 const sortFunctions = {
   name: {
-    asc: (a, b) => a.name > b.name,
-    desc: (a, b) => b.name > a.name,
+    asc: (a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1),
+    desc: (a, b) => (b.name.toLowerCase() > a.name.toLowerCase() ? 1 : -1),
   },
   price: {
     asc: (a, b) => a.price - b.price,

@@ -27,10 +27,10 @@ export function ItemCategoryProvider({ children }) {
   const [filterChar, setFilterChar] = useState({ items: "", categories: "" });
   const [sortFunc, setSortFunc] = useState({
     items: {
-      func: (a, b) => a["name"] > b["name"],
+      func: (a, b) => (a["name"] > b["name"] ? 1 : -1),
     },
     categories: {
-      func: (a, b) => b["name"] > a["name"],
+      func: (a, b) => (b["name"] > a["name"] ? 1 : -1),
     },
   });
   const [page, setPage] = useState([0, 10]);
@@ -132,10 +132,10 @@ export function ItemCategoryProvider({ children }) {
     //Clear Sorting
     setSortFunc({
       items: {
-        func: (a, b) => a["name"] > b["name"],
+        func: (a, b) => (a["name"] > b["name"] ? 1 : -1),
       },
       categories: {
-        func: (a, b) => b["name"] > a["name"],
+        func: (a, b) => (b["name"] > a["name"] ? 1 : -1),
       },
     });
     //Clear Paging
