@@ -21,11 +21,16 @@
 }
 @media (max-width: 1024px) {
   .category-item-container {
-    height: 30vh;
-    flex: 0 0 40vw;
+    height: 25vh;
+    flex: 0 0 calc(34% - 1em);
     margin: 0 5px;
     &:hover {
       transform: scale(1);
     }
+  }
+}
+@media (max-width: 767px) {
+  .category-item-container {
+    flex: 0 0 calc(51% - 1em);
   }
 }
