@@ -47,7 +47,7 @@ export default function AdminPage() {
         pageIcon={pageHeaderInfo.icon}
         pageType="admin"
       />
-
+      {pageHeaderInfo.sideMenu ? <PageSideMenu /> : null}
       <div
         className="admin-page-content"
         style={!pageHeaderInfo.sideMenu ? { margin: "auto" } : {}}
@@ -64,7 +64,6 @@ export default function AdminPage() {
           </Route>
         </Switch>
       </div>
-      {pageHeaderInfo.sideMenu ? <PageSideMenu /> : null}
     </section>
   );
 }
