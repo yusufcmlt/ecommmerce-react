@@ -40,6 +40,11 @@ export default function AdminProductList() {
 
   return (
     <div className="admin-product-list-container">
+      <p className="admin-list-info">
+        {activeItemCount
+          ? `${activeItemCount} Ürün gösteriliyor`
+          : "Ürün bulunamadı"}
+      </p>
       {items.loaded ? (
         filteredItems.map((item) => <AdminProduct key={item.id} data={item} />)
       ) : (

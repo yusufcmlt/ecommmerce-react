@@ -41,6 +41,11 @@ export default function AdminCategoryList() {
 
   return (
     <div className="admin-category-list-container">
+      <p className="admin-list-info">
+        {activeCategoryCount
+          ? `${activeCategoryCount} Kategori gösteriliyor`
+          : "Ürün bulunamadı"}
+      </p>
       {categories &&
         filteredCategories.map((category) => (
           <CategoryItem
