@@ -34,6 +34,7 @@ const adminMenuFilters = {
   productsAdmin: {
     name: "Ürün",
     id: "items",
+    formPath: "urunekle",
     data: [
       { name: "Ürün Adı A-Z", value: "items-name-asc" },
       { name: "Ürün Adı Z-A", value: "items-name-desc" },
@@ -44,6 +45,7 @@ const adminMenuFilters = {
   categoriesAdmin: {
     name: "Kategori",
     id: "categories",
+    formPath: "kategoriekle",
     data: [
       { name: "Kategori Adı A-Z", value: "categories-name-asc" },
       { name: "Kategori Adı Z-A", value: "categories-name-desc" },
@@ -72,4 +74,12 @@ const sortFunctions = {
   },
 };
 
-export { signedMenuItems, adminMenuFilters, sortFunctions };
+const randomNumberForLink = () => {
+  return Math.ceil(Math.random() * 100000);
+};
+export {
+  signedMenuItems,
+  adminMenuFilters,
+  sortFunctions,
+  randomNumberForLink,
+};
