@@ -29,13 +29,15 @@ export default function AdminProductList() {
   }, []);
 
   useEffect(() => {
-    setFilteredItems(
-      items.data
-        .filter((item) => item.name.toLowerCase().includes(filterChar.items))
-        .sort(sortFunc.items.func)
-        .slice(...page),
-      setActiveItemCount(filteredItems.length)
-    );
+    if (items.data) {
+      setFilteredItems(
+        items.data
+          .filter((item) => item.name.toLowerCase().includes(filterChar.items))
+          .sort(sortFunc.items.func)
+          .slice(...page),
+        setActiveItemCount(filteredItems.length)
+      );
+    }
   }, [filterChar, sortFunc, filteredItems.length, items.data, page]);
 
   return (

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import PageNumberButtons from "../../../components/buttons/page-number-buttons/PageNumberButtons";
 
 import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";
@@ -28,15 +29,17 @@ export default function AdminCategoryList() {
   }, []);
 
   useEffect(() => {
-    setFilteredCategories(
-      categories.data
-        .filter((item) =>
-          item.name.toLowerCase().includes(filterChar.categories)
-        )
-        .sort(sortFunc.categories.func)
-        .slice(...page),
-      setActiveCategoryCount(filteredCategories.length)
-    );
+    if (categories.data) {
+      setFilteredCategories(
+        categories.data
+          .filter((category) =>
+            category.name.toLowerCase().includes(filterChar.categories)
+          )
+          .sort(sortFunc.categories.func)
+          .slice(...page),
+        setActiveCategoryCount(filteredCategories.length)
+      );
+    }
   }, [filterChar, sortFunc, filteredCategories.length, categories.data, page]);
 
   return (
@@ -52,7 +55,15 @@ export default function AdminCategoryList() {
             key={category.id}
             name={category.name}
             imageUrl={category.imageUrl}
-          />
+          >
+            <Link
+              className="admin-category-link"
+              to={{
+                pathname: `/yonetim/kategoriekle`,
+                state: { ...category },
+              }}
+            ></Link>
+          </CategoryItem>
         ))}
       <PageNumberButtons
         itemCount={activeCategoryCount}
