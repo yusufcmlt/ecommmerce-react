@@ -5,12 +5,11 @@
   margin: 1rem 0.5em;
   border: 2px solid transparent;
   border-radius: 5px;
+  transition-duration: 0.3s;
 
-  &:hover {
+  &:hover,
+  :active {
     border: 2px solid rgba(79, 84, 133, 0.2);
-  }
-  &:active {
-    border: 3px solid rgba(79, 84, 133, 0.2);
   }
 
   .item-image {
@@ -45,6 +44,10 @@
 
 @media (max-width: 450px) {
   .item-container {
+    &:hover,
+    :active {
+      border: unset;
+    }
     .item-description-container {
       .item-price {
         font-size: 14px;
@@ -62,15 +65,27 @@
 @media (min-width: 40em) {
   .item-container {
     flex: 0 1 calc(50% - 1em);
+    &:hover,
+    :active {
+      border: unset;
+    }
   }
 }
 @media (min-width: 52em) {
   .item-container {
     flex: 0 1 calc(33% - 1em);
+    &:hover,
+    :active {
+      border: unset;
+    }
   }
 }
 @media (min-width: 1024px) {
   .item-container {
     flex: 0 1 calc(20% - 1em);
+    &:hover,
+    :active {
+      border: 2px solid rgba(79, 84, 133, 0.2);
+    }
   }
 }

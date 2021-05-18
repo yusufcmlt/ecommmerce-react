@@ -37,6 +37,15 @@ export default function PageContent() {
         <Route path="/yonetim">
           {userIsAdmin ? <AdminPage /> : <Redirect to="/" />}
         </Route>
+        <Route path="/arama">
+          <div>Urun Arama</div>
+        </Route>
+        <Route path="/urun">
+          <div>URUN</div>
+        </Route>
+        <Route path="/kategori">
+          <div>KATEGORI</div>
+        </Route>
         <Route path="/sepetim">
           <div>SEPET</div>
         </Route>

@@ -72,7 +72,7 @@ export function AdminCategoryItemForm({ formOptions }) {
     if (
       (adminForm.imageURL || imageFile) &&
       formChanged &&
-      adminForm.category.length
+      (formOptions.formType === "categories" || adminForm.category.length)
     ) {
       setLoading(true);
       createOrUpdateItemCategory(
@@ -114,6 +114,7 @@ export function AdminCategoryItemForm({ formOptions }) {
       case "id":
         value = value.replace(/[^A-Za-z]/gi, "").toLowerCase();
         setAdminForm({ ...adminForm, [name]: value });
+        setFormChanged(true);
         break;
       case "category":
         adminForm.category
@@ -134,6 +135,7 @@ export function AdminCategoryItemForm({ formOptions }) {
   }
 
   function handleRemoveSelectedCategory(selectedID) {
+    setFormChanged(true);
     setAdminForm({
       ...adminForm,
       category: adminForm.category.filter((item) => item !== selectedID),
@@ -199,26 +201,26 @@ export function CategoryForm({
         inputPlaceholder={"Kategori ismi girin."}
         value={location.state && adminForm.name}
       />
-      {!location.state ? (
-        <>
-          <label htmlFor="category-link">
-            Kategori Linki (Sadece İngilizce max 20 karakter.)
-          </label>
-          <label className="item-category-link" htmlFor="category-link">
-            Adres: /kategori/{`${adminForm.id}-${randomLink}`}
-          </label>
-          <CustomInput
-            id="category-link"
-            inputName="id"
-            inputType="text"
-            inputChange={handleAdminFormChange}
-            inputSize="admin-form"
-            inputPlaceholder={"Kategori link adı girin."}
-            value={adminForm.id}
-            maxLength="20"
-          />
-        </>
-      ) : null}
+
+      <>
+        <label htmlFor="category-link">
+          Kategori Linki (Sadece İngilizce max 20 karakter.)
+        </label>
+        <label className="item-category-link" htmlFor="category-link">
+          Adres: /kategori/{`${adminForm.id}-${randomLink}`}
+        </label>
+        <CustomInput
+          id="category-link"
+          inputName="id"
+          inputType="text"
+          inputChange={handleAdminFormChange}
+          inputSize="admin-form"
+          inputPlaceholder={"Kategori link adı girin."}
+          value={location.state && adminForm.id}
+          maxLength="20"
+          disabled={location.state ? true : false}
+        />
+      </>
 
       <CustomButton
         buttonText={`Kategori ${location.state ? "Güncelle" : "Ekle"}`}

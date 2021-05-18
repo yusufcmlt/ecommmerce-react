@@ -9,6 +9,7 @@ import CategoryItem from "./category-item/CategoryItem";
 
 //Styles
 import "./CategoryContainer.style.scss";
+import { Link } from "react-router-dom";
 
 export default function CategoryContainer() {
   const [mouseOverInterval, setMouseOver] = useState();
@@ -53,7 +54,14 @@ export default function CategoryContainer() {
               key={category.id}
               name={category.name}
               imageURL={category.imageURL}
-            />
+            >
+              <Link
+                className="home-category-link"
+                to={{
+                  pathname: `/kategori/${category.id}`,
+                }}
+              ></Link>
+            </CategoryItem>
           ))
         ) : (
           <Loading size="page" />
