@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
+import "firebase/storage";
 
 // Initialize Firebase
 const app = firebase.initializeApp({
@@ -114,6 +115,82 @@ export function getCategories() {
       });
   });
 }
+
+export function createOrUpdateItemCategory(form, image, type, isUpdate) {
+  //REF
+  const documentRef = firestore.collection(type).doc(form.id);
+  const countRef = firestore.collection("itemCounts").doc(type);
+  const fileRef = storage.ref(`${type}-images`);
+  const increment = firebase.firestore.FieldValue.increment(1);
+
+  return new Promise((resolve, reject) => {
+    //Checking if a new image provided or not(Update the image).
+    //User can't pass the form submit without providing either a url or an image file
+    //Only check for image file. If it is an existing item or category there will be an url.
+    if (image) {
+      fileRef
+        .child(form.id)
+        .put(image)
+        .then((imageSnapshot) => {
+          imageSnapshot.ref.getDownloadURL().then((imageURL) => {
+            form.imageURL = imageURL;
+            const { id, ...restInfo } = form;
+            if (isUpdate) {
+              documentRef
+                .update(restInfo)
+                .then(() => {
+                  resolve(`${type} updated.`);
+                })
+                .catch((error) => reject(error));
+            } else {
+              documentRef
+                .set(restInfo)
+                .then(() => {
+                  countRef.update({ count: increment });
+                  resolve(`New ${type} added.`);
+                })
+                .catch((error) => reject(error));
+            }
+          });
+        });
+    } else {
+      const { id, ...restInfo } = form;
+      documentRef
+        .update({ ...restInfo })
+        .then(() => {
+          resolve(`${type} updated`);
+        })
+        .catch((error) => reject(error));
+    }
+  });
+}
+
+export function removeItemCategory(id, type) {
+  const deleteImageRef = storage.ref(`${type}-images/${id}`);
+  const docRef = firestore.collection(type).doc(id);
+  const decrement = firebase.firestore.FieldValue.increment(-1);
+  const countRef = firestore.collection("itemCounts").doc(type);
+  return new Promise((resolve, reject) => {
+    deleteImageRef
+      .delete()
+      .then(() => {
+        docRef
+          .delete()
+          .then(() => {
+            countRef.update({ count: decrement });
+            resolve(`${type} deleted`);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export const storage = app.storage();
 export const auth = app.auth();
 export const firestore = app.firestore();
 

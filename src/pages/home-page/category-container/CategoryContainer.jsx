@@ -52,7 +52,7 @@ export default function CategoryContainer() {
             <CategoryItem
               key={category.id}
               name={category.name}
-              imageUrl={category.imageUrl}
+              imageURL={category.imageURL}
             />
           ))
         ) : (

@@ -9,9 +9,10 @@ const CustomInput = ({
   inputName,
   inputIcon,
   inputSize = "normal",
+  ...props
 }) => {
   return (
-    <div className={`input-container`}>
+    <div className={`input-container`} id={props.id}>
       {inputIcon ? (
         <div className={`input-icon input-icon-${inputIcon}`} />
       ) : null}
@@ -22,6 +23,7 @@ const CustomInput = ({
         placeholder={inputPlaceholder}
         onChange={inputChange}
         required
+        {...props}
       />
     </div>
   );

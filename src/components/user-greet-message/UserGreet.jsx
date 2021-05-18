@@ -14,7 +14,11 @@ export default function UserGreet() {
       <span
         role="img"
         aria-label="hand-greet"
-        style={{ marginLeft: "5px", fontSize: "22px" }}
+        style={{
+          marginLeft: "5px",
+          marginBottom: "5px",
+          fontSize: "22px",
+        }}
       >
         👋
       </span>

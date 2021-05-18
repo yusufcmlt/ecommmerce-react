@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 
-import { AdminFilterMenu } from "../../pages/admin-page/admin-forms/AdminProductForm";
+import { AdminFilterMenu } from "../../components/filter-menu/FilterMenu";
 import { adminMenuFilters } from "../../utils/constants";
 
 import "./PageSideMenu.style.scss";
@@ -12,15 +12,13 @@ export default function PageSideMenu({ children }) {
       <Switch>
         <Route path="/yonetim/urunler">
           <AdminFilterMenu
-            filter={adminMenuFilters.productsAdmin.name}
-            filterOption={adminMenuFilters.productsAdmin.data}
+            filter={adminMenuFilters.productsAdmin}
             input={adminMenuFilters.productsAdmin.id}
           />
         </Route>
         <Route path="/yonetim/kategoriler">
           <AdminFilterMenu
-            filter={adminMenuFilters.categoriesAdmin.name}
-            filterOption={adminMenuFilters.categoriesAdmin.data}
+            filter={adminMenuFilters.categoriesAdmin}
             input={adminMenuFilters.categoriesAdmin.id}
           />
         </Route>

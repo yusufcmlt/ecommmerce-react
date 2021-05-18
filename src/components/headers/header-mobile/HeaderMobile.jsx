@@ -30,13 +30,12 @@ export default function HeaderMobile() {
                 }}
               />
             )}
-
             <UserGreet />
-            <CustomButton
+            {/* <CustomButton
               buttonSize="nav"
               buttonIcon="nav"
               funcOnPress={handleMenuOpened}
-            />
+            /> */}
           </div>
           <div className="header-mobile-optional-row">
             {location.pathname === "/" ? (

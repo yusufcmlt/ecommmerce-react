@@ -278,6 +278,19 @@
     background-color: #da9408;
   }
 }
+.size-admin-delete {
+  background-color: rgb(235, 98, 98);
+  color: black;
+  font-size: 14px;
+  width: 270px;
+  margin: 15px 0;
+  @media (max-width: 1024px) {
+    width: 70vw;
+  }
+  &:hover {
+    background-color: rgb(235, 98, 98);
+  }
+}
 
 .size-page-number {
   width: 50px;

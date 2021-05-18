@@ -19,9 +19,26 @@
     color: #4f5485;
   }
 }
-
+.select-size-form {
+  width: 270px;
+  height: 50px;
+  border: none;
+  margin: 5px 0;
+  color: #4f5485;
+  & option {
+    background-color: #d7654c75;
+    color: #4f5485;
+  }
+  &:focus {
+    background-color: #d7654c;
+    color: #4f5485;
+  }
+}
 @media (max-width: 1024px) {
   .select-size-admin {
+    width: 70vw;
+  }
+  .select-size-form {
     width: 70vw;
   }
 }

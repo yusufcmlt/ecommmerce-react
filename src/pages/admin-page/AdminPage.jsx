@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useMediaQuery } from "react-responsive";
 import { Route, Switch, useLocation } from "react-router-dom";
 import PageSideMenu from "../../components/page-side-menu/PageSideMenu";
 
@@ -9,6 +8,10 @@ import AdminCategoryList from "./admin-items/AdminCategoryList";
 import AdminProductList from "./admin-items/AdminProductList";
 import AdminNavButtons from "./admin-nav-buttons/AdminNavButtons";
 
+//Constant Data
+import { routeInfo } from "../../utils/routeConstants";
+import { AdminCategoryItemForm } from "./admin-forms/AdminForms";
+
 export default function AdminPage() {
   const [pageHeaderInfo, setPageHeaderInfo] = useState({
     title: "Yönetim",
@@ -17,28 +20,14 @@ export default function AdminPage() {
   });
 
   const location = useLocation();
-  const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
 
+  //Getting header info from location data
   useEffect(() => {
-    switch (location.pathname) {
-      case "/yonetim/urunler":
-        setPageHeaderInfo({
-          title: "Ürünler",
-          icon: "product",
-          sideMenu: true,
-        });
-        break;
-      case "/yonetim/kategoriler":
-        setPageHeaderInfo({
-          title: "Kategoriler",
-          icon: "category",
-          sideMenu: true,
-        });
-        break;
-      default:
-        setPageHeaderInfo({ title: "Yönetim", icon: "admin", sideMenu: false });
-    }
-  }, [location.pathname]);
+    let locationPath = location.pathname.split("/");
+    locationPath = locationPath[locationPath.length - 1];
+    console.log(locationPath);
+    setPageHeaderInfo({ ...routeInfo[locationPath] });
+  }, [location]);
 
   return (
     <section className="admin-page-container">
@@ -61,6 +50,19 @@ export default function AdminPage() {
           </Route>
           <Route path="/yonetim/kategoriler">
             <AdminCategoryList />
+          </Route>
+          <Route path="/yonetim/urunekle">
+            <AdminCategoryItemForm
+              formOptions={{ redirectPath: "urunler", formType: "items" }}
+            />
+          </Route>
+          <Route path="/yonetim/kategoriekle">
+            <AdminCategoryItemForm
+              formOptions={{
+                redirectPath: "kategoriler",
+                formType: "categories",
+              }}
+            />
           </Route>
         </Switch>
       </div>

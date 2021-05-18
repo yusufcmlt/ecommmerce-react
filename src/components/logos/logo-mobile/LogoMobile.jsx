@@ -14,7 +14,13 @@ export default function LogoMobile() {
       style={{ textDecoration: "none" }}
       className="logo-mobile-link"
     >
-      <MobileLogo className="logo-mobile-icon" />
+      <div className="logo-mobile-container">
+        <MobileLogo className="logo-mobile-icon" />
+        <h2 className="logo-mobile-text">
+          <span>FINDIK</span>
+          <span>FISTIK</span>
+        </h2>
+      </div>
     </Link>
   );
 }

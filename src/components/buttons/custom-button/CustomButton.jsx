@@ -12,6 +12,7 @@ export default function CustomButton({
   buttonOut,
   buttonInfo,
   buttonValue,
+  ...props
 }) {
   return (
     <button
@@ -28,6 +29,7 @@ export default function CustomButton({
       onMouseOver={buttonMouseOver}
       onMouseOut={buttonOut}
       value={buttonValue}
+      {...props}
     >
       {buttonInfo && <span className="button-info-admin">{buttonInfo}</span>}
       {buttonIcon && (

@@ -22,7 +22,13 @@ export default function MenuNav({ navType }) {
 
   return currentUser ? (
     <React.Fragment>
-      <Link to="/yonetim" key="adminButton">
+      <Link
+        to={{
+          pathname: "/yonetim",
+          state: { title: "Yönetim", icon: "admin", sideMenu: false },
+        }}
+        key="adminButton"
+      >
         {userIsAdmin ? (
           <CustomButton
             buttonText="Yönetim"

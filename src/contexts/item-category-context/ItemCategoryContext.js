@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useMemo } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import {
   getAdminItems,
@@ -30,7 +30,7 @@ export function ItemCategoryProvider({ children }) {
       func: (a, b) => (a["name"] > b["name"] ? 1 : -1),
     },
     categories: {
-      func: (a, b) => (b["name"] > a["name"] ? 1 : -1),
+      func: (a, b) => (a["name"] > b["name"] ? 1 : -1),
     },
   });
   const [page, setPage] = useState([0, 10]);
@@ -76,6 +76,7 @@ export function ItemCategoryProvider({ children }) {
       })
       .catch((error) => console.log("Failed to load new items", error));
   }
+
   function handleCategoryLoading() {
     console.log("Categories Loading");
     getCategories()
@@ -135,7 +136,7 @@ export function ItemCategoryProvider({ children }) {
         func: (a, b) => (a["name"] > b["name"] ? 1 : -1),
       },
       categories: {
-        func: (a, b) => (b["name"] > a["name"] ? 1 : -1),
+        func: (a, b) => (a["name"] > b["name"] ? 1 : -1),
       },
     });
     //Clear Paging

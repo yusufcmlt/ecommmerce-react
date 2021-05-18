@@ -1,7 +1,7 @@
 .category-item-container {
   height: 250px;
   flex: 0 0 150px;
-  margin: 0 5px;
+  margin: 10px 5px;
   background-size: cover;
   background-position: center;
   transition-duration: 0.2s;
@@ -23,7 +23,7 @@
   .category-item-container {
     height: 25vh;
     flex: 0 0 calc(34% - 1em);
-    margin: 0 5px;
+    margin: 10px 5px;
     &:hover {
       transform: scale(1);
     }

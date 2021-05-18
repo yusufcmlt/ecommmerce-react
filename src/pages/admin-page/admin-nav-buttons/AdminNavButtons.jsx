@@ -11,16 +11,20 @@ export default function AdminNavButtons({ navPosition }) {
   const { handleCountLoading, counts } = useItems();
 
   useEffect(() => {
-    if (!counts.loaded) {
-      handleCountLoading();
-    }
+    handleCountLoading();
   }, []);
 
   return (
     <nav className={`admin-nav-buttons admin-nav-${navPosition}`}>
       {counts.loaded ? (
         <React.Fragment>
-          <Link to="/yonetim/urunler" className="admin-nav-link">
+          <Link
+            to={{
+              pathname: "/yonetim/urunler",
+              state: { title: "Ürünler", icon: "product", sideMenu: true },
+            }}
+            className="admin-nav-link"
+          >
             <CustomButton
               buttonText={counts.items}
               buttonSize="admin-nav"
@@ -28,7 +32,13 @@ export default function AdminNavButtons({ navPosition }) {
               buttonInfo="Ürünler"
             />
           </Link>
-          <Link to="/yonetim/kategoriler" className="admin-nav-link">
+          <Link
+            to={{
+              pathname: "/yonetim/kategoriler",
+              state: { title: "Kategoriler", icon: "category", sideMenu: true },
+            }}
+            className="admin-nav-link"
+          >
             <CustomButton
               buttonText={counts.categories}
               buttonSize="admin-nav"

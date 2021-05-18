@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router";
 import { useEffect, useState } from "react/cjs/react.development";
 import PageNumberButtons from "../../../components/buttons/page-number-buttons/PageNumberButtons";
 import Loading from "../../../components/loading/Loading";
@@ -7,6 +8,8 @@ import { useItems } from "../../../contexts/item-category-context/ItemCategoryCo
 import AdminProduct from "./AdminProduct";
 
 export default function AdminProductList() {
+  const location = useLocation();
+
   const {
     items,
     handleItemLoading,
@@ -19,11 +22,15 @@ export default function AdminProductList() {
 
   const [activeItemCount, setActiveItemCount] = useState(items.data.length);
   const [filteredItems, setFilteredItems] = useState(items.data);
+  const [isUpdated, setUpdated] = useState(
+    location.state ? location.state.isUpdated : false
+  );
 
   //Load Items on Page Load
   useEffect(() => {
-    if (!items.loaded) {
+    if (!items.loaded || isUpdated) {
       handleItemLoading();
+      setUpdated(false);
     }
     clearAllFilters();
   }, []);

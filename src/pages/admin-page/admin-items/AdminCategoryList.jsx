@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import PageNumberButtons from "../../../components/buttons/page-number-buttons/PageNumberButtons";
 
 import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";
@@ -16,14 +16,19 @@ export default function AdminCategoryList() {
     clearAllFilters,
   } = useItems();
 
+  const location = useLocation();
   const [activeCategoryCount, setActiveCategoryCount] = useState(
     categories.data.length
   );
   const [filteredCategories, setFilteredCategories] = useState(categories.data);
+  const [isUpdated, setUpdated] = useState(
+    location.state ? location.state.isUpdated : false
+  );
 
   useEffect(() => {
-    if (!categories.loaded) {
+    if (!categories.loaded || isUpdated) {
       handleCategoryLoading();
+      setUpdated(false);
     }
     clearAllFilters();
   }, []);
@@ -54,7 +59,7 @@ export default function AdminCategoryList() {
           <CategoryItem
             key={category.id}
             name={category.name}
-            imageUrl={category.imageUrl}
+            imageURL={category.imageURL}
           >
             <Link
               className="admin-category-link"

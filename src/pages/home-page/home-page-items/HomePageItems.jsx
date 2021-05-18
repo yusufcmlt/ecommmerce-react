@@ -23,7 +23,7 @@ export default function HomePageItems() {
           newItems.data.map((item) => (
             <Item
               key={item.name + item.price}
-              image={item.image}
+              image={item.imageURL}
               name={item.name}
               price={item.price}
               desc={item.description}
