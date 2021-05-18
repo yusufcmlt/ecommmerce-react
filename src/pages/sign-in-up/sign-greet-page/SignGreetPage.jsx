@@ -21,12 +21,11 @@ const SignGreetPage = ({ signIn, signUp }) => {
         />
         <p style={{ color: "#FBB224", fontWeight: "500" }}>veya</p>
         <CustomButton
-          className="google-hesap-secenek"
           buttonText="hesabınızla bağlanın"
           funcOnPress={signInWithGoogle}
           buttonIcon="google"
           buttonSize="google"
-        ></CustomButton>
+        />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ export default function UserGreet() {
       <span className="header-greet-username">
         {currentUser ? currentUser.displayName : "Misafir"}!
       </span>
-      <span
+      {/* <span
         role="img"
         aria-label="hand-greet"
         style={{
@@ -21,7 +21,7 @@ export default function UserGreet() {
         }}
       >
         👋
-      </span>
+      </span> */}
     </div>
   );
 }

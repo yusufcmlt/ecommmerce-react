@@ -1,6 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import { Redirect, Route, Switch } from "react-router";
+import { Redirect, Route, Switch, useLocation } from "react-router";
 import { useEffect, useState } from "react/cjs/react.development";
 import { useAuth } from "../../contexts/auth-context/AuthContext";
 import AdminPage from "../../pages/admin-page/AdminPage";
@@ -12,6 +12,7 @@ export default function PageContent() {
   const [headerHeight, setHeaderHeight] = useState(0);
   const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
   const { userIsAdmin } = useAuth();
+  const location = useLocation();
 
   useEffect(() => {
     if (isMobile) {
@@ -20,7 +21,7 @@ export default function PageContent() {
       ).offsetHeight;
       setHeaderHeight(headerHeightSelector);
     }
-  });
+  }, [location.pathname]);
 
   return (
     <div

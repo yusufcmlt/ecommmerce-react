@@ -13,11 +13,11 @@ import "./MenuNav.style.scss";
 
 export default function MenuNav({ navType }) {
   const { currentUser, userIsAdmin } = useAuth();
-  const { appPageState, handleMenuOpened, handlePageState } = useNavMenu();
+  const { appPageState, handlePageState } = useNavMenu();
   const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
 
   function isButtonSelected(buttonPath) {
-    return !isMobile && buttonPath && appPageState === buttonPath;
+    return buttonPath && appPageState === buttonPath;
   }
 
   return currentUser ? (
@@ -38,7 +38,6 @@ export default function MenuNav({ navType }) {
             buttonIcon="setting"
             selectedMenuButton={isButtonSelected("yonetim")}
             funcOnPress={() => {
-              handleMenuOpened();
               handlePageState("yonetim");
             }}
           />
@@ -54,7 +53,6 @@ export default function MenuNav({ navType }) {
             funcOnPress={
               button.funcOnPress ||
               (() => {
-                handleMenuOpened();
                 handlePageState(button.path);
               })
             }

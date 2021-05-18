@@ -6,16 +6,14 @@
   justify-content: space-between;
   flex-wrap: wrap;
   box-sizing: border-box;
-
   position: fixed;
   top: 0;
   z-index: 10000;
   .header-mobile-main-row {
     width: 100vw;
     height: 70px;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    justify-items: center;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 0 10px;
   }
