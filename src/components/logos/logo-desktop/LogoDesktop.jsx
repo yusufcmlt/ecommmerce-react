@@ -17,8 +17,8 @@ export const LogoDesktop = () => {
       <div className="logo-desktop-container">
         <DesktopLogo className="logo-desktop-icon" />
         <h2 className="logo-desktop-text">
-          <span>FINDIK</span>
-          <span>FISTIK</span>
+          <span>Fındık</span>
+          <span>Fıstık</span>
         </h2>
       </div>
     </Link>

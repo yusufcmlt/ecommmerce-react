@@ -15,8 +15,8 @@ const LogoLogin = () => {
       <div className="logo-login-container">
         <LoginLogo className="logo-login-icon" />
         <h2 className="logo-login-text">
-          <span>FINDIK</span>
-          <span>FISTIK</span>
+          <span>Fındık</span>
+          <span>Fıstık</span>
         </h2>
       </div>
     </Link>
