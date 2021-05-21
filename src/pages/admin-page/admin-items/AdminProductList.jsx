@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { useEffect, useState } from "react/cjs/react.development";
 import PageNumberButtons from "../../../components/buttons/page-number-buttons/PageNumberButtons";
 import Loading from "../../../components/loading/Loading";
 import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";

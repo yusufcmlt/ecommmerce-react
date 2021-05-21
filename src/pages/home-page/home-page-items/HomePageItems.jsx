@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useEffect } from "react";
 import Item from "../../../components/item/Item";
 import Loading from "../../../components/loading/Loading";
 import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";

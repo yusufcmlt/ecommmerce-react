@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Redirect, Route, Switch, useLocation } from "react-router";
-import { useEffect, useState } from "react/cjs/react.development";
+
 import { useAuth } from "../../contexts/auth-context/AuthContext";
 import AdminPage from "../../pages/admin-page/AdminPage";
 import HomePage from "../../pages/home-page/HomePage";

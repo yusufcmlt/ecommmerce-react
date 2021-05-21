@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { useState } from "react/cjs/react.development";
 import { auth } from "../../../firebase/firebase";
 
 import CustomButton from "../../../components/buttons/custom-button/CustomButton";

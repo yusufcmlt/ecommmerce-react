@@ -1,7 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-
-import { useEffect } from "react/cjs/react.development";
 
 const MobileSizeContext = React.createContext();
 

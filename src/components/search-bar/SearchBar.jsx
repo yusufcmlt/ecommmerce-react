@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { useState } from "react/cjs/react.development";
+
 import CustomButton from "../buttons/custom-button/CustomButton";
 
 import "./SearchBar.style.scss";
