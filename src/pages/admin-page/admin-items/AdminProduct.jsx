@@ -32,7 +32,7 @@ export default function AdminProduct({ data }) {
       <Link
         className="admin-product-link"
         to={{
-          pathname: `${process.env.PUBLIC_URL}/yonetim/urunekle`,
+          pathname: `/yonetim/urunekle`,
           state: { ...data },
         }}
       >

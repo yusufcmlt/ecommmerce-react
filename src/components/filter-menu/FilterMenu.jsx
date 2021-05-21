@@ -25,7 +25,7 @@ function AdminFilterMenu({ filter, input }) {
       />
       <Link
         to={{
-          pathname: `${process.env.PUBLIC_URL}/yonetim/${filter.formPath}`,
+          pathname: `/yonetim/${filter.formPath}`,
           id: "",
         }}
       >

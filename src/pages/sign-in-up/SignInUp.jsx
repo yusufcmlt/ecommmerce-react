@@ -30,7 +30,7 @@ export const SignInUp = () => {
     if (currentUser) {
       createUserProfileDocument(currentUser.email, currentUser.uid)
         .then(() => {
-          history.replace({ pathname: `${process.env.PUBLIC_URL}/` });
+          history.replace({ pathname: `/` });
         })
         .catch((error) => {
           setSignError("Girişte bir hata oldu.");

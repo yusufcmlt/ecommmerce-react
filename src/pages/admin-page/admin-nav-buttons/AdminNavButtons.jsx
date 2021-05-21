@@ -20,7 +20,7 @@ export default function AdminNavButtons({ navPosition }) {
         <React.Fragment>
           <Link
             to={{
-              pathname: `${process.env.PUBLIC_URL}/yonetim/urunler`,
+              pathname: `/yonetim/urunler`,
               state: { title: "Ürünler", icon: "product", sideMenu: true },
             }}
             className="admin-nav-link"
@@ -34,7 +34,7 @@ export default function AdminNavButtons({ navPosition }) {
           </Link>
           <Link
             to={{
-              pathname: `${process.env.PUBLIC_URL}/yonetim/kategoriler`,
+              pathname: `/yonetim/kategoriler`,
               state: { title: "Kategoriler", icon: "category", sideMenu: true },
             }}
             className="admin-nav-link"

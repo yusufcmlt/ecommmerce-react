@@ -14,7 +14,7 @@ export default function SearchBar({ searchBarSize }) {
     event.preventDefault();
     if (searchTerm.trim()) {
       history.push({
-        pathname: `${process.env.PUBLIC_URL}/arama`,
+        pathname: `/arama`,
         search: `ara=${searchTerm}`,
       });
     } else {

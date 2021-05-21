@@ -9,7 +9,7 @@ export default function Item({ image, name, price, desc, routeTo }) {
     <div
       className="item-container"
       onClick={() => {
-        history.push({ pathname: `${process.env.PUBLIC_URL}/urun/${routeTo}` });
+        history.push({ pathname: `/urun/${routeTo}` });
       }}
     >
       <img src={image} alt={name} className="item-image" />

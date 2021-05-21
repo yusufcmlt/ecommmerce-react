@@ -34,32 +34,28 @@ export default function PageContent() {
       }}
     >
       <Switch>
-        <Route exact path={process.env.PUBLIC_URL + "/"}>
+        <Route exact path={"/"}>
           <HomePage />
         </Route>
-        <Route path={process.env.PUBLIC_URL + "/yonetim"}>
-          {userIsAdmin ? (
-            <AdminPage />
-          ) : (
-            <Redirect to={process.env.PUBLIC_URL + "/"} />
-          )}
+        <Route path={"/yonetim"}>
+          {userIsAdmin ? <AdminPage /> : <Redirect to={"/"} />}
         </Route>
-        <Route path={process.env.PUBLIC_URL + "/arama"}>
+        <Route path={"/arama"}>
           <SearchResultsPage />
         </Route>
-        <Route path={process.env.PUBLIC_URL + "/urun/:productID"}>
+        <Route path={"/urun/:productID"}>
           <ProductPage />
         </Route>
-        <Route path={process.env.PUBLIC_URL + "/kategori/:categoryID"}>
+        <Route path={"/kategori/:categoryID"}>
           <CategoryResultsPage />
         </Route>
-        <Route path={process.env.PUBLIC_URL + "/sepetim"}>
+        <Route path={"/sepetim"}>
           <div>SEPET</div>
         </Route>
-        <Route path={process.env.PUBLIC_URL + "/siparislerim"}>
+        <Route path={"/siparislerim"}>
           <div>SIPARIS</div>
         </Route>
-        <Route path={process.env.PUBLIC_URL + "/adreslerim"}>
+        <Route path={"/adreslerim"}>
           <div>ADRES</div>
         </Route>
       </Switch>

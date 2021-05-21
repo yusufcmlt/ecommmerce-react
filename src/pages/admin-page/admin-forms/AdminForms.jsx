@@ -47,7 +47,7 @@ export function AdminCategoryItemForm({ formOptions }) {
   function reloadDatas() {
     setLoading(false);
     history.replace({
-      pathname: `${process.env.PUBLIC_URL}/yonetim/${formOptions.redirectPath}`,
+      pathname: `/yonetim/${formOptions.redirectPath}`,
       state: { isUpdated: true },
     });
   }

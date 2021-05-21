@@ -18,22 +18,22 @@ export default function PageSideMenu({
     <div className={`${size} page-side-menu-container`}>
       <h4>{title}</h4>
       <Switch>
-        <Route path={process.env.PUBLIC_URL + "/yonetim/urunler"}>
+        <Route path={"/yonetim/urunler"}>
           <AdminFilterMenu
             filter={adminMenuFilters.productsAdmin}
             input={adminMenuFilters.productsAdmin.id}
           />
         </Route>
-        <Route path={process.env.PUBLIC_URL + "/yonetim/kategoriler"}>
+        <Route path={"/yonetim/kategoriler"}>
           <AdminFilterMenu
             filter={adminMenuFilters.categoriesAdmin}
             input={adminMenuFilters.categoriesAdmin.id}
           />
         </Route>
-        <Route path={process.env.PUBLIC_URL + "/arama"}>
+        <Route path={"/arama"}>
           <MainFilter />
         </Route>
-        <Route path={process.env.PUBLIC_URL + "/kategori"}>
+        <Route path={"/kategori"}>
           <MainFilter />
         </Route>
       </Switch>

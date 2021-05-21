@@ -9,7 +9,7 @@ import { AuthProvider } from "./contexts/auth-context/AuthContext";
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <App />
       </Router>
     </AuthProvider>

@@ -58,7 +58,7 @@ export default function CategoryContainer() {
               <Link
                 className="home-category-link"
                 to={{
-                  pathname: `${process.env.PUBLIC_URL}/kategori/${category.id}`,
+                  pathname: `/kategori/${category.id}`,
                   state: category,
                 }}
               ></Link>

@@ -64,7 +64,7 @@ export default function AdminCategoryList() {
             <Link
               className="admin-category-link"
               to={{
-                pathname: `${process.env.PUBLIC_URL}/yonetim/kategoriekle`,
+                pathname: `/yonetim/kategoriekle`,
                 state: { ...category },
               }}
             ></Link>

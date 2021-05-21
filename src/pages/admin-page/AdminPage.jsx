@@ -42,21 +42,21 @@ export default function AdminPage() {
         style={!pageHeaderInfo.sideMenu ? { margin: "auto" } : {}}
       >
         <Switch>
-          <Route exact path={process.env.PUBLIC_URL + "/yonetim"}>
+          <Route exact path={"/yonetim"}>
             <AdminNavButtons navPosition="center" />
           </Route>
-          <Route path={process.env.PUBLIC_URL + "/yonetim/urunler"}>
+          <Route path={"/yonetim/urunler"}>
             <AdminProductList />
           </Route>
-          <Route path={process.env.PUBLIC_URL + "/yonetim/kategoriler"}>
+          <Route path={"/yonetim/kategoriler"}>
             <AdminCategoryList />
           </Route>
-          <Route path={process.env.PUBLIC_URL + "/yonetim/urunekle"}>
+          <Route path={"/yonetim/urunekle"}>
             <AdminCategoryItemForm
               formOptions={{ redirectPath: "urunler", formType: "items" }}
             />
           </Route>
-          <Route path={process.env.PUBLIC_URL + "/yonetim/kategoriekle"}>
+          <Route path={"/yonetim/kategoriekle"}>
             <AdminCategoryItemForm
               formOptions={{
                 redirectPath: "kategoriler",
