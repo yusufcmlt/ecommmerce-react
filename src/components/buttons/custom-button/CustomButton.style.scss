@@ -311,6 +311,30 @@
     height: 40px;
   }
 }
+.size-product-page {
+  flex-basis: calc(50% - 1em);
+  background-color: #4f5485;
+  font-size: 15px;
+
+  @media (max-width: 1400px) {
+    flex-basis: 100%;
+    margin-top: 10px;
+  }
+  @media (max-width: 1024px) {
+    flex-basis: calc(50% - 1em);
+    margin-top: unset;
+  }
+  @media (max-width: 500px) {
+    flex-basis: calc(100%);
+    margin-top: 10px;
+  }
+
+  &:hover,
+  :active {
+    background-color: #fbb224;
+    color: #4f5485;
+  }
+}
 .selected {
   border: 2px solid #fbb224;
   background-color: #fbb32415;

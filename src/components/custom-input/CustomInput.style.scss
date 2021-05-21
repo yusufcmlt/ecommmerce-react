@@ -85,4 +85,26 @@
       width: 70vw;
     }
   }
+
+  .custom-input-product-page {
+    width: 100%;
+    &::placeholder {
+      color: #4f5485;
+    }
+    @at-root .input-container {
+      flex-basis: calc(50% - 1em);
+      @media (max-width: 1400px) {
+        flex-basis: 100%;
+      }
+      @media (max-width: 1024px) {
+        flex-basis: calc(50% - 1em);
+      }
+      @media (max-width: 500px) {
+        flex-basis: calc(100%);
+      }
+    }
+
+    height: 50px;
+    text-indent: 10px;
+  }
 }

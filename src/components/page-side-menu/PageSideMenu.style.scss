@@ -15,6 +15,23 @@
     width: 270px;
   }
 }
+.page-side-product {
+  right: 5%;
+  h4 {
+    color: #fbb224;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 1400px) {
+  .page-side-product {
+    right: 1%;
+    h4 {
+      color: #fbb224;
+      font-weight: 600;
+    }
+  }
+}
 
 @media (max-width: 1024px) {
   .page-side-menu-container {
