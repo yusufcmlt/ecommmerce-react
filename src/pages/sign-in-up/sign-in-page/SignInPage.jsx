@@ -22,20 +22,25 @@ export default function SignInPage({
     handleSignLoading(true);
     event.preventDefault();
     handleError("");
-    auth
-      .signInWithEmailAndPassword(
-        loginCredentials.email,
-        loginCredentials.password
-      )
-      .catch((error) => {
-        console.log(error);
-        handleError(
-          "Giriş bilgilerinde bir hata var. Lütfen doğru girdiğinden emin ol. "
-        );
-      })
-      .finally(() => {
-        handleSignLoading(false);
-      });
+    if (loginCredentials.email.trim() && loginCredentials.password.trim()) {
+      auth
+        .signInWithEmailAndPassword(
+          loginCredentials.email,
+          loginCredentials.password
+        )
+        .catch((error) => {
+          console.log(error);
+          handleError(
+            "Giriş bilgilerinde bir hata var. Lütfen doğru girdiğinden emin ol. "
+          );
+        })
+        .finally(() => {
+          handleSignLoading(false);
+        });
+    } else {
+      handleSignLoading(false);
+      handleError("Boş karakter girmediğinden emin ol.");
+    }
   }
   function handleChange(event) {
     const { value, name } = event.target;

@@ -12,8 +12,13 @@ export default function SearchBar({ searchBarSize }) {
 
   function handleSearchSubmit(event) {
     event.preventDefault();
-    if (searchTerm) {
-      history.push({ pathname: "/arama", search: `?${searchTerm}` });
+    if (searchTerm.trim()) {
+      history.push({
+        pathname: `${process.env.PUBLIC_URL}/arama`,
+        search: `ara=${searchTerm}`,
+      });
+    } else {
+      setSearchTerm("");
     }
   }
 
@@ -32,6 +37,7 @@ export default function SearchBar({ searchBarSize }) {
         className="search-bar-input"
         type="search"
         placeholder="Aklından geçen ürünü ara..."
+        value={searchTerm}
       />
       <CustomButton
         buttonSize="search"
