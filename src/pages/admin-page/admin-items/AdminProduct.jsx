@@ -20,7 +20,7 @@ export default function AdminProduct({ data }) {
       <img className="admin-product-image" src={imageURL} alt={name} />
       <div className="admin-product-info">
         <h4 className="admin-product-title">{name}</h4>
-        <span className="admin-product-desc">Fiyat: {price} TL</span>
+        <span className="admin-product-desc">Fiyat: {price} ₺</span>
         <span className="admin-product-desc">Stok: {quantity} Kg</span>
         <span className="admin-product-desc">
           Kategori:{" "}
@@ -31,7 +31,10 @@ export default function AdminProduct({ data }) {
       </div>
       <Link
         className="admin-product-link"
-        to={{ pathname: "/yonetim/urunekle", state: { ...data } }}
+        to={{
+          pathname: `${process.env.PUBLIC_URL}/yonetim/urunekle`,
+          state: { ...data },
+        }}
       >
         <CustomButton buttonIcon="edit" buttonSize="edit" />
       </Link>

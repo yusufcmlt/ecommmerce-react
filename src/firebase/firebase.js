@@ -81,7 +81,7 @@ export function getNewFiveItem() {
   return new Promise((resolve, reject) => {
     firestore
       .collection("items")
-      .orderBy("dateAdded", "asc")
+      .orderBy("dateAdded", "desc")
       .limit(5)
       .get()
       .then((itemSnapshot) =>
@@ -187,6 +187,53 @@ export function removeItemCategory(id, type) {
       .catch((error) => {
         reject(error);
       });
+  });
+}
+
+export function getIndividualProduct(productID) {
+  const productRef = firestore.collection("items").doc(productID);
+
+  return new Promise((resolve, reject) => {
+    productRef
+      .get()
+      .then((productSnapshot) => {
+        //console.log(productSnapshot.data());
+        resolve({ id: productSnapshot.id, ...productSnapshot.data() });
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function addProductToCart(productInfo, userID) {
+  const cartRef = firestore.doc(`carts/${userID}`);
+
+  const { id, imageURL, price, quantity, totalQuantity } = productInfo;
+
+  return new Promise((resolve, reject) => {
+    cartRef.get().then((cartData) => {
+      let cartCopy = cartData.data();
+
+      cartCopy = {
+        ...cartCopy,
+        [id]: cartCopy[id]
+          ? {
+              imageURL,
+              price,
+              quantity:
+                cartCopy[id].quantity + quantity > totalQuantity
+                  ? totalQuantity
+                  : cartCopy[id].quantity + quantity,
+            }
+          : { imageURL, price, quantity },
+      };
+
+      cartRef
+        .update({ ...cartCopy })
+        .then(resolve("Added to cart"))
+        .catch((error) => reject(error));
+    });
   });
 }
 
