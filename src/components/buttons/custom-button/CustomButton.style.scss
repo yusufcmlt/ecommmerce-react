@@ -334,6 +334,10 @@
     background-color: #fbb224;
     color: #4f5485;
   }
+  &:disabled {
+    background-color: gray;
+    color: #fbb224;
+  }
 }
 .selected {
   border: 2px solid #fbb224;

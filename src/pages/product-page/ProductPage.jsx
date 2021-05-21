@@ -21,7 +21,6 @@ export default function ProductPage() {
   const [selectedProductQuantity, setProductQuantity] = useState(1);
 
   useEffect(() => {
-    console.log(currentUser.uid);
     if (!productData.loaded) {
       getIndividualProduct(productID)
         .then((product) => {
@@ -44,7 +43,7 @@ export default function ProductPage() {
         quantity: selectedProductQuantity,
         totalQuantity: productData.data.quantity,
       },
-      currentUser.uid
+      currentUser && currentUser.uid
     ).then((message) => {
       console.log(message);
     });
@@ -86,6 +85,7 @@ export default function ProductPage() {
                 buttonText="Sepete Ekle"
                 buttonSize="product-page"
                 buttonType="submit"
+                buttonState={!currentUser}
               />
             </form>
           </div>
