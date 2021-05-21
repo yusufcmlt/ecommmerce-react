@@ -12,12 +12,12 @@ export default function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/giris">
+        <Route path={process.env.PUBLIC_URL + "/giris"}>
           <SizeProvider>
             <SignInUp />
           </SizeProvider>
         </Route>
-        <Route path="/">
+        <Route path={process.env.PUBLIC_URL + "/"}>
           <MenuProvider>
             <SizeProvider>
               <MainPage />

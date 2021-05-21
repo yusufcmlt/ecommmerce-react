@@ -5,6 +5,9 @@ import { useEffect, useState } from "react/cjs/react.development";
 import { useAuth } from "../../contexts/auth-context/AuthContext";
 import AdminPage from "../../pages/admin-page/AdminPage";
 import HomePage from "../../pages/home-page/HomePage";
+import ProductPage from "../../pages/product-page/ProductPage";
+import CategoryResultsPage from "../../pages/search-results-page/CategoryResultsPage";
+import SearchResultsPage from "../../pages/search-results-page/SearchResultsPage";
 
 import "./PageContent.style.scss";
 
@@ -31,28 +34,32 @@ export default function PageContent() {
       }}
     >
       <Switch>
-        <Route exact path="/">
+        <Route exact path={process.env.PUBLIC_URL + "/"}>
           <HomePage />
         </Route>
-        <Route path="/yonetim">
-          {userIsAdmin ? <AdminPage /> : <Redirect to="/" />}
+        <Route path={process.env.PUBLIC_URL + "/yonetim"}>
+          {userIsAdmin ? (
+            <AdminPage />
+          ) : (
+            <Redirect to={process.env.PUBLIC_URL + "/"} />
+          )}
         </Route>
-        <Route path="/arama">
-          <div>Urun Arama</div>
+        <Route path={process.env.PUBLIC_URL + "/arama"}>
+          <SearchResultsPage />
         </Route>
-        <Route path="/urun">
-          <div>URUN</div>
+        <Route path={process.env.PUBLIC_URL + "/urun/:productID"}>
+          <ProductPage />
         </Route>
-        <Route path="/kategori">
-          <div>KATEGORI</div>
+        <Route path={process.env.PUBLIC_URL + "/kategori/:categoryID"}>
+          <CategoryResultsPage />
         </Route>
-        <Route path="/sepetim">
+        <Route path={process.env.PUBLIC_URL + "/sepetim"}>
           <div>SEPET</div>
         </Route>
-        <Route path="/siparislerim">
+        <Route path={process.env.PUBLIC_URL + "/siparislerim"}>
           <div>SIPARIS</div>
         </Route>
-        <Route path="/adreslerim">
+        <Route path={process.env.PUBLIC_URL + "/adreslerim"}>
           <div>ADRES</div>
         </Route>
       </Switch>

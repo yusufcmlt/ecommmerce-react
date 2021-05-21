@@ -23,7 +23,12 @@ function AdminFilterMenu({ filter, input }) {
         selectName={input}
         selectOnChange={handleSorting}
       />
-      <Link to={{ pathname: `/yonetim/${filter.formPath}`, id: "" }}>
+      <Link
+        to={{
+          pathname: `${process.env.PUBLIC_URL}/yonetim/${filter.formPath}`,
+          id: "",
+        }}
+      >
         <CustomButton
           buttonText={`${filter.name} Ekle`}
           buttonSize="admin-menu"

@@ -24,7 +24,7 @@ export default function MenuNav({ navType }) {
     <React.Fragment>
       <Link
         to={{
-          pathname: "/yonetim",
+          pathname: `${process.env.PUBLIC_URL}/yonetim`,
           state: { title: "Yönetim", icon: "admin", sideMenu: false },
         }}
         key="adminButton"

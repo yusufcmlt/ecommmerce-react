@@ -17,8 +17,8 @@ export default function LogoMobile() {
       <div className="logo-mobile-container">
         <MobileLogo className="logo-mobile-icon" />
         <h2 className="logo-mobile-text">
-          <span>FINDIK</span>
-          <span>FISTIK</span>
+          <span>Fındık</span>
+          <span>Fıstık</span>
         </h2>
       </div>
     </Link>
