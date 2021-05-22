@@ -17,6 +17,8 @@ export default function AdminProductList() {
     page,
     handlePaging,
     clearAllFilters,
+    handleCategoryLoading,
+    categories,
   } = useItems();
 
   const [activeItemCount, setActiveItemCount] = useState(items.data.length);
@@ -27,8 +29,9 @@ export default function AdminProductList() {
 
   //Load Items on Page Load
   useEffect(() => {
-    if (!items.loaded || isUpdated) {
+    if ((!items.loaded && !categories.loaded) || isUpdated) {
       handleItemLoading();
+      handleCategoryLoading();
       setUpdated(false);
     }
     clearAllFilters();

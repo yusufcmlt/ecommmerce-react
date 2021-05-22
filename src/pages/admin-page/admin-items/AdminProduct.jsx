@@ -8,13 +8,8 @@ import "../AdminPage.style.scss";
 
 export default function AdminProduct({ data }) {
   const { name, category, price, quantity, imageURL, id } = data;
-  const { categories, handleCategoryLoading } = useItems();
+  const { categories } = useItems();
 
-  useEffect(() => {
-    if (!categories.loaded) {
-      handleCategoryLoading();
-    }
-  }, []);
   return (
     <div className="admin-product-container">
       <img className="admin-product-image" src={imageURL} alt={name} />
