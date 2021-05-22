@@ -1,4 +1,4 @@
-.admin-page-container {
+#admin-page-container {
   margin: 0 auto;
   width: 80vw;
   display: flex;
@@ -18,10 +18,13 @@
       margin: auto;
     }
     .admin-product-list-container {
-      //width: 100%;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      @media (max-width: 1400px) {
+        align-items: flex-start;
+      }
       .admin-product-container {
         width: 50vw;
         height: 100px;
@@ -104,7 +107,7 @@
 }
 
 @media (max-width: 1024px) {
-  .admin-page-container {
+  #admin-page-container {
     width: 100vw;
 
     .admin-page-content {
@@ -112,6 +115,7 @@
       flex-basis: 95%;
 
       .admin-product-list-container {
+        align-items: center;
         .admin-product-container {
           .admin-product-image {
             width: 105px;

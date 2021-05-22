@@ -91,7 +91,7 @@
     &::placeholder {
       color: #4f5485;
     }
-    @at-root .input-container {
+    @at-root .input-container#{&} {
       flex-basis: calc(50% - 1em);
       @media (max-width: 1400px) {
         flex-basis: 100%;

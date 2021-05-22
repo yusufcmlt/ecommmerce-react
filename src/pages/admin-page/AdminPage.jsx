@@ -30,7 +30,7 @@ export default function AdminPage() {
   }, [location]);
 
   return (
-    <section className="admin-page-container">
+    <section id="admin-page-container">
       <PageTitleHeader
         pageTitle={pageHeaderInfo.title}
         pageIcon={pageHeaderInfo.icon}
