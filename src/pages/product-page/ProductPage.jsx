@@ -34,9 +34,10 @@ export default function ProductPage() {
 
   function handleCartAdd(event) {
     event.preventDefault();
-    const { id, imageURL, price } = productData.data;
+    const { name, id, imageURL, price } = productData.data;
     addProductToCart(
       {
+        name,
         id,
         imageURL,
         price,
