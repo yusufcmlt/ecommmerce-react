@@ -209,31 +209,64 @@ export function getIndividualProduct(productID) {
 export function addProductToCart(productInfo, userID) {
   const cartRef = firestore.doc(`carts/${userID}`);
 
-  const { id, imageURL, price, quantity, totalQuantity } = productInfo;
+  const { name, id, imageURL, price, quantity, totalQuantity } = productInfo;
 
   return new Promise((resolve, reject) => {
     cartRef.get().then((cartData) => {
-      let cartCopy = cartData.data();
+      if (cartData.exists) {
+        let cartCopy = cartData.data();
 
-      cartCopy = {
-        ...cartCopy,
-        [id]: cartCopy[id]
-          ? {
-              imageURL,
-              price,
-              quantity:
-                cartCopy[id].quantity + quantity > totalQuantity
-                  ? totalQuantity
-                  : cartCopy[id].quantity + quantity,
-            }
-          : { imageURL, price, quantity },
-      };
+        cartCopy = {
+          ...cartCopy,
+          [id]: cartCopy[id]
+            ? {
+                name,
+                imageURL,
+                price,
+                quantity:
+                  cartCopy[id].quantity + quantity > totalQuantity
+                    ? totalQuantity
+                    : cartCopy[id].quantity + quantity,
+              }
+            : { name, imageURL, price, quantity },
+        };
 
-      cartRef
-        .update({ ...cartCopy })
-        .then(resolve("Added to cart"))
-        .catch((error) => reject(error));
+        cartRef
+          .update({ ...cartCopy })
+          .then(resolve("Added to cart"))
+          .catch((error) => reject(error));
+      } else {
+        const cartInfo = { name, imageURL, price, quantity };
+
+        cartRef
+          .set({ [id]: { ...cartInfo } })
+          .then(resolve("Added to cart"))
+          .catch((error) => reject(error));
+      }
     });
+  });
+}
+export function getUserCart(userID) {
+  const cartRef = firestore.collection("carts").doc(userID);
+
+  return new Promise((resolve, reject) => {
+    cartRef
+      .get()
+      .then((cartData) => {
+        if (cartData.exists) {
+          resolve(
+            Object.keys(cartData.data()).map((cartItem) => ({
+              id: cartItem,
+              ...cartData.data()[cartItem],
+            }))
+          );
+        } else {
+          resolve([]);
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 }
 

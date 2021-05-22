@@ -31,6 +31,9 @@
     filter: invert(48%) sepia(10%) saturate(5122%) hue-rotate(329deg)
       brightness(96%) contrast(74%);
   }
+  .pt-icon-cart {
+    background-image: url("../../assets/icons/shopping-cart.svg");
+  }
 
   .page-title-text {
     color: #fbb224;
@@ -41,6 +44,9 @@
   }
   .page-title-text-admin {
     color: #d7654c;
+  }
+  .page-title-text-normal {
+    color: #fbb224;
   }
 }
 @media (max-width: 1024px) {

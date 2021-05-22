@@ -4,6 +4,7 @@ import { Redirect, Route, Switch, useLocation } from "react-router";
 
 import { useAuth } from "../../contexts/auth-context/AuthContext";
 import AdminPage from "../../pages/admin-page/AdminPage";
+import CartPage from "../../pages/cart-page/CartPage";
 import HomePage from "../../pages/home-page/HomePage";
 import ProductPage from "../../pages/product-page/ProductPage";
 import CategoryResultsPage from "../../pages/search-results-page/CategoryResultsPage";
@@ -14,7 +15,7 @@ import "./PageContent.style.scss";
 export default function PageContent() {
   const [headerHeight, setHeaderHeight] = useState(0);
   const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
-  const { userIsAdmin } = useAuth();
+  const { currentUser, userIsAdmin } = useAuth();
   const location = useLocation();
 
   useEffect(() => {
@@ -50,13 +51,13 @@ export default function PageContent() {
           <CategoryResultsPage />
         </Route>
         <Route path={"/sepetim"}>
-          <div>SEPET</div>
+          {currentUser ? <CartPage /> : <Redirect to={"/"} />}
         </Route>
         <Route path={"/siparislerim"}>
-          <div>SIPARIS</div>
+          {currentUser ? <CartPage /> : <Redirect to={"/"} />}
         </Route>
         <Route path={"/adreslerim"}>
-          <div>ADRES</div>
+          {currentUser ? <CartPage /> : <Redirect to={"/"} />}
         </Route>
       </Switch>
     </div>
