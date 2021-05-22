@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { useItems } from "../../contexts/item-category-context/ItemCategoryContext";
 
 import Item from "../../components/item/Item";
@@ -12,6 +12,7 @@ import { sortFunctions } from "../../utils/constants";
 
 export default function SearchResultsPage() {
   const { search, pathname } = useLocation();
+  const history = useHistory();
   const searchQuery = queryString.parse(search);
   const { items, handleItemLoading } = useItems();
 
@@ -24,16 +25,21 @@ export default function SearchResultsPage() {
   }, []);
 
   useEffect(() => {
+    if (!search) {
+      history.replace({ pathname: "/" });
+    }
     if (searchQuery.sort) {
       setSortParams(searchQuery.sort.split("-"));
     }
   }, [search, pathname]);
 
-  const itemData = items.data.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchQuery.ara.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.ara.toLowerCase())
-  );
+  const itemData =
+    searchQuery.ara &&
+    items.data.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchQuery.ara.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.ara.toLowerCase())
+    );
 
   return (
     <section id="search-results-section">
@@ -43,22 +49,26 @@ export default function SearchResultsPage() {
       <PageSideMenu title="Ürün Filtrele" size="page-side-product" />
       <div className="items-container">
         {items.loaded ? (
-          itemData
-            .sort(
-              sortParams
-                ? sortFunctions[sortParams[0]][sortParams[1]]
-                : sortFunctions.name.asc
-            )
-            .map((item) => (
-              <Item
-                key={item.name + item.price}
-                image={item.imageURL}
-                name={item.name}
-                price={item.price}
-                desc={item.description}
-                routeTo={item.id}
-              />
-            ))
+          itemData && itemData.length ? (
+            itemData
+              .sort(
+                sortParams
+                  ? sortFunctions[sortParams[0]][sortParams[1]]
+                  : sortFunctions.name.asc
+              )
+              .map((item) => (
+                <Item
+                  key={item.name + item.price}
+                  image={item.imageURL}
+                  name={item.name}
+                  price={item.price}
+                  desc={item.description}
+                  routeTo={item.id}
+                />
+              ))
+          ) : (
+            <h3 className="app-section-h3-title">Ürün Bulunamadı</h3>
+          )
         ) : (
           <Loading size="page" />
         )}
