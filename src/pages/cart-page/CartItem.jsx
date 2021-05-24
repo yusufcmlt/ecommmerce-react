@@ -9,7 +9,10 @@ export default function CartItem({ cartData }) {
       <img src={imageURL} className="cart-item-image" alt="item" />
       <div className="cart-item-info">
         <h4>{name}</h4>
-        <span>Birim fiyat:{price}₺</span>
+        <span>
+          Birim fiyat:{price}
+          <span className="currency-symbol">₺</span>
+        </span>
       </div>
       <div className="cart-item-options">
         <span>{quantity}</span>
