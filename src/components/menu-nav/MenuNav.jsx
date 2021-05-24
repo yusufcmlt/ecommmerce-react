@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../../contexts/auth-context/AuthContext";
 import { useNavMenu } from "../../contexts/nav-menu-context/NavMenuContext";
 import { useMediaQuery } from "react-responsive";
+import { useCart } from "../../contexts/cart-context/CartContext";
 
 import { signedMenuItems } from "../../utils/constants";
 
@@ -12,6 +13,7 @@ import CustomButton from "../buttons/custom-button/CustomButton";
 import "./MenuNav.style.scss";
 
 export default function MenuNav({ navType }) {
+  const { cartData, handleCartLoad, cartCount, cartUpdated } = useCart();
   const { currentUser, userIsAdmin } = useAuth();
   const { appPageState, handlePageState } = useNavMenu();
   const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
@@ -19,6 +21,12 @@ export default function MenuNav({ navType }) {
   function isButtonSelected(buttonPath) {
     return buttonPath && appPageState === buttonPath;
   }
+
+  useEffect(() => {
+    if ((cartUpdated || !cartData.loaded) && currentUser) {
+      handleCartLoad();
+    }
+  }, []);
 
   return currentUser ? (
     <React.Fragment>
@@ -56,7 +64,13 @@ export default function MenuNav({ navType }) {
                 handlePageState(button.path);
               })
             }
-          />
+          >
+            {button.path === "sepetim" ? (
+              cartData.loaded && cartCount ? (
+                <span className="cart-count">{cartCount}</span>
+              ) : null
+            ) : null}
+          </CustomButton>
         </Link>
       ))}
     </React.Fragment>

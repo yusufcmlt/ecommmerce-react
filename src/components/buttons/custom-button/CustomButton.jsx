@@ -12,6 +12,7 @@ export default function CustomButton({
   buttonOut,
   buttonInfo,
   buttonValue,
+  children,
   ...props
 }) {
   return (
@@ -36,6 +37,7 @@ export default function CustomButton({
         <span className={`button-icon button-icon-${buttonIcon}`} />
       )}
       {buttonText}
+      {children}
     </button>
   );
 }

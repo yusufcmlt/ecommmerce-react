@@ -5,6 +5,7 @@ import Header from "../../components/headers/Header";
 
 import MobileSideMenu from "../../components/mobile-side-menu/MobileSideMenu";
 import PageContent from "../../components/page-content/PageContent";
+import { CartProvider } from "../../contexts/cart-context/CartContext";
 import { ItemCategoryProvider } from "../../contexts/item-category-context/ItemCategoryContext";
 import { useSize } from "../../contexts/mobile-sizes-context/MobileSizesContext";
 
@@ -20,13 +21,16 @@ export default function MainPage() {
       style={{ minHeight: isMobile ? `${pageMobileHeight}px` : "100vh" }}
       className="main-page-container"
     >
-      <>
-        <Header />
-        <ItemCategoryProvider>
-          <PageContent />
-        </ItemCategoryProvider>
-        {!isMobile ? <Footer /> : <MobileSideMenu />}
-      </>
+      <CartProvider>
+        <>
+          <Header />
+          <ItemCategoryProvider>
+            <PageContent />
+          </ItemCategoryProvider>
+
+          {!isMobile ? <Footer /> : <MobileSideMenu />}
+        </>
+      </CartProvider>
     </div>
   );
 }

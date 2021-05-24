@@ -6,20 +6,18 @@ import CartSideMenu from "./CartSideMenu";
 import "./CartPage.style.scss";
 import CartItem from "./CartItem";
 import { useAuth } from "../../contexts/auth-context/AuthContext";
-import { getUserCart } from "../../firebase/firebase";
+
 import Loading from "../../components/loading/Loading";
+import { useCart } from "../../contexts/cart-context/CartContext";
 
 export default function CartPage() {
   const { currentUser } = useAuth();
-
-  const [cartData, setCartData] = useState({ loaded: false, data: [] });
+  const { cartData, handleCartLoad, handleCartItemDelete, cartUpdated } =
+    useCart();
 
   useEffect(() => {
-    if (currentUser && !cartData.loaded) {
-      getUserCart(currentUser.uid).then((cartData) => {
-        console.log(cartData);
-        setCartData({ loaded: true, data: [...cartData] });
-      });
+    if (currentUser && cartUpdated) {
+      handleCartLoad();
     }
   }, []);
 
@@ -39,7 +37,13 @@ export default function CartPage() {
           {cartData.loaded ? (
             cartData.data.length ? (
               cartData.data.map((cartItem) => (
-                <CartItem key={cartItem.id} cartData={cartItem} />
+                <CartItem
+                  key={cartItem.id}
+                  cartData={cartItem}
+                  itemDelete={() => {
+                    handleCartItemDelete(currentUser.uid, cartItem.id);
+                  }}
+                />
               ))
             ) : (
               <h3>Sepetiniz Boş</h3>

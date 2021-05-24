@@ -5,20 +5,19 @@ import CustomButton from "../../components/buttons/custom-button/CustomButton";
 import CustomInput from "../../components/custom-input/CustomInput";
 import Loading from "../../components/loading/Loading";
 import { useAuth } from "../../contexts/auth-context/AuthContext";
+import { useCart } from "../../contexts/cart-context/CartContext";
 
-import {
-  addProductToCart,
-  getIndividualProduct,
-} from "../../firebase/firebase";
+import { getIndividualProduct } from "../../firebase/firebase";
 
 import "./ProductPage.style.scss";
 
 export default function ProductPage() {
   const { productID } = useParams();
   const { currentUser } = useAuth();
+  const { handleCartAdd, handleCartUpdate } = useCart();
 
   const [productData, setProductData] = useState({ loaded: false, data: {} });
-  const [selectedProductQuantity, setProductQuantity] = useState(1);
+  const [selectedProductQuantity, setProductQuantity] = useState(0);
 
   useEffect(() => {
     if (!productData.loaded) {
@@ -32,10 +31,11 @@ export default function ProductPage() {
     }
   }, []);
 
-  function handleCartAdd(event) {
+  function handleCartSubmit(event) {
     event.preventDefault();
     const { name, id, imageURL, price } = productData.data;
-    addProductToCart(
+
+    handleCartAdd(
       {
         name,
         id,
@@ -45,9 +45,10 @@ export default function ProductPage() {
         totalQuantity: productData.data.quantity,
       },
       currentUser && currentUser.uid
-    ).then((message) => {
-      console.log(message);
-    });
+    );
+    setProductQuantity(0);
+    handleCartUpdate(true);
+    alert("Sepete eklendi");
   }
   function handleQuantityChange(event) {
     const { value } = event.target;
@@ -71,7 +72,7 @@ export default function ProductPage() {
             <span className="product-quantity">
               Stok:{productData.data.quantity} KG
             </span>
-            <form className="product-input-block" onSubmit={handleCartAdd}>
+            <form className="product-input-block" onSubmit={handleCartSubmit}>
               <label htmlFor="product-quantity">Ürün miktarı (KG)</label>
               <CustomInput
                 id="product-quantity"
@@ -81,6 +82,7 @@ export default function ProductPage() {
                 min="1"
                 max={productData.data.quantity}
                 inputChange={handleQuantityChange}
+                value={selectedProductQuantity.toString()}
               />
               <CustomButton
                 buttonText="Sepete Ekle"
