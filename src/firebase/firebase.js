@@ -270,6 +270,23 @@ export function getUserCart(userID) {
   });
 }
 
+export function deleteUserCartItem(userID, itemID) {
+  const cartRef = firestore.collection("carts").doc(userID);
+
+  return new Promise((resolve, reject) => {
+    cartRef
+      .update({
+        [itemID]: firebase.firestore.FieldValue.delete(),
+      })
+      .then(() => {
+        resolve("Item Deleted");
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
 export const storage = app.storage();
 export const auth = app.auth();
 export const firestore = app.firestore();
