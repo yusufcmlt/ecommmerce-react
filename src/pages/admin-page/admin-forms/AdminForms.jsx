@@ -27,6 +27,7 @@ export function AdminCategoryItemForm({ formOptions }) {
   const history = useHistory();
 
   const isUpdate = location.state ? true : false;
+  const { handleCountLoading } = useItems();
 
   const [adminForm, setAdminForm] = useState(
     location.state ? { ...location.state } : { name: "", id: "", imageURL: "" }
@@ -45,6 +46,7 @@ export function AdminCategoryItemForm({ formOptions }) {
   }, []);
 
   function reloadDatas() {
+    handleCountLoading();
     setLoading(false);
     history.replace({
       pathname: `/yonetim/${formOptions.redirectPath}`,
@@ -72,7 +74,8 @@ export function AdminCategoryItemForm({ formOptions }) {
     if (
       (adminForm.imageURL || imageFile) &&
       formChanged &&
-      (formOptions.formType === "categories" || adminForm.category.length)
+      (formOptions.formType === "categories" ||
+        (adminForm.category && adminForm.category.length))
     ) {
       setLoading(true);
       createOrUpdateItemCategory(

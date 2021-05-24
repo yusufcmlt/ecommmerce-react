@@ -11,7 +11,9 @@ export default function AdminNavButtons({ navPosition }) {
   const { handleCountLoading, counts } = useItems();
 
   useEffect(() => {
-    handleCountLoading();
+    if (!counts.loaded) {
+      handleCountLoading();
+    }
   }, []);
 
   return (
