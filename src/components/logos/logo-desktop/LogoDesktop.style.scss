@@ -8,12 +8,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    @media (max-width: 1300px) {
-      min-width: 10vw;
-      .logo-desktop-text {
-        display: none;
-      }
-    }
 
     .logo-desktop-icon {
       width: 50px;
@@ -22,7 +16,6 @@
     }
     .logo-desktop-text {
       margin: 0;
-
       font-size: 18px;
       transition-duration: 0.2s;
       & :first-child {
@@ -30,6 +23,9 @@
       }
       & :last-child {
         color: rgb(228, 157, 27);
+      }
+      @media (max-width: 1300px) {
+        font-size: 15px;
       }
     }
     &:hover {
