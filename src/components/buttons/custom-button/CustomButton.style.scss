@@ -58,6 +58,9 @@
   .button-icon-edit {
     background-image: url("../../../assets/icons/edit.svg");
   }
+  .button-icon-delete {
+    background-image: url("../../../assets/icons/delete.svg");
+  }
   .button-icon-setting {
     filter: invert(48%) sepia(10%) saturate(5122%) hue-rotate(329deg)
       brightness(96%) contrast(74%);
@@ -351,9 +354,9 @@
   }
 }
 .selected {
-  border: 2px solid #fbb224;
+  border: 1px solid #fbb3242f;
   background-color: #fbb32415;
   @media (max-width: 1024px) {
-    border: 1px solid #fbb224;
+    border: 1px solid #fbb3242f;
   }
 }
