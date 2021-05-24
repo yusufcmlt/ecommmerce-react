@@ -9,13 +9,24 @@ export default function CartSideMenu({ total }) {
       <h3 className="cart-order-title">Sipariş Özeti</h3>
       <div className="cart-order-container">
         <span className="cart-order-info">
-          Ara Toplam:<span className="cart-order-result">{total}₺</span>
+          Ara Toplam:
+          <span className="cart-order-result">
+            {total}
+            <span className="currency-symbol">₺</span>
+          </span>
         </span>
         <span className="cart-order-info">
-          Kargo:<span className="cart-order-result">10₺</span>
+          Kargo:
+          <span className="cart-order-result">
+            10<span className="currency-symbol">₺</span>
+          </span>
         </span>
         <span className="cart-order-info">
-          Toplam:<span className="cart-order-result">{total + 10}₺</span>
+          Toplam:
+          <span className="cart-order-result">
+            {total + 10}
+            <span className="currency-symbol">₺</span>
+          </span>
         </span>
       </div>
       <CustomButton
