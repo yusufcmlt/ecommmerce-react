@@ -33,18 +33,20 @@ export default function SearchResultsPage() {
     }
   }, [search, pathname]);
 
-  const itemData =
-    searchQuery.ara &&
-    items.data.filter(
-      (item) =>
-        item.name.toLowerCase().includes(searchQuery.ara.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.ara.toLowerCase())
-    );
+  const itemData = searchQuery.ara
+    ? items.data.filter(
+        (item) =>
+          item.name.toLowerCase().includes(searchQuery.ara.toLowerCase()) ||
+          item.description.toLowerCase().includes(searchQuery.ara.toLowerCase())
+      )
+    : items.data;
 
   return (
     <section id="search-results-section">
       <h3 className="app-section-h3-title">
-        "{searchQuery.ara}" için Arama Sonuçları
+        {searchQuery.ara
+          ? `"${searchQuery.ara}" için arama sonuçları`
+          : "Tüm Ürünler"}
       </h3>
       <PageSideMenu title="Ürün Filtrele" size="page-side-product" />
       <div className="items-container">

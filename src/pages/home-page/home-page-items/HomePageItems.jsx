@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Item from "../../../components/item/Item";
 import Loading from "../../../components/loading/Loading";
 import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";
@@ -16,7 +17,17 @@ export default function HomePageItems() {
 
   return (
     <section id="new-items-section">
-      <h3 className="app-section-h3-title">Yeni Ürünler</h3>
+      <div className="new-items-header">
+        <h3 className="app-section-h3-title">Yeni Ürünler</h3>
+        <Link
+          to={{
+            pathname: `/arama`,
+            search: `ara=`,
+          }}
+        >
+          Tüm Ürünler{">>"}
+        </Link>
+      </div>
       <div className="items-container">
         {newItems.loaded ? (
           newItems.data.map((item) => (
