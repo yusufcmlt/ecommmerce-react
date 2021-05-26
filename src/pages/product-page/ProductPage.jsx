@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router";
+import { useHistory, useLocation, useParams } from "react-router";
 
 import CustomButton from "../../components/buttons/custom-button/CustomButton";
 import CustomInput from "../../components/custom-input/CustomInput";
@@ -14,6 +14,7 @@ import "./ProductPage.style.scss";
 export default function ProductPage() {
   const { productID } = useParams();
   const { currentUser } = useAuth();
+  const history = useHistory();
   const { handleCartAdd, handleCartUpdate } = useCart();
 
   const [productData, setProductData] = useState({ loaded: false, data: {} });
@@ -84,12 +85,23 @@ export default function ProductPage() {
                 inputChange={handleQuantityChange}
                 value={selectedProductQuantity.toString()}
               />
-              <CustomButton
-                buttonText="Sepete Ekle"
-                buttonSize="product-page"
-                buttonType="submit"
-                buttonState={!currentUser}
-              />
+              {currentUser ? (
+                <CustomButton
+                  buttonText="Sepete Ekle"
+                  buttonSize="product-page"
+                  buttonType="submit"
+                  buttonState={!currentUser}
+                />
+              ) : (
+                <CustomButton
+                  buttonText="Satın Almak için Giriş Yapın"
+                  buttonSize="product-page"
+                  buttonType="button"
+                  funcOnPress={() => {
+                    history.push({ pathname: "/giris" });
+                  }}
+                />
+              )}
             </form>
           </div>
         </>
