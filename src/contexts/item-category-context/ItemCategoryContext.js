@@ -15,7 +15,6 @@ export function useItems() {
 }
 
 export function ItemCategoryProvider({ children }) {
-  //const [itemLoading, setItemLoading] = useState(true);
   const [categories, setCategories] = useState({ loaded: false, data: [] });
   const [newItems, setNewItems] = useState({ loaded: false, data: [] });
   const [items, setItems] = useState({ loaded: false, data: [] });
@@ -89,7 +88,9 @@ export function ItemCategoryProvider({ children }) {
         console.log("Categories Failed to Load");
       });
   }
-
+  /**
+   * FILTER
+   */
   function handleFiltering(event) {
     const { name, value } = event.target;
     setFilterChar({ ...filterChar, [name]: value.toLowerCase() });
