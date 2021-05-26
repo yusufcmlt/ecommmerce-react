@@ -3,6 +3,9 @@ import {
   addProductToCart,
   deleteUserCartItem,
   getUserCart,
+  createOrUpdateUserAddress,
+  getUserAddressList,
+  deleteUserAddressItem,
 } from "../../firebase/firebase";
 import { useAuth } from "../auth-context/AuthContext";
 
@@ -13,12 +16,17 @@ export function useCart() {
 }
 
 export function CartProvider({ children }) {
+  //CART INFO
   const [cartData, setCartData] = useState({ loaded: false, data: [] });
   const [cartCount, setCartCount] = useState(0);
   const [cartUpdated, setCartUpdated] = useState(false);
 
-  const { currentUser } = useAuth();
+  //ADDRESS INFO
+  const [addressData, setAddressData] = useState({ loaded: false, data: [] });
+  const [addressUpdated, setAddressUpdated] = useState(false);
 
+  const { currentUser } = useAuth();
+  //CART
   function handleCartLoad() {
     console.log("Cart loading...");
     getUserCart(currentUser.uid).then((cartInfo) => {
@@ -54,6 +62,53 @@ export function CartProvider({ children }) {
     setCartUpdated((cartUpdated) => updateState);
   }
 
+  //ADDRESS
+  function handleAddressUpdate(updateState) {
+    setAddressUpdated((addressUpdated) => updateState);
+  }
+  function handleAddressAdd(addressInfo, addressID = "") {
+    createOrUpdateUserAddress(currentUser.uid, addressInfo, addressID)
+      .then((message) => {
+        console.log(message);
+        handleAddressLoad();
+        handleAddressUpdate(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function handleAddressLoad() {
+    console.log("User addresses are loading...");
+    setAddressData({ ...addressData, loaded: false });
+    getUserAddressList(currentUser.uid)
+      .then((addressInfo) => {
+        setAddressData({ loaded: true, data: [...addressInfo] });
+        console.log("User addresses are loaded.");
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        handleAddressUpdate(false);
+      });
+  }
+
+  function handleAddressDelete(addressID) {
+    if (window.confirm(`Adres silinsin mi?`)) {
+      setCartData({ ...cartData, loaded: false });
+      deleteUserAddressItem(currentUser.uid, addressID)
+        .then((success) => {
+          alert("Ürün silindi");
+          handleAddressLoad();
+          console.log(success);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
+
   useEffect(() => {});
 
   const value = {
@@ -63,7 +118,11 @@ export function CartProvider({ children }) {
     handleCartAdd,
     cartCount,
     cartUpdated,
+    addressData,
     handleCartUpdate,
+    handleAddressAdd,
+    handleAddressLoad,
+    handleAddressDelete,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

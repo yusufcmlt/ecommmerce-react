@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import { Redirect, Route, Switch, useLocation } from "react-router";
 
 import { useAuth } from "../../contexts/auth-context/AuthContext";
+import AddressPage from "../../pages/address-page/AddressPage";
 import AdminPage from "../../pages/admin-page/AdminPage";
 import CartPage from "../../pages/cart-page/CartPage";
 import HomePage from "../../pages/home-page/HomePage";
@@ -57,7 +58,7 @@ export default function PageContent() {
           {currentUser ? <CartPage /> : <Redirect to={"/"} />}
         </Route>
         <Route path={"/adreslerim"}>
-          {currentUser ? <CartPage /> : <Redirect to={"/"} />}
+          {currentUser ? <AddressPage /> : <Redirect to={"/"} />}
         </Route>
       </Switch>
     </div>

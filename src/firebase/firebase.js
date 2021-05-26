@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage";
+import { randomNumberForLink } from "../utils/constants";
 
 // Initialize Firebase
 const app = firebase.initializeApp({
@@ -280,6 +281,67 @@ export function deleteUserCartItem(userID, itemID) {
       })
       .then(() => {
         resolve("Item Deleted");
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function getUserAddressList(userID) {
+  const addressRef = firestore.collection("addresses").doc(userID);
+
+  return new Promise((resolve, reject) => {
+    addressRef
+      .get()
+      .then((addressData) => {
+        if (addressData.exists) {
+          resolve(
+            Object.keys(addressData.data()).map((addressItem) => ({
+              id: addressItem,
+              ...addressData.data()[addressItem],
+            }))
+          );
+        } else {
+          resolve([]);
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function deleteUserAddressItem(userID, addressID) {
+  const addressRef = firestore.collection("addresses").doc(userID);
+
+  return new Promise((resolve, reject) => {
+    addressRef
+      .update({
+        [addressID]: firebase.firestore.FieldValue.delete(),
+      })
+      .then(() => {
+        resolve("Address Deleted");
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function createOrUpdateUserAddress(userID, addressInfo, addressID = "") {
+  const addressRef = firestore.collection("addresses").doc(userID);
+  const { name } = addressInfo;
+
+  addressID =
+    addressID ||
+    `${name.replace(/\s+/g, "-").toLowerCase()}-${randomNumberForLink()}`;
+
+  return new Promise((resolve, reject) => {
+    addressRef
+      .update({ [addressID]: { ...addressInfo } })
+      .then(() => {
+        resolve("User address updated");
       })
       .catch((error) => {
         reject(error);
