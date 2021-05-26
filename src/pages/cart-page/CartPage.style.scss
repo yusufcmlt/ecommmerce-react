@@ -81,11 +81,23 @@
       background: linear-gradient(60deg, #2d264e, #26294e);
       border-radius: 20px;
       width: 370px;
-      height: 320px;
+      max-height: 500px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      .cart-address-select {
+        width: 90%;
+        height: 50px;
+        & option {
+          background-color: #4f548575;
+          color: #4f5485;
+        }
+        &:focus {
+          background-color: #fbb224;
+          color: #4f5485;
+        }
+      }
 
       .cart-order-title {
         width: 90%;
@@ -98,7 +110,6 @@
         background: linear-gradient(60deg, #151224, #121325);
         height: 170px;
         width: 90%;
-
         box-sizing: border-box;
         padding: 15px;
         display: flex;
@@ -137,10 +148,8 @@
       }
       .cart-menu-container {
         width: 300px;
-        height: 280px;
-        margin: 0 auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin: 20px auto;
+
         .cart-order-title {
           font-size: 15px;
         }
