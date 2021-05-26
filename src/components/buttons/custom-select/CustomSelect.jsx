@@ -14,7 +14,7 @@ export default function CustomSelect({
       className={`custom-select-container ${size} input-stroke`}
       onChange={selectOnChange}
     >
-      <option key="9293932" defaultValue disabled value="">
+      <option key="9293932" defaultValue value="">
         {" "}
         -- Seçiniz --{" "}
       </option>
