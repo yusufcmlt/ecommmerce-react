@@ -74,8 +74,8 @@ const sortFunctions = {
   },
 };
 
-const randomNumberForLink = () => {
-  return Math.ceil(Math.random() * 100000);
+const randomNumberForLink = (randomMultiply = 100000) => {
+  return Math.ceil(Math.random() * randomMultiply);
 };
 export {
   signedMenuItems,
