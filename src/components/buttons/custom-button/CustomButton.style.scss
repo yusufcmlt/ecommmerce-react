@@ -17,6 +17,14 @@
   &:active {
     transform: translateY(2px);
   }
+  &:disabled {
+    background-color: gray;
+    color: #fbb224;
+    &:hover {
+      background-color: gray;
+      color: #fbb224;
+    }
+  }
 
   .button-icon {
     width: 25px;
@@ -287,7 +295,7 @@
   }
 }
 .size-sidemenu {
-  width: 80%;
+  width: 90%;
   height: 50px;
   margin-bottom: 10px;
   font-weight: 600 !important;
@@ -347,10 +355,6 @@
   :active {
     background-color: #fbb224;
     color: #4f5485;
-  }
-  &:disabled {
-    background-color: gray;
-    color: #fbb224;
   }
 }
 .selected {
