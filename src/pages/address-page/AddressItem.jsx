@@ -1,12 +1,16 @@
 import React from "react";
 
-export default function AddressItem({ data, handleSelectedAddress, ...props }) {
+import "./AddressPage.style.scss";
+
+export default function AddressItem({ data, ...props }) {
   const { name, firstName, address } = data;
   return (
     <div
-      className={`address-item ${props.selected && "selected"}`}
+      className={`address-item ${props.selected ? "selected" : ""}`}
       onClick={() => {
-        handleSelectedAddress(data);
+        if (props.handleSelectedAddress) {
+          props.handleSelectedAddress(data);
+        }
       }}
     >
       <div className="address-icon" />

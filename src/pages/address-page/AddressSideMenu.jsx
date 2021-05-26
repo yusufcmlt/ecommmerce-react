@@ -34,7 +34,7 @@ export default function AddressSideMenu({
     if (handleEmptyCheck() && addressChanged) {
       handleTrimInputs();
       const { id, ...restAddressInfo } = addressFormData;
-      console.log(restAddressInfo);
+      //console.log(restAddressInfo);
       handleAddressAdd(restAddressInfo, id);
       setAddressChanged(false);
       setAddressFormData({
@@ -43,7 +43,9 @@ export default function AddressSideMenu({
         firstName: "",
         address: "",
       });
-      handleSelectedAddress();
+      if (isAddressSelected) {
+        handleSelectedAddress();
+      }
     }
   }
   //Fill forms
