@@ -12,7 +12,7 @@ const CustomInput = ({
   ...props
 }) => {
   return (
-    <div className={`input-container`} id={props.id}>
+    <div className={`input-container`}>
       {inputIcon ? (
         <div className={`input-icon input-icon-${inputIcon}`} />
       ) : null}
