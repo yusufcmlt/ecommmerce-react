@@ -338,14 +338,27 @@ export function createOrUpdateUserAddress(userID, addressInfo, addressID = "") {
     `${name.replace(/\s+/g, "-").toLowerCase()}-${randomNumberForLink()}`;
 
   return new Promise((resolve, reject) => {
-    addressRef
-      .update({ [addressID]: { ...addressInfo } })
-      .then(() => {
-        resolve("User address updated");
-      })
-      .catch((error) => {
-        reject(error);
-      });
+    addressRef.get().then((addressDoc) => {
+      if (addressDoc.exists) {
+        addressRef
+          .update({ [addressID]: { ...addressInfo } })
+          .then(() => {
+            resolve("User address updated");
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      } else {
+        addressRef
+          .set({ [addressID]: { ...addressInfo } })
+          .then(() => {
+            resolve("A user address created for the first time");
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }
+    });
   });
 }
 
