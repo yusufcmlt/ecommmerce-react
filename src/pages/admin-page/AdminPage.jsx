@@ -25,7 +25,6 @@ export default function AdminPage() {
   useEffect(() => {
     let locationPath = location.pathname.split("/");
     locationPath = locationPath[locationPath.length - 1];
-    console.log(locationPath);
     setPageHeaderInfo({ ...routeInfo[locationPath] });
   }, [location]);
 
