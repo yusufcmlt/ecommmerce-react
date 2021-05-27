@@ -9,16 +9,25 @@ import AddressItem from "../address-page/AddressItem";
 import "./CartPage.style.scss";
 import "../address-page/AddressPage.style.scss";
 import CartAddressItem from "./CartAddressItem";
+import { checkCartItemsOnBuy, createOrder } from "../../firebase/firebase";
+import { useItems } from "../../contexts/item-category-context/ItemCategoryContext";
+import { useAuth } from "../../contexts/auth-context/AuthContext";
 
 export default function CartSideMenu({ total }) {
   const history = useHistory();
-  const { addressData, handleAddressLoad } = useCart();
+  const { addressData, handleAddressLoad, cartData, handleCartLoad } =
+    useCart();
+  const { items, handleItemLoading } = useItems();
+  const { currentUser } = useAuth();
 
   const [selectedAddress, setSelectedAddress] = useState({});
 
   useEffect(() => {
     if (!addressData.loaded) {
       handleAddressLoad();
+    }
+    if (!items.loaded) {
+      handleItemLoading();
     }
   }, []);
 
@@ -43,6 +52,60 @@ export default function CartSideMenu({ total }) {
     }
   }
 
+  function handleBuyProducts() {
+    if (checkIfAddressEmpty()) {
+      const itemIDs = cartData.data.reduce(
+        (acc, item) => ({
+          ...acc,
+          [item.id]: {
+            quantity: item.quantity,
+            name: item.name,
+            price: item.price,
+          },
+        }),
+        {}
+      );
+      if (checkCartItemsOnBuy(itemIDs)) {
+        const { id, ...addressRest } = selectedAddress;
+        createOrder(itemIDs, currentUser.uid, addressRest, total)
+          .then((message) => {
+            console.log(message);
+            handleCartLoad();
+            alert("Satın alımınız için teşekkürler.");
+            history.push({ pathname: "/siparislerim" });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    } else {
+      alert("Adres alanı boş bırakılamaz.");
+    }
+  }
+
+  function checkIfAddressEmpty() {
+    return Object.keys(selectedAddress).length;
+  }
+
+  //MODIFIES EXISTING ITEMIDS OBJECT
+  function checkCartItemsOnBuy(cartItemsID) {
+    const { keyPair } = items;
+    for (const cartKey in cartItemsID) {
+      if (
+        !keyPair[cartKey] ||
+        keyPair[cartKey] - cartItemsID[cartKey].quantity < 0
+      ) {
+        alert(`${cartItemsID[cartKey].name} ürünü tükenmiş olabilir.`);
+        return false;
+      } else {
+        cartItemsID[cartKey].leftItems =
+          keyPair[cartKey] - cartItemsID[cartKey].quantity;
+      }
+    }
+
+    return true;
+  }
+
   return (
     <div className="cart-menu-container">
       <h3 className="cart-order-title">Adres</h3>
@@ -51,7 +114,7 @@ export default function CartSideMenu({ total }) {
         size="cart-address-select"
         selectOnChange={handleSelectChange}
       />
-      {Object.keys(selectedAddress).length ? (
+      {checkIfAddressEmpty() ? (
         <CartAddressItem data={selectedAddress} />
       ) : null}
       <CustomButton
@@ -87,6 +150,7 @@ export default function CartSideMenu({ total }) {
       <CustomButton
         buttonSize="admin-menu size-sidemenu"
         buttonText="Satın Al"
+        funcOnPress={handleBuyProducts}
       />
     </div>
   );

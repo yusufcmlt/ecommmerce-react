@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Loading from "../../components/loading/Loading";
 import PageTitleHeader from "../../components/page-title-header/PageTitleHeader";
+import { useCart } from "../../contexts/cart-context/CartContext";
 import OrderItem from "./OrderItem";
 
 import "./OrdersPage.style.scss";
 
 export default function OrdersPage() {
-  const orderItemTest = [{}];
+  const { orderData, handleOrderLoad } = useCart();
+
+  useEffect(() => {
+    if (!orderData.loaded) {
+      handleOrderLoad();
+    }
+  }, []);
 
   return (
     <section id="orders-page-section">
@@ -15,10 +23,16 @@ export default function OrdersPage() {
         pageType="normal"
       />
       <div className="order-list">
-        {orderItemTest.length ? (
-          orderItemTest.map((item) => <OrderItem data={item} />)
+        {orderData.loaded ? (
+          orderData.data.length ? (
+            orderData.data.map((item) => (
+              <OrderItem key={item.id} data={item} />
+            ))
+          ) : (
+            <h3>Siparişiniz Bulunmuyor...</h3>
+          )
         ) : (
-          <h3>Siparişiniz bulunmuyor...</h3>
+          <Loading size="page" />
         )}
       </div>
     </section>

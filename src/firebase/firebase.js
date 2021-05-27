@@ -116,28 +116,93 @@ export function getCategories() {
   });
 }
 
-// export function checkCartItemsOnBuy(cartItems){
+export function getOrderList(userID) {
+  const orderRef = firestore.collection("orders").doc(userID);
 
-//   const itemsRef = firestore.collection('items');
+  return new Promise((resolve, reject) => {
+    orderRef
+      .get()
+      .then((orderData) => {
+        resolve(
+          Object.keys(orderData.data()).reduce(
+            (acc, key) => [...acc, { id: key, ...orderData.data()[key] }],
+            []
+          )
+        );
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
 
-//   return new Promise((resolve,reject)=>{
+export function createOrder(cartItems, userID, addressData, total) {
+  const itemsRef = firestore.collection("items");
+  const orderRef = firestore.collection("orders").doc(userID);
+  const cartRef = firestore.collection("carts").doc(userID);
+  const orderID = `order-${randomNumberForLink(1000000)}`;
 
-//     for(const item in cartItems){
+  return new Promise((resolve, reject) => {
+    //Subtract item quantities stocks
+    for (const cartKey in cartItems) {
+      itemsRef.doc(cartKey).update({ quantity: cartItems[cartKey].leftItems });
+      delete cartItems[cartKey].leftItems;
+    }
+    //Create new order
+    orderRef.get().then((orderDoc) => {
+      const orderObj = {
+        [orderID]: {
+          status: "Kargoda",
+          items: cartItems,
+          dateOrdered: new Date(),
+          address: addressData,
+          total,
+        },
+      };
 
-//       itemsRef.doc(item).get().then(itemData=>{
-//         if(itemData.exists && itemData.data().quantity-cartItems[item]>=0){
+      if (orderDoc.exists) {
+        orderRef.update({ ...orderObj }).then(() => {
+          cartRef
+            .delete()
+            .then(() => {
+              resolve("User cart deleted and order created.");
+            })
+            .catch((error) => {
+              console.log(error);
+              reject("Error creating order and deleting cart");
+            });
+        });
+      } else {
+        orderRef
+          .set({ ...orderObj })
+          .then(() => {
+            cartRef
+              .delete()
+              .then(() => {
+                resolve("User cart deleted and order created.");
+              })
+              .catch((error) => {
+                console.log(error);
+                reject("Error creating order and deleting cart");
+              });
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }
+    });
+  });
+}
 
-//         }
-//         else{
-//           reject("Ürün")
-//         }
-//       })
+export function deleteCartAfterOrder(userID) {
+  const cartRef = firestore.collection("carts").doc(userID);
 
-//     }
-
-//   })
-
-// }
+  cartRef.delete().then(() => {
+    console.log("User cart deleted after creating order.").catch((error) => {
+      console.log("Error deleting user cart", error);
+    });
+  });
+}
 
 export function createOrUpdateItemCategory(form, image, type, isUpdate) {
   //REF

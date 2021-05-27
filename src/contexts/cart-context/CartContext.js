@@ -6,6 +6,7 @@ import {
   createOrUpdateUserAddress,
   getUserAddressList,
   deleteUserAddressItem,
+  getOrderList,
 } from "../../firebase/firebase";
 import { useAuth } from "../auth-context/AuthContext";
 
@@ -24,6 +25,9 @@ export function CartProvider({ children }) {
   //ADDRESS INFO
   const [addressData, setAddressData] = useState({ loaded: false, data: [] });
   const [addressUpdated, setAddressUpdated] = useState(false);
+
+  //ORDER INFO
+  const [orderData, setOrderData] = useState({ loaded: false, data: [] });
 
   const { currentUser } = useAuth();
   //CART
@@ -109,6 +113,19 @@ export function CartProvider({ children }) {
     }
   }
 
+  function handleOrderLoad() {
+    console.log("User orders data loading.");
+    getOrderList(currentUser.uid)
+      .then((orderInfo) => {
+        setOrderData({ loaded: true, data: [...orderInfo] });
+        console.log(orderInfo);
+        console.log("User order data loaded");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   useEffect(() => {});
 
   const value = {
@@ -123,6 +140,8 @@ export function CartProvider({ children }) {
     handleAddressAdd,
     handleAddressLoad,
     handleAddressDelete,
+    orderData,
+    handleOrderLoad,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
