@@ -8,7 +8,7 @@ export default function OrderItem({ data }) {
 
   //Changing mm/dd/yyyy to dd/mm/yyyy
   function handleDateString() {
-    let dateString = dateOrdered.toDate().toLocaleString().split("/");
+    let dateString = dateOrdered.toDate().toLocaleDateString().split("/");
     dateString = [dateString[1], dateString[0], dateString[2]];
     return dateString.join("/");
   }

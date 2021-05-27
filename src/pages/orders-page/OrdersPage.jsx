@@ -25,9 +25,9 @@ export default function OrdersPage() {
       <div className="order-list">
         {orderData.loaded ? (
           orderData.data.length ? (
-            orderData.data.map((item) => (
-              <OrderItem key={item.id} data={item} />
-            ))
+            orderData.data
+              .sort((a, b) => b.dateOrdered - a.dateOrdered)
+              .map((item) => <OrderItem key={item.id} data={item} />)
           ) : (
             <h3>Siparişiniz Bulunmuyor...</h3>
           )
