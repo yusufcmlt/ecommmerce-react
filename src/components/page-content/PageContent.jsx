@@ -7,6 +7,7 @@ import AddressPage from "../../pages/address-page/AddressPage";
 import AdminPage from "../../pages/admin-page/AdminPage";
 import CartPage from "../../pages/cart-page/CartPage";
 import HomePage from "../../pages/home-page/HomePage";
+import OrdersPage from "../../pages/orders-page/OrdersPage";
 import ProductPage from "../../pages/product-page/ProductPage";
 import CategoryResultsPage from "../../pages/search-results-page/CategoryResultsPage";
 import SearchResultsPage from "../../pages/search-results-page/SearchResultsPage";
@@ -52,13 +53,13 @@ export default function PageContent() {
           <CategoryResultsPage />
         </Route>
         <Route path={"/sepetim"}>
-          {currentUser ? <CartPage /> : <Redirect to={"/"} />}
+          {currentUser ? <CartPage /> : <Redirect to={"/giris"} />}
         </Route>
         <Route path={"/siparislerim"}>
-          {currentUser ? <CartPage /> : <Redirect to={"/"} />}
+          {currentUser ? <OrdersPage /> : <Redirect to={"/giris"} />}
         </Route>
         <Route path={"/adreslerim"}>
-          {currentUser ? <AddressPage /> : <Redirect to={"/"} />}
+          {currentUser ? <AddressPage /> : <Redirect to={"/giris"} />}
         </Route>
       </Switch>
     </div>
