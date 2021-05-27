@@ -58,7 +58,10 @@ export function ItemCategoryProvider({ children }) {
     console.log("Items Loading");
     getAdminItems()
       .then((itemData) => {
-        setItems({ loaded: true, data: [...itemData] });
+        setItems({
+          loaded: true,
+          data: itemData.filter((item) => item.quantity > 0),
+        });
         console.log("Items Loaded");
       })
       .catch((error) => {
@@ -70,7 +73,10 @@ export function ItemCategoryProvider({ children }) {
     console.log("New Items Loading");
     getNewFiveItem()
       .then((newFiveItemsData) => {
-        setNewItems({ loaded: true, data: [...newFiveItemsData] });
+        setNewItems({
+          loaded: true,
+          data: [...newFiveItemsData],
+        });
         console.log("New items loaded.");
       })
       .catch((error) => console.log("Failed to load new items", error));
