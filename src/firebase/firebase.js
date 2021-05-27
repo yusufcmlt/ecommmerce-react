@@ -27,9 +27,6 @@ export async function createUserProfileDocument(email, userID) {
   if (!snapShot.exists) {
     await userRef.set({
       email,
-      cart: [],
-      addresses: [],
-      orders: [],
       isAdmin: false,
       createdAt: new Date(),
     });
@@ -82,6 +79,8 @@ export function getNewFiveItem() {
   return new Promise((resolve, reject) => {
     firestore
       .collection("items")
+      .where("quantity", ">", 0)
+      .orderBy("quantity")
       .orderBy("dateAdded", "desc")
       .limit(5)
       .get()
@@ -116,6 +115,29 @@ export function getCategories() {
       });
   });
 }
+
+// export function checkCartItemsOnBuy(cartItems){
+
+//   const itemsRef = firestore.collection('items');
+
+//   return new Promise((resolve,reject)=>{
+
+//     for(const item in cartItems){
+
+//       itemsRef.doc(item).get().then(itemData=>{
+//         if(itemData.exists && itemData.data().quantity-cartItems[item]>=0){
+
+//         }
+//         else{
+//           reject("Ürün")
+//         }
+//       })
+
+//     }
+
+//   })
+
+// }
 
 export function createOrUpdateItemCategory(form, image, type, isUpdate) {
   //REF
