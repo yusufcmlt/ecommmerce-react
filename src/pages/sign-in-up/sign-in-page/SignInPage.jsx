@@ -53,7 +53,7 @@ export default function SignInPage({
         inputPlaceholder="E-posta adresiniz."
         inputIcon="email"
         inputName="email"
-        inputValue={loginCredentials.email}
+        value={loginCredentials.email}
         inputChange={handleChange}
       />
       <CustomInput
@@ -61,7 +61,7 @@ export default function SignInPage({
         inputPlaceholder="Şifreniz"
         inputIcon="password"
         inputName="password"
-        inputValue={loginCredentials.password}
+        value={loginCredentials.password}
         inputChange={handleChange}
       />
       <CustomButton
