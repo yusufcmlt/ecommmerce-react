@@ -50,6 +50,9 @@
             color: #4f5485;
             flex-basis: 100%;
             margin: 0;
+            @media (max-width: 1024px) {
+              font-size: 14px;
+            }
           }
           div {
             align-self: flex-start;
@@ -62,7 +65,7 @@
             font-size: 13px;
             width: 95%;
             @media (max-width: 1024px) {
-              font-size: 12px;
+              font-size: 10px;
             }
           }
         }
