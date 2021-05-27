@@ -18,6 +18,7 @@ export function ItemCategoryProvider({ children }) {
   const [categories, setCategories] = useState({ loaded: false, data: [] });
   const [newItems, setNewItems] = useState({ loaded: false, data: [] });
   const [items, setItems] = useState({ loaded: false, data: [] });
+
   const [counts, setCounts] = useState({
     loaded: false,
     items: 0,
@@ -61,6 +62,9 @@ export function ItemCategoryProvider({ children }) {
         setItems({
           loaded: true,
           data: itemData.filter((item) => item.quantity > 0),
+          keyPair: itemData
+            .filter((item) => item.quantity > 0)
+            .reduce((acc, item) => ({ ...acc, [item.id]: item.quantity }), {}),
         });
         console.log("Items Loaded");
       })
