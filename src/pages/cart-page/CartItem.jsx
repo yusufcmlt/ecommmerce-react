@@ -10,7 +10,7 @@ export default function CartItem({ cartData, itemDelete }) {
 
   return (
     <div className="cart-item-container">
-      <img src={imageURL} className="cart-item-image" alt="item" />
+      <img src={imageURL} className="cart-item-image" alt={name} />
       <div
         className="cart-item-info"
         onClick={() => {
