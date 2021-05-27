@@ -10,8 +10,8 @@ export default function AdminProductList() {
   const location = useLocation();
 
   const {
-    items,
-    handleItemLoading,
+    adminItems,
+    handleAdminItemsLoading,
     filterChar,
     sortFunc,
     page,
@@ -20,33 +20,37 @@ export default function AdminProductList() {
     handleCategoryLoading,
   } = useItems();
 
-  const [activeItemCount, setActiveItemCount] = useState(items.data.length);
-  const [filteredItems, setFilteredItems] = useState(items.data);
+  const [activeItemCount, setActiveItemCount] = useState(
+    adminItems.data.length
+  );
+  const [filteredItems, setFilteredItems] = useState(adminItems.data);
   const [isUpdated, setUpdated] = useState(
     location.state ? location.state.isUpdated : false
   );
 
   //Load Items on Page Load
   useEffect(() => {
-    if (!items.loaded || isUpdated) {
-      handleItemLoading();
+    if (!adminItems.loaded || isUpdated) {
+      handleAdminItemsLoading();
       handleCategoryLoading();
       setUpdated(false);
     }
+
     clearAllFilters();
   }, []);
 
   useEffect(() => {
-    if (items.data) {
+    if (adminItems.data) {
+      console.log(adminItems);
       setFilteredItems(
-        items.data
+        adminItems.data
           .filter((item) => item.name.toLowerCase().includes(filterChar.items))
           .sort(sortFunc.items.func)
           .slice(...page),
         setActiveItemCount(filteredItems.length)
       );
     }
-  }, [filterChar, sortFunc, filteredItems.length, items.data, page]);
+  }, [filterChar, sortFunc, filteredItems.length, adminItems.data, page]);
 
   return (
     <div className="admin-product-list-container">
@@ -55,7 +59,7 @@ export default function AdminProductList() {
           ? `${activeItemCount} Ürün gösteriliyor`
           : "Ürün bulunamadı"}
       </p>
-      {items.loaded ? (
+      {adminItems.loaded ? (
         filteredItems.map((item) => <AdminProduct key={item.id} data={item} />)
       ) : (
         <Loading size="page" />

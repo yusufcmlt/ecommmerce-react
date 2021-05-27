@@ -18,6 +18,7 @@ export function ItemCategoryProvider({ children }) {
   const [categories, setCategories] = useState({ loaded: false, data: [] });
   const [newItems, setNewItems] = useState({ loaded: false, data: [] });
   const [items, setItems] = useState({ loaded: false, data: [] });
+  const [adminItems, setAdminItems] = useState({ loaded: false, data: [] });
 
   const [counts, setCounts] = useState({
     loaded: false,
@@ -67,6 +68,21 @@ export function ItemCategoryProvider({ children }) {
             .reduce((acc, item) => ({ ...acc, [item.id]: item.quantity }), {}),
         });
         console.log("Items Loaded");
+      })
+      .catch((error) => {
+        console.log("Failed to load items: ", error);
+      });
+  }
+  function handleAdminItemsLoading() {
+    console.log("Admin Items Loading");
+    getAdminItems()
+      .then((itemData) => {
+        setAdminItems({
+          loaded: true,
+          data: [...itemData],
+        });
+
+        console.log("Admin items Loaded");
       })
       .catch((error) => {
         console.log("Failed to load items: ", error);
@@ -174,6 +190,8 @@ export function ItemCategoryProvider({ children }) {
     page,
     handlePaging,
     clearAllFilters,
+    handleAdminItemsLoading,
+    adminItems,
   };
 
   return (
