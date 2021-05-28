@@ -112,6 +112,12 @@ dist
 # testing
 /coverage
 
+#firebase
+.firebase
+/.firebase
+/.github
+.firebaserc
+
 # production
 /build
 
