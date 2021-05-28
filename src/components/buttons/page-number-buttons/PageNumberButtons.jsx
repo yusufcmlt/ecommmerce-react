@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useItems } from "../../../contexts/item-category-context/ItemCategoryContext";
 
 import CustomButton from "../custom-button/CustomButton";
 
 import "./PageNumberButtons.style.scss";
 
-export default function PageNumberButtons({ itemCount, handlePaging }) {
+export default function PageNumberButtons({ itemCount }) {
   const [pageCount, setPageCount] = useState(0);
+  const { handlePaging } = useItems();
 
   useEffect(() => {
     const pageDivide = itemCount / 10;
