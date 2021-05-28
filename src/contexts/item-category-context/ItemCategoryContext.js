@@ -151,7 +151,7 @@ export function ItemCategoryProvider({ children }) {
     value = Number(value);
     const startPage = (value - 1) * 10;
     const endPage = value * 10;
-    console.log([startPage, endPage]);
+
     setPage([startPage, endPage]);
   }
 

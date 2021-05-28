@@ -118,7 +118,6 @@ export function CartProvider({ children }) {
     getOrderList(currentUser.uid)
       .then((orderInfo) => {
         setOrderData({ loaded: true, data: [...orderInfo] });
-        console.log(orderInfo);
         console.log("User order data loaded");
       })
       .catch((error) => {
