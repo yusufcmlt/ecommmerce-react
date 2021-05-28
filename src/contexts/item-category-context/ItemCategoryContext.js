@@ -28,10 +28,12 @@ export function ItemCategoryProvider({ children }) {
   const [filterChar, setFilterChar] = useState({ items: "", categories: "" });
   const [sortFunc, setSortFunc] = useState({
     items: {
-      func: (a, b) => (a["name"] > b["name"] ? 1 : -1),
+      func: (a, b) =>
+        a["name"].toLowerCase().localeCompare(b["name"].toLowerCase()),
     },
     categories: {
-      func: (a, b) => (a["name"] > b["name"] ? 1 : -1),
+      func: (a, b) =>
+        a["name"].toLowerCase().localeCompare(b["name"].toLowerCase()),
     },
   });
   const [page, setPage] = useState([0, 10]);
@@ -129,13 +131,15 @@ export function ItemCategoryProvider({ children }) {
   function handleSorting(event) {
     //Getting sort directions as ['list to sort','property to sort','sort order']
     const { value } = event.target;
-    const valueSplit = value.split("-");
+    if (value) {
+      const valueSplit = value.split("-");
 
-    console.log(valueSplit);
-    setSortFunc({
-      ...sortFunc,
-      [valueSplit[0]]: { func: sortFunctions[valueSplit[1]][valueSplit[2]] },
-    });
+      console.log(valueSplit);
+      setSortFunc({
+        ...sortFunc,
+        [valueSplit[0]]: { func: sortFunctions[valueSplit[1]][valueSplit[2]] },
+      });
+    }
   }
 
   /**
@@ -147,7 +151,7 @@ export function ItemCategoryProvider({ children }) {
     value = Number(value);
     const startPage = (value - 1) * 10;
     const endPage = value * 10;
-
+    console.log([startPage, endPage]);
     setPage([startPage, endPage]);
   }
 
@@ -160,10 +164,12 @@ export function ItemCategoryProvider({ children }) {
     //Clear Sorting
     setSortFunc({
       items: {
-        func: (a, b) => (a["name"] > b["name"] ? 1 : -1),
+        func: (a, b) =>
+          a["name"].toLowerCase().localeCompare(b["name"].toLowerCase()),
       },
       categories: {
-        func: (a, b) => (a["name"] > b["name"] ? 1 : -1),
+        func: (a, b) =>
+          a["name"].toLowerCase().localeCompare(b["name"].toLowerCase()),
       },
     });
     //Clear Paging
