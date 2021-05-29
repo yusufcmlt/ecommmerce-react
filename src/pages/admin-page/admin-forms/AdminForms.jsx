@@ -335,6 +335,7 @@ export function ItemForm({
           inputType="number"
           min="0"
           max="5000"
+          step="any"
           inputChange={handleAdminFormChange}
           inputSize="admin-form"
           inputPlaceholder="Ürün fiyatı girin."
