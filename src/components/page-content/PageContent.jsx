@@ -61,6 +61,9 @@ export default function PageContent() {
         <Route path={"/adreslerim"}>
           {currentUser ? <AddressPage /> : <Redirect to={"/giris"} />}
         </Route>
+        <Route path="*">
+          <Redirect to="/" />
+        </Route>
       </Switch>
     </div>
   );
