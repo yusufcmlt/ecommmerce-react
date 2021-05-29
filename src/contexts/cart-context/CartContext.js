@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import swal from "sweetalert";
 import {
   addProductToCart,
   deleteUserCartItem,
@@ -42,18 +43,31 @@ export function CartProvider({ children }) {
     handleCartUpdate(false);
   }
   function handleCartItemDelete(userID, itemID) {
-    if (window.confirm(`Ürün silinsin mi?`)) {
-      setCartData({ ...cartData, loaded: false });
-      deleteUserCartItem(userID, itemID)
-        .then((success) => {
-          alert("Ürün silindi");
-          handleCartLoad();
-          console.log(success);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    swal({
+      title: "Ürün sil",
+      text: "Ürünü sepetinden çıkarmak istiyor musun?",
+      icon: "warning",
+      buttons: ["Hayır", "Evet"],
+      dangerMode: true,
+    }).then((isDelete) => {
+      if (isDelete) {
+        setCartData({ ...cartData, loaded: false });
+        deleteUserCartItem(userID, itemID)
+          .then((success) => {
+            swal("Ürün sepetten çıkartıldı.", {
+              icon: "success",
+              button: "Tamam",
+            });
+            handleCartLoad();
+            console.log(success);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        swal("Ürün çıkartılmadı.", { icon: "info", button: "Tamam" });
+      }
+    });
   }
   function handleCartAdd(itemInfo, userInfo) {
     addProductToCart(itemInfo, userInfo).then((message) => {
@@ -75,6 +89,7 @@ export function CartProvider({ children }) {
       .then((message) => {
         console.log(message);
         handleAddressLoad();
+        swal("Adres eklendi", { icon: "success", button: "Tamam" });
         handleAddressUpdate(false);
       })
       .catch((error) => {
@@ -99,18 +114,28 @@ export function CartProvider({ children }) {
   }
 
   function handleAddressDelete(addressID) {
-    if (window.confirm(`Adres silinsin mi?`)) {
-      setCartData({ ...cartData, loaded: false });
-      deleteUserAddressItem(currentUser.uid, addressID)
-        .then((success) => {
-          alert("Ürün silindi");
-          handleAddressLoad();
-          console.log(success);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    swal({
+      title: "Adres Sil",
+      text: "Adresi silmek istediğinden emin misin?",
+      icon: "warning",
+      buttons: ["Hayır", "Evet"],
+      dangerMode: true,
+    }).then((isDelete) => {
+      if (isDelete) {
+        setCartData({ ...cartData, loaded: false });
+        deleteUserAddressItem(currentUser.uid, addressID)
+          .then((success) => {
+            swal("Adres silindi", { icon: "success", button: "Tamam" });
+            handleAddressLoad();
+            console.log(success);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        swal("Adres silinmedi", { icon: "info", button: "Tamam" });
+      }
+    });
   }
 
   function handleOrderLoad() {

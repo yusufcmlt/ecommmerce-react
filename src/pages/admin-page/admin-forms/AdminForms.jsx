@@ -15,6 +15,7 @@ import {
 import { randomNumberForLink } from "../../../utils/constants";
 
 import "./AdminForms.style.scss";
+import swal from "sweetalert";
 
 export function AdminProductForm() {
   return <div>PRODUCT FORM</div>;
@@ -55,16 +56,25 @@ export function AdminCategoryItemForm({ formOptions }) {
   }
 
   function handleItemCategoryDelete() {
-    const removeConfirm = window.confirm("Silmek istediğinden emin misin?");
-    if (removeConfirm) {
-      setLoading(true);
-      removeItemCategory(adminForm.id, formOptions.formType)
-        .then(() => {
-          alert("Silindi.");
-          reloadDatas();
-        })
-        .catch((errorMessage) => console.log(errorMessage));
-    }
+    swal({
+      title: "Sil",
+      text: "Silmek istediğinden emin misin?",
+      icon: "warning",
+      buttons: ["Hayır", "Evet"],
+      dangerMode: true,
+    }).then((isDelete) => {
+      if (isDelete) {
+        setLoading(true);
+        removeItemCategory(adminForm.id, formOptions.formType)
+          .then(() => {
+            swal("Silindi", { icon: "success", button: "Tamam" });
+            reloadDatas();
+          })
+          .catch((errorMessage) => console.log(errorMessage));
+      } else {
+        swal("Silinmedi", { icon: "info", button: "Tamam" });
+      }
+    });
   }
 
   function handleAdminFormSubmit(event) {
@@ -99,7 +109,10 @@ export function AdminCategoryItemForm({ formOptions }) {
           console.log(errorMessage);
         });
     } else {
-      alert("Eksik bilgi girdiniz veya güncellenecek bir bilgi yok.");
+      swal("Eksik bir bilgi girdiniz veya güncellenecek bir bilgi yok", {
+        icon: "warning",
+        button: "Tamam",
+      });
     }
   }
 

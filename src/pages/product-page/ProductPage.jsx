@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
+import swal from "sweetalert";
 
 import CustomButton from "../../components/buttons/custom-button/CustomButton";
 import CustomInput from "../../components/custom-input/CustomInput";
@@ -49,7 +50,7 @@ export default function ProductPage() {
     );
     setProductQuantity(0);
     handleCartUpdate(true);
-    alert("Sepete eklendi");
+    swal({ title: "Sepete Eklendi!", icon: "success", button: "Tamam" });
   }
   function handleQuantityChange(event) {
     const { value } = event.target;

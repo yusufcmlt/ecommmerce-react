@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { createOrder } from "../../firebase/firebase";
+import swal from "sweetalert";
 
 import CustomButton from "../../components/buttons/custom-button/CustomButton";
 import CustomSelect from "../../components/buttons/custom-select/CustomSelect";
-import { useCart } from "../../contexts/cart-context/CartContext";
-import AddressItem from "../address-page/AddressItem";
+import CartAddressItem from "./CartAddressItem";
 
 import "./CartPage.style.scss";
 import "../address-page/AddressPage.style.scss";
-import CartAddressItem from "./CartAddressItem";
-import { checkCartItemsOnBuy, createOrder } from "../../firebase/firebase";
+
+import { useCart } from "../../contexts/cart-context/CartContext";
 import { useItems } from "../../contexts/item-category-context/ItemCategoryContext";
 import { useAuth } from "../../contexts/auth-context/AuthContext";
 
@@ -71,15 +72,22 @@ export default function CartSideMenu({ total }) {
           .then((message) => {
             console.log(message);
             handleCartLoad();
-            alert("Satın alımınız için teşekkürler.");
-            history.push({ pathname: "/siparislerim" });
+            swal("Satın alımınız için teşekkürler", {
+              icon: "success",
+              button: "Tamam",
+            }).then((isConfirm) => {
+              history.push({ pathname: "/siparislerim" });
+            });
           })
           .catch((error) => {
             console.log(error);
           });
       }
     } else {
-      alert("Adres alanı boş bırakılamaz.");
+      swal("Adres alanı boş bırakılamaz", {
+        icon: "warning",
+        button: "Tamam",
+      });
     }
   }
 
@@ -95,7 +103,12 @@ export default function CartSideMenu({ total }) {
         !keyPair[cartKey] ||
         keyPair[cartKey] - cartItemsID[cartKey].quantity < 0
       ) {
-        alert(`${cartItemsID[cartKey].name} ürünü tükenmiş olabilir.`);
+        swal({
+          title: "Eksik ürün",
+          text: `${cartItemsID[cartKey].name} ürünü tükenmiş olabilir.`,
+          icon: "warning",
+          button: "Tamam",
+        });
         return false;
       } else {
         cartItemsID[cartKey].leftItems =
