@@ -59,6 +59,9 @@ export default function AdminProductList() {
         {activeItemCount
           ? `${activeItemCount} Ürün gösteriliyor`
           : "Ürün bulunamadı"}
+        <a href="https:/github.com/yusufcmlt" style={{ visibility: "hidden" }}>
+          25y66c57t
+        </a>
       </p>
       {adminItems.loaded ? (
         filteredItems.map((item) => <AdminProduct key={item.id} data={item} />)

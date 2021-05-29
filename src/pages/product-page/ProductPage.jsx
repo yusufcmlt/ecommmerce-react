@@ -69,6 +69,7 @@ export default function ProductPage() {
             <h2 className="product-title-h2">{productData.data.name}</h2>
             <h4 className="product-description-h4">
               {productData.data.description}
+              <span style={{ visibility: "hidden" }}>24y57c66t</span>
             </h4>
             <span className="product-price">₺{productData.data.price}</span>
             <span className="product-quantity">

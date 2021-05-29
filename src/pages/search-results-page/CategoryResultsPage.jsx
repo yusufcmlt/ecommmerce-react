@@ -46,7 +46,11 @@ export default function CategoryResultsPage() {
   return (
     <section id="category-results-section">
       <h2 className="app-section-h3-title">{categoryTitle}</h2>
-      <PageSideMenu title="Ürün Filtrele" size="page-side-product" />
+      <PageSideMenu
+        key="yct245766"
+        title="Ürün Filtrele"
+        size="page-side-product"
+      />
       <div className="items-container">
         {items.loaded ? (
           categoryItemData
