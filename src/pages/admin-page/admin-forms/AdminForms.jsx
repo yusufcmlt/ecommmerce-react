@@ -49,9 +49,15 @@ export function AdminCategoryItemForm({ formOptions }) {
   function reloadDatas() {
     handleCountLoading();
     setLoading(false);
-    history.replace({
-      pathname: `/yonetim/${formOptions.redirectPath}`,
-      state: { isUpdated: true },
+    swal({
+      title: "Ürünler güncellendi",
+      icon: "success",
+      button: "Tamam",
+    }).then(() => {
+      history.replace({
+        pathname: `/yonetim/${formOptions.redirectPath}`,
+        state: { isUpdated: true },
+      });
     });
   }
 
