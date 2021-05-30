@@ -1,5 +1,4 @@
 .input-container {
-  width: 100%;
   position: relative;
 
   .input-icon {
@@ -23,10 +22,11 @@
   .input-icon-email {
     background-image: url("../../assets/icons/email.svg");
   }
+  .input-icon-search {
+    background-image: url("../../assets/icons/search.svg");
+  }
 
   .custom-input {
-    width: 335px;
-    height: 50px;
     background-color: #4f548575;
     color: #fbb224;
     font-family: inherit;
@@ -49,5 +49,50 @@
           brightness(101%) contrast(97%);
       }
     }
+  }
+
+  .custom-input-normal {
+    width: 335px;
+    height: 50px;
+  }
+  .custom-input-admin {
+    width: 270px;
+    height: 50px;
+    margin: 15px 0;
+    text-indent: 15px;
+    border-radius: 5px;
+    @media (max-width: 1024px) {
+      width: 70vw;
+    }
+  }
+  .custom-input-admin-form {
+    width: 270px;
+    height: 50px;
+    background: linear-gradient(60deg, #2d264e, #26294e);
+    text-indent: 15px;
+    &::placeholder {
+      color: #d7654c;
+    }
+    &:focus {
+      &::placeholder {
+        color: black;
+      }
+      background: #d7654c;
+      color: #4f5485;
+    }
+
+    @media (max-width: 1024px) {
+      width: 70vw;
+    }
+  }
+
+  .custom-input-product-page {
+    width: 100%;
+    &::placeholder {
+      color: #4f5485;
+    }
+
+    height: 50px;
+    text-indent: 10px;
   }
 }

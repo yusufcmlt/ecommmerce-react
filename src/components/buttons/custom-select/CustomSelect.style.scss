@@ -1,0 +1,47 @@
+.custom-select-container {
+  border-radius: 5px;
+  background-color: #4f548575;
+  text-indent: 10px;
+  color: #fbb324a1;
+  font-weight: 500;
+  font-family: inherit;
+}
+.select-size-admin {
+  width: 270px;
+  height: 50px;
+  border: none;
+  & option {
+    background-color: #4f548575;
+    color: #4f5485;
+  }
+  &:focus {
+    background-color: #fbb224;
+    color: #4f5485;
+  }
+}
+.select-size-form {
+  width: 270px;
+  height: 50px;
+  border: none;
+  margin: 5px 0;
+  color: #4f5485;
+  & option {
+    background-color: #d7654c75;
+    color: #4f5485;
+  }
+  &:focus {
+    background-color: #d7654c;
+    color: #4f5485;
+  }
+}
+.select-size-product {
+  margin: 10px;
+}
+@media (max-width: 1024px) {
+  .select-size-admin {
+    width: 70vw;
+  }
+  .select-size-form {
+    width: 70vw;
+  }
+}

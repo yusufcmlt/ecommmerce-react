@@ -1,7 +1,6 @@
 import React from "react";
-import { useHistory, useLocation } from "react-router";
-import { useNavMenu } from "../../../contexts/nav-menu-context/NavMenuContext";
-import CustomButton from "../../buttons/custom-button/CustomButton";
+import { useLocation } from "react-router";
+
 import LogoMobile from "../../logos/logo-mobile/LogoMobile";
 import SearchBar from "../../search-bar/SearchBar";
 import UserGreet from "../../user-greet-message/UserGreet";
@@ -9,51 +8,21 @@ import UserGreet from "../../user-greet-message/UserGreet";
 import "./HeaderMobile.style.scss";
 
 export default function HeaderMobile() {
-  const { isMenuOpened, handleMenuOpened } = useNavMenu();
-
   const location = useLocation();
-  const history = useHistory();
 
   return (
     <header id="header-mobile-container" className="header-mobile-container">
-      {!isMenuOpened ? (
-        <React.Fragment>
-          <div className="header-mobile-main-row">
-            {location.pathname === "/" ? (
-              <LogoMobile />
-            ) : (
-              <CustomButton
-                buttonSize="back"
-                buttonIcon="back"
-                funcOnPress={() => {
-                  history.goBack();
-                }}
-              />
-            )}
-
-            <UserGreet />
-            <CustomButton
-              buttonSize="nav"
-              buttonIcon="nav"
-              funcOnPress={handleMenuOpened}
-            />
-          </div>
-          <div className="header-mobile-optional-row">
-            {location.pathname === "/" ? (
-              <SearchBar searchBarSize="mobile" />
-            ) : null}
-          </div>
-        </React.Fragment>
-      ) : (
+      <React.Fragment>
         <div className="header-mobile-main-row">
-          <CustomButton
-            buttonSize="back"
-            buttonIcon="back"
-            funcOnPress={handleMenuOpened}
-          />
+          {<LogoMobile />}
           <UserGreet />
         </div>
-      )}
+        <div className="header-mobile-optional-row">
+          {location.pathname === "/" ? (
+            <SearchBar searchBarSize="mobile" />
+          ) : null}
+        </div>
+      </React.Fragment>
     </header>
   );
 }

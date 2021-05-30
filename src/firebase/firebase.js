@@ -1,7 +1,8 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import { createPortal } from "react-dom";
+import "firebase/storage";
+import { randomNumberForLink } from "../utils/constants";
 
 // Initialize Firebase
 const app = firebase.initializeApp({
@@ -26,9 +27,6 @@ export async function createUserProfileDocument(email, userID) {
   if (!snapShot.exists) {
     await userRef.set({
       email,
-      cart: [],
-      addresses: [],
-      orders: [],
       isAdmin: false,
       createdAt: new Date(),
     });
@@ -47,20 +45,411 @@ export function getUserIsAdmin(userID) {
 }
 
 export function getItemCategoryCount() {
-  let countObj = {};
   return new Promise((resolve) => {
     firestore
       .collection(`itemCounts`)
       .get()
       .then((countSnapshot) => {
-        countSnapshot.forEach((countData) => {
-          countObj = { ...countObj, [countData.id]: countData.data().count };
-        });
-        resolve(countObj);
+        resolve(
+          countSnapshot.docs.reduce((acc, countDoc) => {
+            return { ...acc, [countDoc.id]: countDoc.data()["count"] };
+          }, {})
+        );
       });
   });
 }
 
+export function getAdminItems() {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("items")
+      .get()
+      .then((itemSnapshot) => {
+        resolve(
+          itemSnapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+        );
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function getNewFiveItem() {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("items")
+      .where("quantity", ">", 0)
+      .orderBy("quantity")
+      .orderBy("dateAdded", "desc")
+      .limit(5)
+      .get()
+      .then((itemSnapshot) =>
+        resolve(
+          itemSnapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+        )
+      )
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function getCategories() {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("categories")
+      .get()
+      .then((categorySnapshot) => {
+        resolve(
+          categorySnapshot.docs.map((category) => {
+            return {
+              id: category.id,
+              ...category.data(),
+            };
+          })
+        );
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function getOrderList(userID) {
+  const orderRef = firestore.collection("orders").doc(userID);
+
+  return new Promise((resolve, reject) => {
+    orderRef
+      .get()
+      .then((orderData) => {
+        resolve(
+          Object.keys(orderData.data()).reduce(
+            (acc, key) => [...acc, { id: key, ...orderData.data()[key] }],
+            []
+          )
+        );
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function createOrder(cartItems, userID, addressData, total) {
+  const itemsRef = firestore.collection("items");
+  const orderRef = firestore.collection("orders").doc(userID);
+  const cartRef = firestore.collection("carts").doc(userID);
+  const orderID = `order-${randomNumberForLink(1000000)}`;
+
+  return new Promise((resolve, reject) => {
+    //Subtract item quantities stocks
+    for (const cartKey in cartItems) {
+      itemsRef.doc(cartKey).update({ quantity: cartItems[cartKey].leftItems });
+      delete cartItems[cartKey].leftItems;
+    }
+    //Create new order
+    orderRef.get().then((orderDoc) => {
+      const orderObj = {
+        [orderID]: {
+          status: "Kargoda",
+          items: cartItems,
+          dateOrdered: new Date(),
+          address: addressData,
+          total,
+        },
+      };
+
+      if (orderDoc.exists) {
+        orderRef.update({ ...orderObj }).then(() => {
+          cartRef
+            .delete()
+            .then(() => {
+              resolve("User cart deleted and order created.");
+            })
+            .catch((error) => {
+              console.log(error);
+              reject("Error creating order and deleting cart");
+            });
+        });
+      } else {
+        orderRef
+          .set({ ...orderObj })
+          .then(() => {
+            cartRef
+              .delete()
+              .then(() => {
+                resolve("User cart deleted and order created.");
+              })
+              .catch((error) => {
+                console.log(error);
+                reject("Error creating order and deleting cart");
+              });
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }
+    });
+  });
+}
+
+export function deleteCartAfterOrder(userID) {
+  const cartRef = firestore.collection("carts").doc(userID);
+
+  cartRef.delete().then(() => {
+    console.log("User cart deleted after creating order.").catch((error) => {
+      console.log("Error deleting user cart", error);
+    });
+  });
+}
+
+export function createOrUpdateItemCategory(form, image, type, isUpdate) {
+  //REF
+  const documentRef = firestore.collection(type).doc(form.id);
+  const countRef = firestore.collection("itemCounts").doc(type);
+  const fileRef = storage.ref(`${type}-images`);
+  const increment = firebase.firestore.FieldValue.increment(1);
+
+  return new Promise((resolve, reject) => {
+    //Checking if a new image provided or not(Update the image).
+    //User can't pass the form submit without providing either a url or an image file
+    //Only check for image file. If it is an existing item or category there will be an url.
+    if (image) {
+      fileRef
+        .child(form.id)
+        .put(image)
+        .then((imageSnapshot) => {
+          imageSnapshot.ref.getDownloadURL().then((imageURL) => {
+            form.imageURL = imageURL;
+            const { id, ...restInfo } = form;
+            if (isUpdate) {
+              documentRef
+                .update(restInfo)
+                .then(() => {
+                  resolve(`${type} updated.`);
+                })
+                .catch((error) => reject(error));
+            } else {
+              documentRef
+                .set(restInfo)
+                .then(() => {
+                  countRef.update({ count: increment });
+                  resolve(`New ${type} added.`);
+                })
+                .catch((error) => reject(error));
+            }
+          });
+        });
+    } else {
+      const { id, ...restInfo } = form;
+      documentRef
+        .update({ ...restInfo })
+        .then(() => {
+          resolve(`${type} updated`);
+        })
+        .catch((error) => reject(error));
+    }
+  });
+}
+
+export function removeItemCategory(id, type) {
+  const deleteImageRef = storage.ref(`${type}-images/${id}`);
+  const docRef = firestore.collection(type).doc(id);
+  const decrement = firebase.firestore.FieldValue.increment(-1);
+  const countRef = firestore.collection("itemCounts").doc(type);
+  return new Promise((resolve, reject) => {
+    deleteImageRef
+      .delete()
+      .then(() => {
+        docRef
+          .delete()
+          .then(() => {
+            countRef.update({ count: decrement });
+            resolve(`${type} deleted`);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function getIndividualProduct(productID) {
+  const productRef = firestore.collection("items").doc(productID);
+
+  return new Promise((resolve, reject) => {
+    productRef
+      .get()
+      .then((productSnapshot) => {
+        //console.log(productSnapshot.data());
+        resolve({ id: productSnapshot.id, ...productSnapshot.data() });
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function addProductToCart(productInfo, userID) {
+  const cartRef = firestore.doc(`carts/${userID}`);
+
+  const { name, id, imageURL, price, quantity, totalQuantity } = productInfo;
+
+  return new Promise((resolve, reject) => {
+    cartRef.get().then((cartData) => {
+      if (cartData.exists) {
+        let cartCopy = cartData.data();
+
+        cartCopy = {
+          ...cartCopy,
+          [id]: cartCopy[id]
+            ? {
+                name,
+                imageURL,
+                price,
+                quantity:
+                  cartCopy[id].quantity + quantity > totalQuantity
+                    ? totalQuantity
+                    : cartCopy[id].quantity + quantity,
+              }
+            : { name, imageURL, price, quantity },
+        };
+
+        cartRef
+          .update({ ...cartCopy })
+          .then(resolve("Added to cart"))
+          .catch((error) => reject(error));
+      } else {
+        const cartInfo = { name, imageURL, price, quantity };
+
+        cartRef
+          .set({ [id]: { ...cartInfo } })
+          .then(resolve("Added to cart"))
+          .catch((error) => reject(error));
+      }
+    });
+  });
+}
+export function getUserCart(userID) {
+  const cartRef = firestore.collection("carts").doc(userID);
+
+  return new Promise((resolve, reject) => {
+    cartRef
+      .get()
+      .then((cartData) => {
+        if (cartData.exists) {
+          resolve(
+            Object.keys(cartData.data()).map((cartItem) => ({
+              id: cartItem,
+              ...cartData.data()[cartItem],
+            }))
+          );
+        } else {
+          resolve([]);
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function deleteUserCartItem(userID, itemID) {
+  const cartRef = firestore.collection("carts").doc(userID);
+
+  return new Promise((resolve, reject) => {
+    cartRef
+      .update({
+        [itemID]: firebase.firestore.FieldValue.delete(),
+      })
+      .then(() => {
+        resolve("Item Deleted");
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function getUserAddressList(userID) {
+  const addressRef = firestore.collection("addresses").doc(userID);
+
+  return new Promise((resolve, reject) => {
+    addressRef
+      .get()
+      .then((addressData) => {
+        if (addressData.exists) {
+          resolve(
+            Object.keys(addressData.data()).map((addressItem) => ({
+              id: addressItem,
+              ...addressData.data()[addressItem],
+            }))
+          );
+        } else {
+          resolve([]);
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function deleteUserAddressItem(userID, addressID) {
+  const addressRef = firestore.collection("addresses").doc(userID);
+
+  return new Promise((resolve, reject) => {
+    addressRef
+      .update({
+        [addressID]: firebase.firestore.FieldValue.delete(),
+      })
+      .then(() => {
+        resolve("Address Deleted");
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function createOrUpdateUserAddress(userID, addressInfo, addressID = "") {
+  const addressRef = firestore.collection("addresses").doc(userID);
+  const { name } = addressInfo;
+
+  addressID =
+    addressID ||
+    `${name.replace(/\s+/g, "-").toLowerCase()}-${randomNumberForLink()}`;
+
+  return new Promise((resolve, reject) => {
+    addressRef.get().then((addressDoc) => {
+      if (addressDoc.exists) {
+        addressRef
+          .update({ [addressID]: { ...addressInfo } })
+          .then(() => {
+            resolve("User address updated");
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      } else {
+        addressRef
+          .set({ [addressID]: { ...addressInfo } })
+          .then(() => {
+            resolve("A user address created for the first time");
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }
+    });
+  });
+}
+
+export const storage = app.storage();
 export const auth = app.auth();
 export const firestore = app.firestore();
 

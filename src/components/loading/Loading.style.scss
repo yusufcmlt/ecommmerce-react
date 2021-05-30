@@ -1,0 +1,29 @@
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-icon {
+  background-image: url("../../assets/icons/loading.svg");
+  background-size: cover;
+}
+.loading-size-sign {
+  filter: invert(79%) sepia(46%) saturate(2247%) hue-rotate(340deg)
+    brightness(103%) contrast(97%);
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 190px;
+  top: 120px;
+  animation: spin 0.5s linear infinite;
+}
+.loading-size-page {
+  filter: invert(35%) sepia(11%) saturate(2147%) hue-rotate(197deg)
+    brightness(88%) contrast(85%);
+  width: 35px;
+  height: 35px;
+  margin: auto;
+  box-sizing: border-box;
+  animation: spin 0.75s linear infinite;
+}

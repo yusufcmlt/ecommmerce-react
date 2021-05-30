@@ -1,65 +1,70 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
+import PageSideMenu from "../../components/page-side-menu/PageSideMenu";
 
+//Components
 import PageTitleHeader from "../../components/page-title-header/PageTitleHeader";
-import { getItemCategoryCount } from "../../firebase/firebase";
+import AdminCategoryList from "./admin-items/AdminCategoryList";
+import AdminProductList from "./admin-items/AdminProductList";
 import AdminNavButtons from "./admin-nav-buttons/AdminNavButtons";
+
+//Constant Data
+import { routeInfo } from "../../utils/routeConstants";
+import { AdminCategoryItemForm } from "./admin-forms/AdminForms";
 
 export default function AdminPage() {
   const [pageHeaderInfo, setPageHeaderInfo] = useState({
     title: "Yönetim",
     icon: "admin",
+    sideMenu: false,
   });
-  const [isLoading, setLoading] = useState(true);
-  const [adminCounts, setAdminCounts] = useState(0);
 
   const location = useLocation();
 
+  //Getting header info from location data
   useEffect(() => {
-    getItemCategoryCount().then((newItemCounts) => {
-      setAdminCounts(newItemCounts);
-    });
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    switch (location.pathname) {
-      case "/yonetim/urunler":
-        console.log("hey");
-        setPageHeaderInfo({ title: "Ürünler", icon: "product" });
-        break;
-      case "/yonetim/kategoriler":
-        setPageHeaderInfo({ title: "Kategoriler", icon: "category" });
-        break;
-      default:
-        setPageHeaderInfo({ title: "Yönetim", icon: "admin" });
-    }
-  }, [location.pathname]);
+    let locationPath = location.pathname.split("/");
+    locationPath = locationPath[locationPath.length - 1];
+    setPageHeaderInfo({ ...routeInfo[locationPath] });
+  }, [location]);
 
   return (
-    <section className="admin-page-container">
+    <section id="admin-page-container">
       <PageTitleHeader
         pageTitle={pageHeaderInfo.title}
         pageIcon={pageHeaderInfo.icon}
         pageType="admin"
       />
-      {!isLoading && (
+      {pageHeaderInfo.sideMenu ? <PageSideMenu /> : null}
+      <div
+        className="admin-page-content"
+        style={!pageHeaderInfo.sideMenu ? { margin: "auto" } : {}}
+      >
         <Switch>
-          <Route exact path="/yonetim">
-            <AdminNavButtons
-              navPosition="center"
-              productCount={adminCounts.items}
-              categoryCount={adminCounts.categories}
+          <Route exact path={"/yonetim"}>
+            <AdminNavButtons navPosition="center" />
+          </Route>
+          <Route path={"/yonetim/urunler"}>
+            <AdminProductList />
+          </Route>
+          <Route path={"/yonetim/kategoriler"}>
+            <AdminCategoryList />
+          </Route>
+          <Route path={"/yonetim/urunekle"}>
+            <AdminCategoryItemForm
+              formOptions={{ redirectPath: "urunler", formType: "items" }}
             />
           </Route>
-          <Route path="/yonetim/urunler">
-            <p>Urunler</p>
-          </Route>
-          <Route path="/yonetim/kategoriler">
-            <p>kategoriler</p>
+          <Route path={"/yonetim/kategoriekle"}>
+            <AdminCategoryItemForm
+              formOptions={{
+                redirectPath: "kategoriler",
+                formType: "categories",
+              }}
+            />
           </Route>
         </Switch>
-      )}
+      </div>
     </section>
   );
 }

@@ -1,0 +1,52 @@
+.add-image-button {
+  width: 250px;
+  height: 370px;
+  border: none;
+  display: flex;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  overflow: hidden;
+  font-weight: 600;
+  color: #d7654c;
+  position: relative;
+  &:active {
+    transform: translateY(2px);
+  }
+
+  input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+  }
+  label {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    background-size: cover;
+    background-position: center;
+    .add-image-icon {
+      display: block;
+      background-image: url("../../../assets/icons/plus.svg");
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+      margin: 25px 0;
+      filter: invert(63%) sepia(44%) saturate(3662%) hue-rotate(325deg)
+        brightness(87%) contrast(93%);
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .add-image-button {
+    width: 200px;
+    height: 300px;
+  }
+}

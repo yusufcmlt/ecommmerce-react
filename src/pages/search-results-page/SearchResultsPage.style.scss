@@ -1,0 +1,29 @@
+#search-results-section,
+#category-results-section {
+  margin: 50px 0;
+  //min-height: 350px;
+  width: 100%;
+  .items-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 75vw;
+    @media (max-width: 1400px) {
+      width: 70vw;
+      .item-container {
+        flex: 0 0 calc(25% - 1em);
+      }
+    }
+    @media (max-width: 1024px) {
+      width: unset;
+      .item-container {
+        flex: 0 0 calc(33% - 1em);
+      }
+    }
+    @media (max-width: 768px) {
+      width: unset;
+      .item-container {
+        flex: 0 0 calc(50% - 1em);
+      }
+    }
+  }
+}

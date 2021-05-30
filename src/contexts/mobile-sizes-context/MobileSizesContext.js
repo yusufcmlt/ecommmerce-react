@@ -1,7 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-
-import { useEffect } from "react/cjs/react.development";
 
 const MobileSizeContext = React.createContext();
 
@@ -17,7 +15,6 @@ export function SizeProvider({ children }) {
     if (isMobile) {
       const mobileHeight = window.innerHeight;
       setPageMobileHeight(mobileHeight);
-      console.log(mobileHeight);
     }
   }, [isMobile]);
 

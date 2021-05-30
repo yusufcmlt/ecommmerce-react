@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../../contexts/auth-context/AuthContext";
 import { useNavMenu } from "../../contexts/nav-menu-context/NavMenuContext";
 import { useMediaQuery } from "react-responsive";
+import { useCart } from "../../contexts/cart-context/CartContext";
 
 import { signedMenuItems } from "../../utils/constants";
 
@@ -12,17 +13,30 @@ import CustomButton from "../buttons/custom-button/CustomButton";
 import "./MenuNav.style.scss";
 
 export default function MenuNav({ navType }) {
+  const { cartData, handleCartLoad, cartCount, cartUpdated } = useCart();
   const { currentUser, userIsAdmin } = useAuth();
-  const { appPageState, handleMenuOpened, handlePageState } = useNavMenu();
+  const { appPageState, handlePageState } = useNavMenu();
   const isMobile = useMediaQuery({ query: "(max-width:1024px)" });
 
   function isButtonSelected(buttonPath) {
-    return !isMobile && buttonPath && appPageState === buttonPath;
+    return buttonPath && appPageState === buttonPath;
   }
+
+  useEffect(() => {
+    if ((cartUpdated || !cartData.loaded) && currentUser) {
+      handleCartLoad();
+    }
+  }, []);
 
   return currentUser ? (
     <React.Fragment>
-      <Link to="/yonetim" key="adminButton">
+      <Link
+        to={{
+          pathname: `/yonetim`,
+          state: { title: "Yönetim", icon: "admin", sideMenu: false },
+        }}
+        key="adminButton"
+      >
         {userIsAdmin ? (
           <CustomButton
             buttonText="Yönetim"
@@ -32,7 +46,6 @@ export default function MenuNav({ navType }) {
             buttonIcon="setting"
             selectedMenuButton={isButtonSelected("yonetim")}
             funcOnPress={() => {
-              handleMenuOpened();
               handlePageState("yonetim");
             }}
           />
@@ -48,11 +61,16 @@ export default function MenuNav({ navType }) {
             funcOnPress={
               button.funcOnPress ||
               (() => {
-                handleMenuOpened();
                 handlePageState(button.path);
               })
             }
-          />
+          >
+            {button.path === "sepetim" ? (
+              cartData.loaded && cartCount ? (
+                <span className="cart-count">{cartCount}</span>
+              ) : null
+            ) : null}
+          </CustomButton>
         </Link>
       ))}
     </React.Fragment>

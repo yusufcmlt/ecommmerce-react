@@ -1,9 +1,23 @@
 .logo-mobile-link {
-  width: 45px;
-  height: 45px;
+  .logo-mobile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  .logo-mobile-icon {
-    width: 45px;
-    height: 45px;
+    .logo-mobile-icon {
+      width: 45px;
+      height: 45px;
+    }
+    .logo-mobile-text {
+      margin: 0;
+      font-size: 14px;
+      transition-duration: 0.2s;
+      & :first-child {
+        color: rgb(207, 97, 33);
+      }
+      & :last-child {
+        color: rgb(228, 157, 27);
+      }
+    }
   }
 }

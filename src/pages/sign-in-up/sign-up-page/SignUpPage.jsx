@@ -24,26 +24,42 @@ export default function SignUpPage({
     credentialsCheck();
     handleError("");
     handleSignLoading(true);
-    auth
-      .createUserWithEmailAndPassword(
-        userCredentials.email,
-        userCredentials.password
-      )
-      .then(({ user }) => {
-        user
-          .updateProfile({ displayName: userCredentials.displayName })
-          .then(() => {
-            auth.currentUser.reload();
-          });
-      })
-      .catch((error) => {
-        handleError(
-          "Kayıt durumuyla ilgili bir sorun var. Bu email kullanılıyor olabilir."
-        );
-      })
-      .finally(() => {
-        handleSignLoading(false);
-      });
+    if (checkIfAnySpace()) {
+      console.log("i'm in if");
+      auth
+        .createUserWithEmailAndPassword(
+          userCredentials.email,
+          userCredentials.password
+        )
+        .then(({ user }) => {
+          user
+            .updateProfile({ displayName: userCredentials.displayName })
+            .then(() => {
+              auth.currentUser.reload();
+            });
+        })
+        .catch((error) => {
+          handleError(
+            "Kayıt durumuyla ilgili bir sorun var. Bu email kullanılıyor olabilir."
+          );
+        })
+        .finally(() => {
+          handleSignLoading(false);
+        });
+    } else {
+      handleError("Boş karakter girmediğinden emin ol.");
+      handleSignLoading(false);
+    }
+  }
+
+  function checkIfAnySpace() {
+    for (const credential in userCredentials) {
+      if (!userCredentials[credential].trim()) {
+        setCredentials({ ...userCredentials, [credential]: "" });
+        return false;
+      }
+    }
+    return true;
   }
 
   function handleChange(event) {
@@ -66,7 +82,7 @@ export default function SignUpPage({
         inputPlaceholder="Adınız"
         inputIcon="account"
         inputName="displayName"
-        inputValue={userCredentials.displayName}
+        value={userCredentials.displayName}
         inputChange={handleChange}
       />
       <CustomInput
@@ -74,7 +90,7 @@ export default function SignUpPage({
         inputPlaceholder="E-posta adresiniz."
         inputIcon="email"
         inputName="email"
-        inputValue={userCredentials.email}
+        value={userCredentials.email}
         inputChange={handleChange}
       />
       <CustomInput
@@ -82,7 +98,7 @@ export default function SignUpPage({
         inputPlaceholder="Şifreniz"
         inputIcon="password"
         inputName="password"
-        inputValue={userCredentials.password}
+        value={userCredentials.password}
         inputChange={handleChange}
       />
       <CustomInput
@@ -90,7 +106,7 @@ export default function SignUpPage({
         inputPlaceholder="Şifrenizi onaylayın"
         inputIcon="password"
         inputName="confirmPassword"
-        inputValue={userCredentials.confirmPassword}
+        value={userCredentials.confirmPassword}
         inputChange={handleChange}
       />
       <CustomButton

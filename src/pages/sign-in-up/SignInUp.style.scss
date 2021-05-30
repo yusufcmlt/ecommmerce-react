@@ -1,20 +1,13 @@
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-.page-container-height-setter {
-}
 .sign-page-container {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), black),
-    url("../../assets/images/giris_arkaplan.jpg");
+    url("../../assets/images/giris_arkaplan.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 
   .sign-page-form-container {
     background: linear-gradient(60deg, #2d264e, #26294e);
@@ -49,18 +42,6 @@
         text-align: center;
         color: #d7654c;
         font-weight: 600;
-      }
-      .loading-icon {
-        width: 30px;
-        height: 30px;
-        background-image: url("../../assets/icons/loading.svg");
-        background-size: cover;
-        animation: spin 0.5s linear infinite;
-        filter: invert(79%) sepia(46%) saturate(2247%) hue-rotate(340deg)
-          brightness(103%) contrast(97%);
-        position: absolute;
-        right: 190px;
-        top: 120px;
       }
     }
   }

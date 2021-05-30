@@ -1,0 +1,12 @@
+.page-number-container {
+  width: 95%;
+  margin: 50px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (max-width: 1024px) {
+  .page-number-container {
+    width: 95%;
+  }
+}

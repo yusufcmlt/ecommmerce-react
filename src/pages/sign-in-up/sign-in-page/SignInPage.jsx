@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { useState } from "react/cjs/react.development";
 import { auth } from "../../../firebase/firebase";
 
 import CustomButton from "../../../components/buttons/custom-button/CustomButton";
@@ -22,20 +21,25 @@ export default function SignInPage({
     handleSignLoading(true);
     event.preventDefault();
     handleError("");
-    auth
-      .signInWithEmailAndPassword(
-        loginCredentials.email,
-        loginCredentials.password
-      )
-      .catch((error) => {
-        console.log(error);
-        handleError(
-          "Giriş bilgilerinde bir hata var. Lütfen doğru girdiğinden emin ol. "
-        );
-      })
-      .finally(() => {
-        handleSignLoading(false);
-      });
+    if (loginCredentials.email.trim() && loginCredentials.password.trim()) {
+      auth
+        .signInWithEmailAndPassword(
+          loginCredentials.email,
+          loginCredentials.password
+        )
+        .catch((error) => {
+          console.log(error);
+          handleError(
+            "Giriş bilgilerinde bir hata var. Lütfen doğru girdiğinden emin ol. "
+          );
+        })
+        .finally(() => {
+          handleSignLoading(false);
+        });
+    } else {
+      handleSignLoading(false);
+      handleError("Boş karakter girmediğinden emin ol.");
+    }
   }
   function handleChange(event) {
     const { value, name } = event.target;
@@ -49,7 +53,7 @@ export default function SignInPage({
         inputPlaceholder="E-posta adresiniz."
         inputIcon="email"
         inputName="email"
-        inputValue={loginCredentials.email}
+        value={loginCredentials.email}
         inputChange={handleChange}
       />
       <CustomInput
@@ -57,7 +61,7 @@ export default function SignInPage({
         inputPlaceholder="Şifreniz"
         inputIcon="password"
         inputName="password"
-        inputValue={loginCredentials.password}
+        value={loginCredentials.password}
         inputChange={handleChange}
       />
       <CustomButton

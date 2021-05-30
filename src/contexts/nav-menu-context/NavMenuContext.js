@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useLocation } from "react-router";
-import { useEffect } from "react/cjs/react.development";
 
 const NavMenuContext = React.createContext();
 
@@ -21,7 +20,8 @@ export function MenuProvider({ children }) {
     setMenuOpened((isMenuOpened) => !isMenuOpened);
   }
   function handlePageState(pageState) {
-    setPageState((appPageState) => pageState);
+    console.log(pageState);
+    setPageState(pageState);
   }
 
   const value = {

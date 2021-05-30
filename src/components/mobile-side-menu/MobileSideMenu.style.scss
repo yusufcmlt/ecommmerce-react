@@ -1,12 +1,18 @@
-.mobile-side-menu-nav {
-  width: 100vw;
-
+.mobile-menu-nav {
   background: linear-gradient(60deg, #2d264e, #26294e);
+  z-index: 99999;
+  position: fixed;
+  height: 75px;
+  bottom: 0;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  .mobile-side-menu-title {
+  a {
+    text-decoration: none;
+  }
+
+  .mobile-menu-title {
     color: #fbb224;
   }
 }

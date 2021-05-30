@@ -12,12 +12,12 @@ export default function Hero() {
     <div className="hero">
       <div className="hero-first">
         <h1 className="hero-title">
-          TÜM AYAKKABI ÇEŞİTLERİNDE ALIŞVERİŞİN ADRESİ!
+          Tüm Kuruyemiş Çeşitlerinde Alışverişin Adresi!
         </h1>
         {!isMobile && <SearchBar searchBarSize="desktop" />}
       </div>
       <div className="hero-second">
-        <h3 className="app-section-h3-title">Kategoriler</h3>
+        <h3 className="app-section-h3-title">Ürün Çeşitleri</h3>
         <CategoryContainer />
       </div>
     </div>
